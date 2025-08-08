@@ -19,7 +19,7 @@ arkweb是OpenHarmony webview组件的Native引擎，基于Chromium和CEF构建�
 ## 目录
 
 ```
-base/web/web_cangjie_api
+base/web/arkweb_cangjie_wrapper
 ├── ohos             # 仓颉webview接口实现
 ├── kit              # 仓颉kit化代码
 ├── figures          # 存放readme中的架构图
@@ -27,6 +27,6 @@ base/web/web_cangjie_api
 
 ## 相关仓
 
-web_cangjie_api
+arkweb_cangjie_wrapper
 
 [web_webview](https://gitee.com/openharmony/web_webview)

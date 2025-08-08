@@ -26,18 +26,18 @@ ohos_cj_library("ohos.webview") {
   ]
 
   cj_external_deps = [
-    "arkui_cangjie_api:ohos.base",
-    "cangjie_api:ohos.ffi",
-    "hiviewdfx_cangjie_api:ohos.hilog",
-    "multimedia_cangjie_api:ohos.image",
-    "cangjie_api:ohos.labels",
-    "global_cangjie_api:ohos.resource_manager",
-    "arkui_cangjie_api:ohos.ui_resource",
+    "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.ffi",
+    "hiviewdfx_cangjie_wrapper:ohos.hilog",
+    "multimedia_cangjie_wrapper:ohos.image",
+    "cangjie_ark_interop:ohos.labels",
+    "global_cangjie_wrapper:ohos.resource_manager",
+    "arkui_cangjie_wrapper:ohos.ui_resource",
   ]
 
   external_deps = [ "webview:cj_webview_ffi" ]
 
   subsystem_name = "web"
-  part_name = "web_cangjie_api"
+  part_name = "arkweb_cangjie_wrapper"
   lib_name = "webview"
 }

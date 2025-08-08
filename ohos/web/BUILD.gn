@@ -18,6 +18,6 @@ ohos_cj_library("ohos.web") {
   sources = [ "web.cj" ]
 
   subsystem_name = "web"
-  part_name = "web_cangjie_api"
+  part_name = "arkweb_cangjie_wrapper"
   lib_name = "web"
 }

@@ -18,7 +18,7 @@ Below is the software architecture.
 ## Directory Structure
 
 ```
-base/web/web_cangjie_api
+base/web/arkweb_cangjie_wrapper
 ├── ohos             # Cangjie webview code
 ├── kit              # Cangjie kit code
 ├── figures          # architecture pictures
@@ -26,6 +26,6 @@ base/web/web_cangjie_api
 
 ## Repositories Involved
 
-web_cangjie_api
+arkweb_cangjie_wrapper
 
 [web_webview](https://gitee.com/openharmony/web_webview)

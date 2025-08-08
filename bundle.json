@@ -1,0 +1,49 @@
+{
+    "name": "@ohos/web_cangjie_api",
+    "description": "library for webview",
+    "version": "6.0",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "base/web/web_cangjie_api"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "web_cangjie_api",
+        "subsystem": "web",
+        "syscap": [
+            "SystemCapability.Web.Webview.Core"
+        ],
+        "features": [],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "hisysevent_config": [
+        ],
+        "rom": "~85MB",
+        "ram": "~150MB",
+        "deps": {
+            "components": [
+                "cangjie_api",
+                "arkui_cangjie_api",
+                "multimedia_cangjie_api",
+                "global_cangjie_api"
+            ]
+        },
+        "build": {
+            "sub_component": [
+                "//base/web/web_cangjie_api/ohos/web:ohos.web",
+                "//base/web/web_cangjie_api/ohos/web/webview:ohos.webview",
+                "//base/web/web_cangjie_api/kit/Arkweb:kit.Arkweb"
+            ],
+            "inner_kits": [
+                {
+                    "name": "//base/web/web_cangjie_api/ohos/web/webview:ohos.webview"
+                }
+            ],
+            "test": [
+            ]
+        }
+    }
+}

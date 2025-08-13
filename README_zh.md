@@ -1,15 +1,15 @@
-# web_webview
+# web仓颉
 
 ## 简介
 
 ### 内容介绍
 
-arkweb是OpenHarmony webview组件的Native引擎。
+web仓颉提供OpenHarmony webview组件引擎的仓颉接口。
 
 ### 软件架构
 
 软件架构说明
-![](figures/Web-architecture_ZH.png "web软件架构图")
+![](figures/arkweb_cangjie_wrapper_architecture.png "web软件架构图")
 
 * webview组件：OpenHarmony的UI组件。
 

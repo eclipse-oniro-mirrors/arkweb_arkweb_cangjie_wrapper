@@ -22,7 +22,7 @@
         "hisysevent_config": [
         ],
         "rom": "300KB",
-        "ram": "900KB",
+        "ram": "216KB",
         "deps": {
             "components": [
                 "cangjie_ark_interop",

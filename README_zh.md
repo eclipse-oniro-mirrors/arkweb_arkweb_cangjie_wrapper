@@ -1,17 +1,15 @@
-# web仓颉
+# Web仓颉接口
 
 ## 简介
 
 ### 内容介绍
 
-web仓颉提供OpenHarmony webview组件引擎的仓颉接口。
+Web仓颉接口是在 OpenHarmony 上基于 arkweb 能力之上封装的仓颉API。arkweb是OpenHarmony webview组件的Native引擎，基于Chromium和CEF构建。
 
 ### 软件架构
 
 软件架构说明
 ![](figures/arkweb_cangjie_wrapper_architecture.png "web软件架构图")
-
-* webview组件：OpenHarmony的UI组件。
 
 ## 目录
 
@@ -24,6 +22,4 @@ base/web/arkweb_cangjie_wrapper
 
 ## 相关仓
 
-arkweb_cangjie_wrapper
-
-[web_webview](https://gitee.com/openharmony/web_webview)
+[web_webview](https://gitee.com/openharmony/web_webview/blob/master/README.md)

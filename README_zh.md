@@ -11,6 +11,9 @@ Web仓颉接口是在 OpenHarmony 上基于 arkweb 能力之上封装的仓颉AP
 软件架构说明
 ![](figures/arkweb_cangjie_wrapper_architecture.png "web软件架构图")
 
+* nweb：基于CEF构建的OpenHarmony web组件的Native引擎。
+* CEF：CEF全称Chromium Embedded Framework，是一个基于Google Chromium 的开源项目。
+
 ## 目录
 
 ```

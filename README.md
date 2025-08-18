@@ -10,7 +10,8 @@ Below is the software architecture.
 
 ![](figures/arkweb_cangjie_wrapper_architecture_en.png "web-architecture")
 
-* Webview component: UI component in OpenHarmony.
+* nweb: native engine of the OpenHarmony web component, which is built based on the Chromium Embedded Framework (CEF).
+* CEF: stands for Chromium Embedded Framework. It is an open-source project based on Google Chromium.
 
 ## Directory Structure
 

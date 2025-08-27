@@ -14,10 +14,9 @@
 import("//build/ohos.gni")
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("ohos.web") {
+ohos_cangjie_shared_library("ohos.web") {
   sources = [ "web.cj" ]
 
   subsystem_name = "web"
   part_name = "arkweb_cangjie_wrapper"
-  lib_name = "web"
 }

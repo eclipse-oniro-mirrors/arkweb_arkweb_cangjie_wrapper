@@ -13,17 +13,18 @@
  * limitations under the License.
  */
 
-package ohos.webview
+package ohos.web.webview
 
-import ohos.labels.*
-import ohos.ffi.*
-import ohos.base.*
-import std.collection.*
+import ohos.ffi.{ RemoteDataLite, releaseFFIData }
+import ohos.labels.APILevel
 
+/**
+ * Provides back and forward history list information method. related to {@link HistoryItem}.
+ *
+ * @relation interface BackForwardList
+ */
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.Web.Webview.Core"
 ]
@@ -36,10 +37,13 @@ public class BackForwardList <: RemoteDataLite {
         releaseFFIData(myDataId)
     }
 
+    /**
+     * Current index in BackForwardList.
+     *
+     * @relation currentIndex: number
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -54,10 +58,13 @@ public class BackForwardList <: RemoteDataLite {
         }
     }
 
+    /**
+     * Size of in BackForwardList.
+     *
+     * @relation size: number
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -78,13 +85,10 @@ public class BackForwardList <: RemoteDataLite {
      * @param { Int32 } index Index of back forward list entry.
      * @returns { HistoryItem } HistoryItem at given index in back forward list.
      * @throws { BusinessException } 401 - Invalid input parameter.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief getItemAtIndex(index: number): HistoryItem
+     * @relation getItemAtIndex(index: number): HistoryItem
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]

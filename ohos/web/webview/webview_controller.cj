@@ -13,54 +13,55 @@
  * limitations under the License.
  */
 
-package ohos.webview
+package ohos.web.webview
 
-import ohos.ui_resource.*
-import ohos.resource_manager.AppResource
+import ohos.base.ResourceStr
 import ohos.labels.*
 import ohos.ffi.*
-import ohos.base.*
-import std.collection.*
-import ohos.image.*
+import ohos.business_exception.{BusinessException, AsyncCallback, ERR_PARAMETER_ERROR}
+import std.collection.HashSet
+import ohos.arkui.component.util.transResourceMediaToString
 
+/**
+ * WebviewController can control various behaviors of Web components
+ * (including page navigation, declaring cycle state, JavaScript interaction and so on).
+ * A WebviewController object can only control one Web component,
+ * and methods on the Webviewcontroller (except static methods) can only be called
+ * after the web component is bound to the WebviewController.
+ *
+ * @relation class WebviewController
+ */
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class WebviewController <: RemoteDataLite {
-    /**
-     * A constructor used to create a WebviewController object.
-     *
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief constructor(webTag?: string)
-     */
-    @!APILevel[
-        21,
-        atomicservice: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Web.Webview.Core"
-    ]
-    public init() {
-        super(unsafe { FfiOHOSWebviewCtlConstructor() })
+    static var webTagId: Int32 = 0
+    static let webTagSet: HashSet<String> = HashSet<String>()
+
+    static func generateWebTag(): String {
+        var webTag = "arkweb:${webTagId}"
+        while (webTagSet.contains(webTag)) {
+            webTagId++
+            webTag = "arkweb:${webTagId}"
+        }
+        webTagSet.add(webTag)
+        webTag
     }
 
     /**
      * A constructor used to create a WebviewController object.
      *
      * @param { String } [webTag] - specified the name of the web component, Empty by default.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief constructor(webTag?: string)
+     * @relation constructor(webTag?: string)
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
-    public init(webTag: String) {
+    public init(webTag!: ?String = None) {
         super(createWebviewControllerWithWebTag(webTag))
     }
 
@@ -70,14 +71,12 @@ public class WebviewController <: RemoteDataLite {
 
     /**
      * Enables debugging of web contents.
-     * @param { boolean } webDebuggingAccess {@code true} enables debugging of web contents; {@code false} otherwise.
+     * @param { Bool } webDebuggingAccess {@code true} enables debugging of web contents; {@code false} otherwise.
      * @throws { BusinessException } 401 - Invalid input parameter.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief static setWebDebuggingAccess(webDebuggingAccess: boolean): void
+     * @relation static setWebDebuggingAccess(webDebuggingAccess: boolean): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -92,121 +91,32 @@ public class WebviewController <: RemoteDataLite {
     /**
      * Loads the data or URL.
      *
-     * @param { String } url - The URL to load.
+     * @param { T } url - The URL to load. T should implement ResourceStr.
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100002 - Invalid url.
      * @throws { BusinessException } 17100003 - Invalid resource path or file type.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief loadUrl(url: string | Resource, headers?: Array<WebHeader>): void
+     * @relation loadUrl(url: string | Resource, headers?: Array<WebHeader>): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
-    public func loadUrl(url: String): Unit {
+    public func loadUrl<T>(url: T, headers!: Array<WebHeader> = Array<WebHeader>()): Unit where T <: ResourceStr {
         unsafe {
-            let cUrl = LibC.mallocCString(url)
-            let errCode = FfiOHOSWebviewCtlLoadUrl(getID(), cUrl)
-            LibC.free(cUrl)
-            throwIfNotSuccess(errCode, "WebviewController", "loadUrl")
-        }
-    }
-
-    /**
-     * Loads the data or URL.
-     *
-     * @param { String } url - The URL to load.
-     * @param { Array<WebHeader> } [headers] - Additional HTTP request header for URL.
-     * @throws { BusinessException } 401 - Invalid input parameter.
-     * @throws { BusinessException } 17100001 - Init error.
-     *                           The WebviewController must be associated with a Web component.
-     * @throws { BusinessException } 17100002 - Invalid url.
-     * @throws { BusinessException } 17100003 - Invalid resource path or file type.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief loadUrl(url: string | Resource, headers?: Array<WebHeader>): void
-     */
-    @!APILevel[
-        21,
-        atomicservice: true,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Web.Webview.Core"
-    ]
-    public func loadUrl(url: AppResource): Unit {
-        loadUrl(getResourceMedia(url))
-    }
-
-    /**
-     * Loads the data or URL.
-     *
-     * @param { String } url - The URL to load.
-     * @param { Array<WebHeader> } [headers] - Additional HTTP request header for URL.
-     * @throws { BusinessException } 401 - Invalid input parameter.
-     * @throws { BusinessException } 17100001 - Init error.
-     *                           The WebviewController must be associated with a Web component.
-     * @throws { BusinessException } 17100002 - Invalid url.
-     * @throws { BusinessException } 17100003 - Invalid resource path or file type.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief loadUrl(url: string | Resource, headers?: Array<WebHeader>): void
-     */
-    @!APILevel[
-        21,
-        atomicservice: true,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Web.Webview.Core"
-    ]
-    public func loadUrl(url: String, headers: Array<WebHeader>): Unit {
-        if (headers.size == 0) {
-            return loadUrl(url)
-        }
-        unsafe {
-            let cUrl = LibC.mallocCString(url)
-            let cHeaders = ArrWebHeader(headers) {
-                LibC.free(cUrl)
+            try (cUrl = LibC.mallocCString(transResourceMediaToString(url)).asResource()) {
+                var errCode: Int32 = 0
+                if (headers.size == 0) {
+                    errCode = FfiOHOSWebviewCtlLoadUrl(getID(), cUrl.value)
+                } else {
+                    let cHeaders = ArrWebHeader(headers)
+                    errCode = FfiOHOSWebviewCtlLoadUrlWithHeaders(getID(), cUrl.value, cHeaders)
+                    freeArrWebHeader(cHeaders.head, cHeaders.size)
+                }
+                throwIfNotSuccess(errCode, "WebviewController", "loadUrl")
             }
-            let errCode = FfiOHOSWebviewCtlLoadUrlWithHeaders(getID(), cUrl, cHeaders)
-            freeArrWebHeader(cHeaders.head, cHeaders.size)
-            LibC.free(cUrl)
-            throwIfNotSuccess(errCode, "WebviewController", "loadUrl")
-        }
-    }
-
-    /**
-     * Loads the data or URL.
-     *
-     * @param { String } url - The URL to load.
-     * @param { Array<WebHeader> } [headers] - Additional HTTP request header for URL.
-     * @throws { BusinessException } 401 - Invalid input parameter.
-     * @throws { BusinessException } 17100001 - Init error.
-     *                           The WebviewController must be associated with a Web component.
-     * @throws { BusinessException } 17100002 - Invalid url.
-     * @throws { BusinessException } 17100003 - Invalid resource path or file type.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief loadUrl(url: string | Resource, headers?: Array<WebHeader>): void
-     */
-    @!APILevel[
-        21,
-        atomicservice: true,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Web.Webview.Core"
-    ]
-    public func loadUrl(url: AppResource, headers: Array<WebHeader>): Unit {
-        unsafe {
-            let cUrl = LibC.mallocCString(getResourceMedia(url))
-            let cHeaders = ArrWebHeader(headers) {
-                LibC.free(cUrl)
-            }
-            let errCode = FfiOHOSWebviewCtlLoadUrlWithHeaders(getID(), cUrl, cHeaders)
-            freeArrWebHeader(cHeaders.head, cHeaders.size)
-            LibC.free(cUrl)
-            throwIfNotSuccess(errCode, "WebviewController", "loadUrl")
         }
     }
 
@@ -215,13 +125,10 @@ public class WebviewController <: RemoteDataLite {
      *
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief refresh(): void
+     * @relation refresh(): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -234,15 +141,14 @@ public class WebviewController <: RemoteDataLite {
 
     /**
      * Gets the default user agent.
+     *
      * @returns { String } Return user agent information.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief getUserAgent(): string
+     * @relation getUserAgent(): string
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -257,16 +163,14 @@ public class WebviewController <: RemoteDataLite {
 
     /**
      * Checks whether the web page can go back.
+     *
      * @returns { Bool } True if the web page can go back else false.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100001 - Init error.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief accessBackward(): boolean
+     * @relation accessBackward(): boolean
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -281,17 +185,15 @@ public class WebviewController <: RemoteDataLite {
 
     /**
      * Set custom user agent.
+     *
      * @param { String } userAgent - User custom agent information.
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief setCustomUserAgent(userAgent: string): void
+     * @relation setCustomUserAgent(userAgent: string): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -306,16 +208,14 @@ public class WebviewController <: RemoteDataLite {
 
     /**
      * Get custom user agent.
+     *
      * @returns { String } Get custom User agent information.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief getCustomUserAgent(): string
+     * @relation getCustomUserAgent(): string
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -335,13 +235,10 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief runJavaScript(script: string, callback: AsyncCallback<string>): void
+     * @relation runJavaScript(script: string, callback: AsyncCallback<string>): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -354,7 +251,7 @@ public class WebviewController <: RemoteDataLite {
                     LibC.free(value.data)
                     callback(None, data)
                 } else {
-                    callback(AsyncError(value.code), None)
+                    callback(BusinessException(value.code, getErrorMsg(value.code)), None)
                 }
             }
             let lambdaData = Callback1Param<RetDataCString, Unit>(wrapper)
@@ -372,16 +269,15 @@ public class WebviewController <: RemoteDataLite {
      *                          object name called in the window.
      * @param { Array<String> } methodList - The method of the application side CJ funcs participating
      *                                       in the registration.
-     * @throws { BusinessException } 401 - Invalid input parameter. Possible causes: 1.the funcs and methodList must have the same size.
+     * @throws { BusinessException } 401 - Invalid input parameter. Possible causes:
+     * <br>1.the funcs and methodList must have the same size.
      * <br>2. the funcs' size be greater than 0.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief registerJavaScriptProxy(object: object, name: string, methodList: Array<string>): void
+     * @relation registerJavaScriptProxy(object: object, name: string, methodList: Array<string>): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -403,15 +299,13 @@ public class WebviewController <: RemoteDataLite {
                 cMethodList = toArrayCString(methodList)
             } catch (e: IllegalMemoryException) {
                 LibC.free(cName)
-                throw BusinessException(OUT_MEMEORY,
-                    "WebviewController registerJavaScriptProxy failed: ${getErrorMsg(OUT_MEMEORY)}")
+                throw BusinessException(OUT_MEMEORY, getErrorMsg(OUT_MEMEORY))
             }
             let cFuncIdsPtr = LibC.malloc<Int64>(count: funcs.size)
             if (cFuncIdsPtr.isNull()) {
                 LibC.free(cName)
                 freeArrCString(cMethodList)
-                throw BusinessException(OUT_MEMEORY,
-                    "WebviewController registerJavaScriptProxy failed: ${getErrorMsg(OUT_MEMEORY)}")
+                throw BusinessException(OUT_MEMEORY, getErrorMsg(OUT_MEMEORY))
             }
             for (i in 0..funcs.size) {
                 let wrapper = {
@@ -437,16 +331,14 @@ public class WebviewController <: RemoteDataLite {
 
     /**
      * Gets the url of current Web page.
+     *
      * @returns { String } Return the url of the current page.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief runJavaScript(script: string, callback: AsyncCallback<string>): void
+     * @relation getUrl(): string
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -460,15 +352,14 @@ public class WebviewController <: RemoteDataLite {
 
     /**
      * Gets the original url of current Web page.
+     *
      * @returns { String } Return the original url of the current page.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief runJavaScript(script: string, callback: AsyncCallback<string>): void
+     * @relation getOriginalUrl(): string
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -488,12 +379,10 @@ public class WebviewController <: RemoteDataLite {
      *                          and when set to true, it will jump to the top of the page.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * brief pageUp(top: boolean): void
+     * relation pageUp(top: boolean): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -512,12 +401,10 @@ public class WebviewController <: RemoteDataLite {
      *                             and when set to true, it will jump to the top of the page.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * brief pageDown(bottom: boolean): void
+     * relation pageDown(bottom: boolean): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -537,20 +424,17 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief scrollTo(x: number, y: number): void
+     * @relation scrollTo(x: number, y: number, duration?: number): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
-    public func scrollTo(x: Float32, y: Float32, duration!: Int32 = 0): Unit {
+    public func scrollTo(x: Float32, y: Float32, duration!: ?Int32 = None): Unit {
         unsafe {
-            let errCode = if (duration > 0) {
-                FfiOHOSWebviewCtlScrollToWithAnime(getID(), x, y, duration)
+            let errCode = if (let Some(v) <- duration) {
+                FfiOHOSWebviewCtlScrollToWithAnime(getID(), x, y, v)
             } else {
                 FfiOHOSWebviewCtlScrollTo(getID(), x, y)
             }
@@ -566,20 +450,17 @@ public class WebviewController <: RemoteDataLite {
      * @param { Int32 } duration - the scroll animation duration. Unit: millisecond.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief scrollBy(deltaX: number, deltaY: number): void
+     * @relation scrollBy(deltaX: number, deltaY: number, duration?: number): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
-    public func scrollBy(deltaX: Float32, deltaY: Float32, duration!: Int32 = 0): Unit {
+    public func scrollBy(deltaX: Float32, deltaY: Float32, duration!: ?Int32 = None): Unit {
         unsafe {
-            let errCode = if (duration > 0) {
-                FfiOHOSWebviewCtlScrollByWithAnime(getID(), deltaX, deltaY, duration)
+            let errCode = if (let Some(v) <- duration) {
+                FfiOHOSWebviewCtlScrollByWithAnime(getID(), deltaX, deltaY, v)
             } else {
                 FfiOHOSWebviewCtlScrollBy(getID(), deltaX, deltaY)
             }
@@ -592,13 +473,10 @@ public class WebviewController <: RemoteDataLite {
      *
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief forward(): void
+     * @relation forward(): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -614,13 +492,10 @@ public class WebviewController <: RemoteDataLite {
      *
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief backward(): void
+     * @relation backward(): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -637,13 +512,10 @@ public class WebviewController <: RemoteDataLite {
      * @param { Int32 } step - Steps to go forward or backward.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief backOrForward(step: number): void
+     * @relation backOrForward(step: number): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -656,16 +528,14 @@ public class WebviewController <: RemoteDataLite {
 
     /**
      * Gets the content height of current Web page.
+     *
      * @returns { Int32 } Returns the page height of the current page.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief getPageHeight(): number
+     * @relation getPageHeight(): number
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -680,16 +550,14 @@ public class WebviewController <: RemoteDataLite {
 
     /**
      * Gets the title of current Web page.
+     *
      * @returns { String } Return to File Selector Title.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief getTitle(): string
+     * @relation getTitle(): string
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -709,20 +577,16 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100004 - Function not enable.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief zoom(factor: number): void
+     * @relation zoom(factor: number): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func zoom(factor: Float32): Unit {
         if (factor <= 0.0) {
-            throw BusinessException(ERR_PARAMETER_ERROR,
-                "WebviewController zoom failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         unsafe {
             let errCode = FfiOHOSWebviewCtlZoom(getID(), factor)
@@ -736,12 +600,10 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100004 - Function not enable.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief zoomIn(): void
+     * @relation zoomIn(): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -758,12 +620,10 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100004 - Function not enable.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief zoomOut(): void
+     * @relation zoomOut(): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -776,15 +636,14 @@ public class WebviewController <: RemoteDataLite {
 
     /**
      * Gets the hit test value of HitTest.
+     *
      * @returns { HitTestValue } Return the element information of the clicked area.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief getHitTestValue(): HitTestValue
+     * @relation getHitTestValue(): HitTestValue
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -802,13 +661,10 @@ public class WebviewController <: RemoteDataLite {
      *
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief clearHistory(): void
+     * @relation clearHistory(): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -826,36 +682,31 @@ public class WebviewController <: RemoteDataLite {
      * @returns { Bool } True if the web page can go back else false.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief accessStep(step: number): boolean
+     * @relation accessStep(step: number): boolean
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func accessStep(step: Int32): Bool {
-        unsafe {
-            var code: Int32 = 0
-            let result = FfiOHOSWebviewCtlAccessStep(getID(), inout code, step)
-            throwIfNotSuccess(code, "WebviewController", "accessStep")
-            return result
-        }
+        
+        var code: Int32 = 0
+        let result = unsafe { FfiOHOSWebviewCtlAccessStep(getID(), inout code, step) }
+        throwIfNotSuccess(code, "WebviewController", "accessStep")
+        return result
     }
 
     /**
      * Gets the type of HitTest.
+     *
      * @returns { WebHitTestType } The type of HitTest.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief getHitTest(): WebHitTestType
+     * @relation getHitTest(): WebHitTestType
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -883,12 +734,10 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100003 - Invalid resource path or file type.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief storeWebArchive(baseName: string, autoName: boolean, callback: AsyncCallback<string>): void
+     * @relation storeWebArchive(baseName: string, autoName: boolean, callback: AsyncCallback<string>): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -901,7 +750,7 @@ public class WebviewController <: RemoteDataLite {
                     LibC.free(value.data)
                     callback(None, data)
                 } else {
-                    callback(AsyncError(value.code), None)
+                    callback(BusinessException(value.code, getErrorMsg(value.code)), None)
                 }
             }
             let lambdaData = Callback1Param<RetDataCString, Unit>(wrapper)
@@ -914,15 +763,14 @@ public class WebviewController <: RemoteDataLite {
     /**
      * Enable the ability to check website security risks.
      * Illegal and fraudulent websites are mandatory enabled and can't be disabled by this function.
+     *
      * @param { Bool } enable - {@code true} enable check the website security risks; {@code false} otherwise.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief enableSafeBrowsing(enable: boolean): void
+     * @relation enableSafeBrowsing(enable: boolean): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -935,15 +783,14 @@ public class WebviewController <: RemoteDataLite {
 
     /**
      * Get whether checking website security risks is enabled.
+     *
      * @returns { Bool } True if enable the ability to check website security risks else false.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief isSafeBrowsingEnabled(): boolean
+     * @relation isSafeBrowsingEnabled(): boolean
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -962,12 +809,10 @@ public class WebviewController <: RemoteDataLite {
      * @returns { SecurityLevel } the security level of current page.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief getSecurityLevel(): SecurityLevel
+     * @relation getSecurityLevel(): SecurityLevel
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -986,12 +831,10 @@ public class WebviewController <: RemoteDataLite {
      * @returns { Bool } {@code true} has been set the incognito mode; {@code false} otherwise.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief isIncognitoMode(): boolean
+     * @relation isIncognitoMode(): boolean
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -1012,13 +855,10 @@ public class WebviewController <: RemoteDataLite {
      *                               in ram.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief removeCache(clearRom: boolean): void
+     * @relation removeCache(clearRom: boolean): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -1031,16 +871,14 @@ public class WebviewController <: RemoteDataLite {
 
     /**
      * Get back forward stack list from current webview.
+     *
      * @returns { BackForwardList } Back forward list for current webview.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief getBackForwardEntries(): BackForwardList
+     * @relation getBackForwardEntries(): BackForwardList
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -1058,13 +896,10 @@ public class WebviewController <: RemoteDataLite {
      *
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @brief stop(): void
+     * @relation stop(): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]

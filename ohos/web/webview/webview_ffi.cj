@@ -13,12 +13,10 @@
  * limitations under the License.
  */
 
-package ohos.webview
+package ohos.web.webview
 
 import ohos.ffi.*
-import ohos.base.*
-import std.collection.*
-import ohos.image.*
+import ohos.multimedia.image.*
 
 foreign {
     // WebviewController
@@ -154,8 +152,6 @@ foreign {
 
     func FfiOHOSWebviewCtlGetCertificateByte(id: Int64, errCode: CPointer<Int32>): CCertByteData
 
-    func FfiWebviewCtlCustomizeSchemes(schemes: CArrScheme): Int32
-
     func FfiOHOSWebviewCtlTerminateRenderProcess(id: Int64, errcode: CPointer<Int32>): Bool
 
     func FfiOHOSWebviewCtlCloseAllMediaPresentations(id: Int64): Int32
@@ -220,8 +216,6 @@ foreign {
 
     func FfiOHOSWebviewCtlGetSurfaceId(id: Int64): RetDataCString
 
-    func FfiOHOSWebviewCtlInjectOfflineResources(id: Int64, maps: CArrOfflineResourceMap): Int32
-
     func FfiOHOSWebviewCtlRemoveIntelligentTrackingPreventionBypassingList(hostList: CArrString): Unit
 
     func FfiOHOSWebviewCtlSetBackForwardCacheOptions(id: Int64, size: Int32, timeToLive: Int32): Int32
@@ -232,10 +226,6 @@ foreign {
 
     func FfiOHOSWebviewCtlPrefetchResource(request: CRequestInfo, additionalHeaders: ArrWebHeader, cKey: CString,
         cacheValidTime: Int32): Int32
-
-    func FfiOHOSWebviewCtlPrecompileJavaScript(id: Int64, cUrl: CString, cScript: CString, cCacheOptions: CCacheOptions): Int32
-
-    func FfiOHOSWebviewCtlWebPageSnapshot(id: Int64, info: CSnapshotInfo, classId: Int64): Int32
 
     func FfiOHOSWebviewCtlClearServiceWorkerWebSchemeHandler(): Unit
 
@@ -408,8 +398,6 @@ foreign {
 
     func FfiWebStorageGetOriginQuota(origin: CString, errCode: CPointer<Int32>): Int64
 
-    func FfiWebStorageGetOrigins(errCode: CPointer<Int32>): CArrWebStorageOrigin
-
     // WebSchemeHandlerResponse
     func FfiWebSchemeHandlerResponseConstructor(): Int64
 
@@ -547,106 +535,6 @@ foreign {
 }
 
 @C
-struct CArrScheme {
-    CArrScheme(
-        let head: CPointer<CScheme>,
-        let size: Int64
-    ) {}
-
-    init(arr: Array<WebCustomScheme>) {
-        unsafe {
-            this.head = cjArr2CArr<WebCustomScheme, CScheme>(arr, {cjScheme => CScheme(cjScheme)},
-                {cScheme => cScheme.free()})
-            this.size = arr.size
-        }
-    }
-
-    func free() {
-        if (head.isNull()) {
-            return
-        }
-        for (i in 0..size) {
-            unsafe {
-                head.read(i).free()
-            }
-        }
-        unsafe { LibC.free(head) }
-    }
-}
-
-@C
-struct CScheme {
-    CScheme(
-        let schemeName: CString,
-        let isSupportCORS: Bool,
-        let isSupportFetch: Bool,
-        let isStandard: Bool,
-        let isLocal: Bool,
-        let isDisplayIsolated: Bool,
-        let isSecure: Bool,
-        let isCspBypassing: Bool,
-        let isCodeCacheSupported: Bool
-    ) {}
-
-    init(webCustomScheme: WebCustomScheme) {
-        unsafe {
-            schemeName = LibC.mallocCString(webCustomScheme.schemeName)
-            isSupportCORS = webCustomScheme.isSupportCORS
-            isSupportFetch = webCustomScheme.isSupportFetch
-            isStandard = webCustomScheme.isStandard
-            isLocal = webCustomScheme.isLocal
-            isDisplayIsolated = webCustomScheme.isDisplayIsolated
-            isSecure = webCustomScheme.isSecure
-            isCspBypassing = webCustomScheme.isCspBypassing
-            isCodeCacheSupported = webCustomScheme.isCodeCacheSupported
-        }
-    }
-
-    func free() {
-        unsafe {
-            LibC.free(schemeName)
-        }
-    }
-}
-
-@C
-struct CArrWebStorageOrigin {
-    CArrWebStorageOrigin(
-        let cWebStorageOrigin: CPointer<CWebStorageOrigin>,
-        let size: Int64
-    ) {}
-
-    unsafe func toArrWebStorageOriginAndFree(): Array<WebStorageOrigin> {
-        if (cWebStorageOrigin.isNull()) {
-            return Array<WebStorageOrigin>()
-        }
-        let ret = Array<WebStorageOrigin>(
-            size,
-            {
-                i => cWebStorageOrigin.read(i).toWebStorageOriginAndFree()
-            }
-        )
-        LibC.free<CWebStorageOrigin>(cWebStorageOrigin)
-        return ret
-    }
-}
-
-@C
-struct CWebStorageOrigin {
-    CWebStorageOrigin(
-        let origin: CString,
-        let quota: Int64,
-        let usage: Int64
-    ) {}
-
-    unsafe func toWebStorageOriginAndFree(): WebStorageOrigin {
-        let originString = this.origin.toString()
-        LibC.free(this.origin)
-        return WebStorageOrigin(originString, quota, usage)
-    }
-}
-
-@C
 struct LoadDatas {
     LoadDatas(
         let cData: CString,
@@ -722,13 +610,12 @@ struct ArrWebHeader {
     let head: CPointer<RetWebHeader>
     let size: Int64
 
-    init(arr: Array<WebHeader>, exceptHandle: () -> Unit) {
+    init(arr: Array<WebHeader>) {
         unsafe {
             head = cjArr2CArr<WebHeader, RetWebHeader>(
                 arr,
                 {v: WebHeader => RetWebHeader(v)},
-                {v: RetWebHeader => v.free()},
-                exceptHandle
+                {v: RetWebHeader => v.free()}
             )
             this.size = arr.size
         }
@@ -779,22 +666,6 @@ func freeArrWebHeader(ptr: CPointer<RetWebHeader>, len: Int64) {
 }
 
 @C
-struct CCacheOptions {
-    let responseHeaders: ArrWebHeader
-
-    init(cacheOptions: CacheOptions) {
-        unsafe {
-            let WebHeader = cacheOptions.responseHeaders
-            this.responseHeaders = ArrWebHeader(WebHeader) {}
-        }
-    }
-
-    func free() {
-        freeArrWebHeader(responseHeaders.head, responseHeaders.size)
-    }
-}
-
-@C
 struct CRequestInfo {
     CRequestInfo(
         let url: CString,
@@ -804,144 +675,10 @@ struct CRequestInfo {
 }
 
 @C
-struct COfflineResourceMap {
-    var urlList: CArrString
-    var resource: CPointer<UInt8>
-    var resourceSize: Int64
-    var responseHeaders: ArrWebHeader
-    var _type: Int32
-
-    init() {
-        urlList = CArrString(CPointer<CString>(), 0)
-        resource = CPointer<UInt8>()
-        resourceSize = 0
-        responseHeaders = ArrWebHeader(Array<WebHeader>()) {}
-        _type = 0
-    }
-
-    func free() {
-        unsafe {
-            if (urlList.head.isNotNull()) {
-                for (i in 0..urlList.size) {
-                    LibC.free(urlList.head.read(i))
-                }
-                LibC.free(urlList.head)
-            }
-            LibC.free(resource)
-            for (i in 0..responseHeaders.size) {
-                freeArrWebHeader(responseHeaders.head, i)
-            }
-        }
-    }
-}
-
-@C
-struct CArrOfflineResourceMap {
-    CArrOfflineResourceMap(
-        let head: CPointer<COfflineResourceMap>,
-        let size: Int64
-    ) {}
-
-    init(arr: Array<OfflineResourceMap>) {
-        unsafe {
-            this.head = LibC.malloc<COfflineResourceMap>(count: arr.size)
-            if (this.head.isNull()) {
-                throw IllegalMemoryException("Failed to allocate memory")
-            }
-            for (i in 0..arr.size) {
-                try {
-                    let cMap = arr[i].toCOfflineResourceMap()
-                    head.write(i, cMap)
-                } catch (e: IllegalMemoryException) {
-                    freeArrOfflineResourceMap(head, i)
-                    throw e
-                }
-            }
-            this.size = arr.size
-        }
-    }
-}
-
-@C
-struct CSnapshotInfo {
-    let id: CString
-    let width: Int32
-    let height: Int32
-    let widthType: Int32
-    let heightType: Int32
-
-    init(sInfo: SnapshotInfo) {
-        unsafe {
-            this.id = LibC.mallocCString(sInfo.id)
-        }
-        this.width = Int32(sInfo.size.width.value)
-        this.height = Int32(sInfo.size.height.value)
-        this.widthType = Int32(sInfo.size.width.unitType.getValue())
-        this.heightType = Int32(sInfo.size.height.unitType.getValue())
-    }
-
-    func free() {
-        unsafe {
-            LibC.free(id)
-        }
-    }
-}
-
-@C
-struct CSnapshotResult {
-    CSnapshotResult(
-        var id: CString,
-        var imageId: Int64,
-        var status: Bool,
-        var width: Int32,
-        var height: Int32,
-        var widthType: Int32,
-        var heightType: Int32
-    ) {}
-
-    func toSnapshotResult(): SnapshotResult {
-        unsafe {
-            let resId = id.toString()
-            let image = PixelMap(imageId)
-            let resStatus = status
-            var resWidth = generateLength(width, widthType)
-            var resHeight = generateLength(height, heightType)
-            var resSize = SizeOptions(width: resWidth, height: resHeight)
-            return SnapshotResult(Some(resId), Some(image), Some(resStatus), Some(resSize))
-        }
-    }
-
-    func generateLength(value: Int32, typeLength: Int32): Length {
-        return match (typeLength) {
-            case 0 => Float64(value).px
-            case 1 => Float64(value).vp
-            case 2 => Float64(value).fp
-            case 3 => Float64(value).percent
-            case 4 => Float64(value).lpx
-            case _ => Float64(value).vp
-        }
-    }
-
-    func free() {
-        unsafe {
-            LibC.free(id)
-        }
-    }
-}
-
-@C
 struct CScrollOffset {
     CScrollOffset(
         let x: Float32,
         let y: Float32
-    ) {}
-}
-
-@C
-struct RetDataCSnapshotResult {
-    RetDataCSnapshotResult(
-        let code: Int32,
-        let data: CSnapshotResult
     ) {}
 }
 

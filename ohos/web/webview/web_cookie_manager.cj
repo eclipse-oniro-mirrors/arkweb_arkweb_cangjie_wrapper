@@ -13,26 +13,26 @@
  * limitations under the License.
  */
 
-package ohos.webview
+package ohos.web.webview
 
-import ohos.labels.*
-import ohos.ffi.*
-import ohos.base.*
+import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR}
+import ohos.labels.APILevel
 
 const MAX_STRING_LENGTH: Int64 = 40960
 
 /**
  * Provides methods for managing the web cookies.
  *
+ * @relation class WebCookieManager
  */
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class WebCookieManager {
+    init() {}
+
     /**
      * Gets all cookies for the given URL.
      *
@@ -42,19 +42,16 @@ public class WebCookieManager {
      * @returns { string } - The cookie value for the given URL.
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100002 - Invalid url.
-     * @brief static fetchCookieSync(url: string, incognito?: boolean): string
+     * @relation static fetchCookieSync(url: string, incognito?: boolean): string
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func fetchCookie(url: String, incognito!: Bool = false): String {
         if (url.size > MAX_STRING_LENGTH) {
-            throw BusinessException(ERR_PARAMETER_ERROR,
-                "WebCookieManager fetchCookieSync failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         var cookie: String = ""
         var errCode: Int32 = 0
@@ -82,18 +79,16 @@ public class WebCookieManager {
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100002 - Invalid url.
      * @throws { BusinessException } 17100005 - Invalid cookie value.
-     * @brief static configCookieSync(url: string, value: string, incognito?: boolean): void
+     * @relation static configCookieSync(url: string, value: string, incognito?: boolean): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func configCookie(url: String, value: String, incognito!: Bool = false): Unit {
         if (url.size > MAX_STRING_LENGTH || value.size > MAX_STRING_LENGTH) {
-            throw BusinessException(ERR_PARAMETER_ERROR,
-                "WebCookieManager configCookieSync failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         unsafe {
             var errCode: Int32 = 0
@@ -112,11 +107,10 @@ public class WebCookieManager {
      * By default this is set to be true.
      *
      * @param { Bool } accept - Whether the instance should send and accept cookies.
-     * @brief static putAcceptCookieEnabled(accept: boolean): void
+     * @relation static putAcceptCookieEnabled(accept: boolean): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -130,11 +124,10 @@ public class WebCookieManager {
      * Get whether the instance can send and accept cookies.
      *
      * @returns { Bool } True if the instance can send and accept cookies else false.
-     * @brief static isCookieAllowed(): boolean
+     * @relation static isCookieAllowed(): boolean
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -149,11 +142,10 @@ public class WebCookieManager {
      * By default this is set to be true.
      *
      * @param { Bool } accept - Whether the instance should send and accept cookies.
-     * @brief static putAcceptCookieEnabled(accept: boolean): void
+     * @relation static putAcceptThirdPartyCookieEnabled(accept: boolean): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -167,11 +159,10 @@ public class WebCookieManager {
      * Get whether the instance can send and accept thirdparty cookies.
      *
      * @returns { Bool } True if the instance can send and accept thirdparty cookies else false.
-     * @brief static isThirdPartyCookieAllowed(): boolean
+     * @relation static isThirdPartyCookieAllowed(): boolean
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -187,11 +178,10 @@ public class WebCookieManager {
      * @param { Bool } incognito - {@code true} check whether exists any cookies.
      *                                in incognito mode; {@code false} otherwise.
      * @returns { Bool } True if exists more than one cookie else false;
-     * @brief static existCookie(incognito?: boolean): boolean
+     * @relation static existCookie(incognito?: boolean): boolean
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -206,11 +196,10 @@ public class WebCookieManager {
      *
      * @param { Bool } incognito - {@code true} remove all cookies in incognito mode;
      *                                {@code false} otherwise.
-     * @brief static clearAllCookiesSync(incognito?: boolean): void
+     * @relation static clearAllCookiesSync(incognito?: boolean): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
@@ -222,11 +211,11 @@ public class WebCookieManager {
 
     /**
      * Delete the session cookies.
-     * @brief static clearSessionCookieSync(): void
+     *
+     * @relation static clearSessionCookieSync(): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]

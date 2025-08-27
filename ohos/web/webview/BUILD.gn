@@ -14,30 +14,28 @@
 import("//build/ohos.gni")
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("ohos.webview") {
+ohos_cangjie_shared_library("ohos.web.webview") {
   sources = [
-    "back_forward_list.cj",
+    "geolocation_permissions.cj",
     "web_cookie_manager.cj",
     "webview_common.cj",
     "webview_controller.cj",
     "webview_ffi.cj",
-    "web_storage.cj",
     "webview_utils.cj",
   ]
 
   cj_external_deps = [
-    "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.business_exception",
     "cangjie_ark_interop:ohos.ffi",
     "hiviewdfx_cangjie_wrapper:ohos.hilog",
-    "multimedia_cangjie_wrapper:ohos.image",
+    "multimedia_cangjie_wrapper:ohos.multimedia.image",
     "cangjie_ark_interop:ohos.labels",
-    "global_cangjie_wrapper:ohos.resource_manager",
-    "arkui_cangjie_wrapper:ohos.ui_resource",
+    "arkui_cangjie_wrapper:ohos.base",
+    "arkui_cangjie_wrapper:ohos.arkui.component.util",
   ]
 
   external_deps = [ "webview:cj_webview_ffi" ]
 
   subsystem_name = "web"
   part_name = "arkweb_cangjie_wrapper"
-  lib_name = "webview"
 }

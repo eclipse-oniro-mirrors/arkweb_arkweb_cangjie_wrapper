@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-package ohos.webview
+package ohos.web.webview
 
 import ohos.ffi.*
-import ohos.base.*
+import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
 import std.collection.*
 
 let ERROR_CODE_MAP = HashMap<Int32, String>(
@@ -67,9 +67,14 @@ func getStringAndFree(cString: CString): String {
     return result
 }
 
-func createWebviewControllerWithWebTag(webTag: String): Int64 {
+func createWebviewControllerWithWebTag(webTag: ?String): Int64 {
+    let webTagValue = if (let Some(v) <- webTag) {
+        v
+    } else {
+        WebviewController.generateWebTag()
+    }
     unsafe {
-        let cWebTag = LibC.mallocCString(webTag)
+        let cWebTag = LibC.mallocCString(webTagValue)
         let id = FfiOHOSWebviewCtlConstructorWithWebTag(cWebTag)
         LibC.free(cWebTag)
         return id
@@ -79,15 +84,6 @@ func createWebviewControllerWithWebTag(webTag: String): Int64 {
 func throwIfNotSuccess(code: Int32, className: String, funcName: String): Unit {
     if (code != SUCCESS_CODE) {
         WEBVIEW_LOG.error("${className} ${funcName} failed: ${getErrorMsg(code)}")
-        throw BusinessException(code, "${className} ${funcName} failed: ${getErrorMsg(code)}")
+        throw BusinessException(code, getErrorMsg(code))
     }
-}
-
-func freeArrOfflineResourceMap(ptr: CPointer<COfflineResourceMap>, len: Int64) {
-    for (i in 0..len) {
-        unsafe {
-            ptr.read(i).free()
-        }
-    }
-    unsafe { LibC.free(ptr) }
 }

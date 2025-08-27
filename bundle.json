@@ -34,12 +34,12 @@
         "build": {
             "sub_component": [
                 "//base/web/arkweb_cangjie_wrapper/ohos/web:ohos.web",
-                "//base/web/arkweb_cangjie_wrapper/ohos/web/webview:ohos.webview",
-                "//base/web/arkweb_cangjie_wrapper/kit/Arkweb:kit.Arkweb"
+                "//base/web/arkweb_cangjie_wrapper/ohos/web/webview:ohos.web.webview",
+                "//base/web/arkweb_cangjie_wrapper/kit/ArkWeb:kit.ArkWeb"
             ],
             "inner_kits": [
                 {
-                    "name": "//base/web/arkweb_cangjie_wrapper/ohos/web/webview:ohos.webview"
+                    "name": "//base/web/arkweb_cangjie_wrapper/ohos/web/webview:ohos.web.webview"
                 }
             ],
             "test": [

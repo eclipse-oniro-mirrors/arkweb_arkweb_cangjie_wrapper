@@ -88,14 +88,14 @@ public enum SecurityLevel {
         stagemodelonly: true,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
-    Dangerous
+    Danger
     | ...
 
     static func fromInt32(code: Int32): SecurityLevel {
         match (code) {
             case 1 => Secure
             case 2 => Warning
-            case 3 => Dangerous
+            case 3 => Danger
             case _ => NoneLevel
         }
     }

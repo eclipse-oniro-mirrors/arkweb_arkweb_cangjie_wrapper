@@ -16,7 +16,7 @@ import("//build/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.web.webview") {
   sources = [
-    "geolocation_permissions.cj",
+    "back_forward_list.cj",
     "web_cookie_manager.cj",
     "webview_common.cj",
     "webview_controller.cj",

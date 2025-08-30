@@ -2,7 +2,8 @@
 
 ## 简介
 
-Web仓颉接口是在 OpenHarmony 上基于 arkweb 能力之上封装的仓颉API。提供了Web组件控制器，Cookie管理和历史信息列表的能力。
+Web仓颉接口是在OpenHarmony上基于ArkWeb能力之上封装的仓颉API。提供了Web组件控制，Cookie管理和历史信息列表的能力。
+当前开放的Web仓颉接口仅支持standard设备。
 
 ## 系统架构
 
@@ -14,18 +15,24 @@ Web仓颉接口是在 OpenHarmony 上基于 arkweb 能力之上封装的仓颉AP
 
 ```
 base/web/arkweb_cangjie_wrapper
-├── ohos             # 仓颉webview接口实现
-├── kit              # 仓颉kit化代码
-├── figures          # 存放readme中的架构图
+├── figures    # 存放README中的架构图
+├── kit        # 仓颉ArkWeb的kit化代码
+│   └── ArkWeb
+└── ohos       # 仓颉ArkWeb接口实现
+    └── web
 ```
 
-## 约束
+如架构图所示：
 
-当前开放的Web仓颉接口仅支持standard设备。
+- 历史信息列表：提供获取历史列表中指定索引的历史记录项信息。
+- Cookie管理：提供控制Web组件中的cookie的各种行为。
+- Web组件控制器：提供控制Web组件各种行为（包括页面导航、生命周期状态、JavaScript交互等行为）。
+- 仓颉方舟Web FFI接口定义：负责定义C互操作仓颉接口，用于实现全球化的能力。
+- webview基础能力：负责提供webview基础功能，封装C接口提供给仓颉进行互操作。
 
 ## 使用说明
 
-如架构图所示，Web仓颉接口提供了以下功能接口，开发者可以根据使用诉求，综合使用一类或多类接口：
+Web仓颉接口提供了以下功能接口，开发者可以根据使用诉求，综合使用一类或多类接口：
 
   - BackForwardList：历史信息列表。
   - WebCookieManager：Cookie管理。
@@ -63,6 +70,16 @@ base/web/arkweb_cangjie_wrapper
 ## 相关仓
 
 [web_webview](https://gitee.com/openharmony/web_webview)
+
+[arkcompiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
+
+[arkui_arkui_cangjie_wrapper](https://gitcode.com/openharmony-sig/arkui_arkui_cangjie_wrapper)
+
+[multimedia_multimedia_cangjie_wrapper](https://gitcode.com/openharmony-sig/multimedia_multimedia_cangjie_wrapper)
+
+[global_global_cangjie_wrapper](https://gitcode.com/openharmony-sig/global_global_cangjie_wrapper)
+
+[hiviewdfx_hiviewdfx_cangjie_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)
 
 ## 参与贡献
 

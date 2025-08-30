@@ -2,7 +2,8 @@
 
 ## Introduction
 
-The Web Cangjie API is a Cangjie API encapsulated on OpenHarmony based on the arkweb capability. arkweb is the native engine of OpenHarmony webview components, built on Chromium and CEF.
+The Web Cangjie Interface is a Cangjie API encapsulated on OpenHarmony based on ArkWeb capabilities. It provides the capabilities of Web component control, Cookie management, and historical information list.
+The currently open ArkWeb Cangjie api only supports standard devices.
 
 ## Architecture
 
@@ -10,22 +11,24 @@ The Web Cangjie API is a Cangjie API encapsulated on OpenHarmony based on the ar
 
 ![](figures/arkweb_cangjie_wrapper_architecture_en.png "web-architecture")
 
-* nweb: native engine of the OpenHarmony web component, which is built based on the Chromium Embedded Framework (CEF).
-* CEF: stands for Chromium Embedded Framework. It is an open-source project based on Google Chromium.
+As shown in the architecture:
+
+- BackForwardList: Provides the capability to obtain information about the historical record item at a specified index in the historical list.
+- WebCookieManager: Provides the capability to control various behaviors of cookies in Web components.
+- WebviewController: Provides the capability to control various behaviors of Web components (including behaviors such as page navigation, lifecycle status, and JavaScript interaction).
+- Cangjie ArkWeb FFI Interface:  Based on cross-language interoperability via C interfaces to implement ArkWeb Cangjie API.
+- webview: Responsible for providing basic webview functions, and encapsulates C interfaces for Cangjie to conduct interoperation.
 
 ## Directory Structure
 
 ```
 base/web/arkweb_cangjie_wrapper
-├── ohos             # Cangjie webview code
-├── kit              # Cangjie kit code
-├── figures          # architecture pictures
+├── figures    # architecture pictures
+├── kit        # Cangjie ArkWeb kit code
+│   └── ArkWeb
+└── ohos       # Cangjie ArkWeb code
+    └── web
 ```
-
-## Constraints
-
-The currently open ArkWeb Cangjie api only supports standard devices.
-
 ## Usage Guidelines
 
 The following features are provided:
@@ -66,6 +69,16 @@ For ArkWeb-related APIs, please refer to [ohos.web.webview](https://gitcode.com/
 ## Repositories Involved
 
 [web_webview](https://gitee.com/openharmony/web_webview)
+
+[arkcompiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
+
+[arkui_arkui_cangjie_wrapper](https://gitcode.com/openharmony-sig/arkui_arkui_cangjie_wrapper)
+
+[multimedia_multimedia_cangjie_wrapper](https://gitcode.com/openharmony-sig/multimedia_multimedia_cangjie_wrapper)
+
+[global_global_cangjie_wrapper](https://gitcode.com/openharmony-sig/global_global_cangjie_wrapper)
+
+[hiviewdfx_hiviewdfx_cangjie_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)
 
 ## Code Contribution
 

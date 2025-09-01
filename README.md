@@ -9,7 +9,7 @@ The currently open ArkWeb Cangjie api only supports standard devices.
 
 **Figure 1** Architecture of the web subsystem
 
-![](figures/arkweb_cangjie_wrapper_architecture_en.png "web-architecture")
+![Architecture of the web subsystem](figures/arkweb_cangjie_wrapper_architecture_en.png)
 
 As shown in the architecture:
 
@@ -26,8 +26,9 @@ base/web/arkweb_cangjie_wrapper
 ├── figures    # architecture pictures
 ├── kit        # Cangjie ArkWeb kit code
 │   └── ArkWeb
-└── ohos       # Cangjie ArkWeb code
-    └── web
+├── ohos       # Cangjie ArkWeb code
+│   └── web
+└── test       # Cangjie ArkWeb test cases
 ```
 ## Usage Guidelines
 

@@ -2,14 +2,14 @@
 
 ## 简介
 
-Web仓颉接口是在OpenHarmony上基于ArkWeb能力之上封装的仓颉API。提供了Web组件控制，Cookie管理和历史信息列表的能力。
+Web仓颉接口是在OpenHarmony上基于方舟Web能力之上封装的仓颉API。提供了Web组件控制，Cookie管理和历史信息列表的能力。
 当前开放的Web仓颉接口仅支持standard设备。
 
 ## 系统架构
 
 **图 1**  Web仓颉架构图
 
-![](figures/arkweb_cangjie_wrapper_architecture.png "web软件架构图")
+![Web仓颉架构图](figures/arkweb_cangjie_wrapper_architecture.png)
 
 ## 目录
 
@@ -18,16 +18,17 @@ base/web/arkweb_cangjie_wrapper
 ├── figures    # 存放README中的架构图
 ├── kit        # 仓颉ArkWeb的kit化代码
 │   └── ArkWeb
-└── ohos       # 仓颉ArkWeb接口实现
-    └── web
+├── ohos       # 仓颉方舟Web接口实现
+│   └── web
+└── test       # 仓颉方舟Web测试用例
 ```
 
 如架构图所示：
 
 - 历史信息列表：提供获取历史列表中指定索引的历史记录项信息。
-- Cookie管理：提供控制Web组件中的cookie的各种行为。
+- Cookie管理：提供控制Web组件中Cookie的各种行为。
 - Web组件控制器：提供控制Web组件各种行为（包括页面导航、生命周期状态、JavaScript交互等行为）。
-- 仓颉方舟Web FFI接口定义：负责定义C互操作仓颉接口，用于实现全球化的能力。
+- 仓颉方舟Web FFI接口定义：负责定义C互操作仓颉接口，用于实现方舟Web的能力。
 - webview基础能力：负责提供webview基础功能，封装C接口提供给仓颉进行互操作。
 
 ## 使用说明

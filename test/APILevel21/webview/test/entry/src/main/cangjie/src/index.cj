@@ -255,7 +255,7 @@ class EntryView {
                             case SecurityLevel.NoneLevel => loggerInfo("getSecurityLevel returns NoneLevel")
                             case SecurityLevel.Secure => loggerInfo("getSecurityLevel returns Secure")
                             case SecurityLevel.Warning => loggerInfo("getSecurityLevel returns Warning")
-                            case SecurityLevel.Dangerous => loggerInfo("getSecurityLevel returns Dangerous")
+                            case SecurityLevel.Danger => loggerInfo("getSecurityLevel returns Danger")
                             case _ => throw Exception("unsupported enum constructor")
                         }
                     }

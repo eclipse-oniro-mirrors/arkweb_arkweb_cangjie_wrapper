@@ -32,8 +32,7 @@ import ohos.arkui.component.util.transResourceMediaToString
  * @relation class WebviewController
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class WebviewController <: RemoteDataLite {
@@ -57,8 +56,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation constructor(webTag?: string)
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public init(webTag!: ?String = None) {
@@ -76,8 +74,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation static setWebDebuggingAccess(webDebuggingAccess: boolean): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func setWebDebuggingAccess(webDebuggingAccess: Bool): Unit {
@@ -100,8 +97,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation loadUrl(url: string | Resource, headers?: Array<WebHeader>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func loadUrl<T>(url: T, headers!: Array<WebHeader> = Array<WebHeader>()): Unit where T <: ResourceStr {
@@ -128,8 +124,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation refresh(): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func refresh(): Unit {
@@ -148,8 +143,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation getUserAgent(): string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getUserAgent(): String {
@@ -170,8 +164,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation accessBackward(): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func accessBackward(): Bool {
@@ -193,8 +186,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation setCustomUserAgent(userAgent: string): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func setCustomUserAgent(userAgent: String): Unit {
@@ -215,8 +207,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation getCustomUserAgent(): string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getCustomUserAgent(): String {
@@ -238,8 +229,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation runJavaScript(script: string, callback: AsyncCallback<string>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func runJavaScript(script: String, callback: AsyncCallback<String>): Unit {
@@ -277,8 +267,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation registerJavaScriptProxy(object: object, name: string, methodList: Array<string>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func registerJavaScriptProxy(funcs: Array<(String) -> String>, name: String, methodList: Array<String>): Unit {
@@ -338,8 +327,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation getUrl(): string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getUrl(): String {
@@ -359,8 +347,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation getOriginalUrl(): string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getOriginalUrl(): String {
@@ -382,8 +369,7 @@ public class WebviewController <: RemoteDataLite {
      * relation pageUp(top: boolean): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func pageUp(top: Bool): Unit {
@@ -404,8 +390,7 @@ public class WebviewController <: RemoteDataLite {
      * relation pageDown(bottom: boolean): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func pageDown(bottom: Bool): Unit {
@@ -427,8 +412,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation scrollTo(x: number, y: number, duration?: number): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func scrollTo(x: Float32, y: Float32, duration!: ?Int32 = None): Unit {
@@ -453,8 +437,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation scrollBy(deltaX: number, deltaY: number, duration?: number): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func scrollBy(deltaX: Float32, deltaY: Float32, duration!: ?Int32 = None): Unit {
@@ -476,8 +459,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation forward(): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func forward(): Unit {
@@ -495,8 +477,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation backward(): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func backward(): Unit {
@@ -515,8 +496,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation backOrForward(step: number): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func backOrForward(step: Int32): Unit {
@@ -535,8 +515,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation getPageHeight(): number
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getPageHeight(): Int32 {
@@ -557,8 +536,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation getTitle(): string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getTitle(): String {
@@ -580,8 +558,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation zoom(factor: number): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func zoom(factor: Float32): Unit {
@@ -603,8 +580,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation zoomIn(): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func zoomIn(): Unit {
@@ -623,8 +599,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation zoomOut(): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func zoomOut(): Unit {
@@ -643,8 +618,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation getHitTestValue(): HitTestValue
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getHitTestValue(): HitTestValue {
@@ -664,8 +638,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation clearHistory(): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func clearHistory(): Unit {
@@ -685,8 +658,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation accessStep(step: number): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func accessStep(step: Int32): Bool {
@@ -706,8 +678,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation getHitTest(): WebHitTestType
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getHitTest(): WebHitTestType {
@@ -737,8 +708,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation storeWebArchive(baseName: string, autoName: boolean, callback: AsyncCallback<string>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func storeWebArchive(baseName: String, autoName: Bool, callback: AsyncCallback<String>): Unit {
@@ -770,8 +740,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation enableSafeBrowsing(enable: boolean): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func enableSafeBrowsing(enable: Bool): Unit {
@@ -790,8 +759,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation isSafeBrowsingEnabled(): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func isSafeBrowsingEnabled(): Bool {
@@ -812,8 +780,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation getSecurityLevel(): SecurityLevel
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getSecurityLevel(): SecurityLevel {
@@ -834,8 +801,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation isIncognitoMode(): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func isIncognitoMode(): Bool {
@@ -858,8 +824,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation removeCache(clearRom: boolean): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func removeCache(clearRom: Bool): Unit {
@@ -878,8 +843,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation getBackForwardEntries(): BackForwardList
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getBackForwardEntries(): BackForwardList {
@@ -899,8 +863,7 @@ public class WebviewController <: RemoteDataLite {
      * @relation stop(): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func stop(): Unit {

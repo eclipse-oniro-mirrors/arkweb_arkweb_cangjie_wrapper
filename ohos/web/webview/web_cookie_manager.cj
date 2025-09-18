@@ -26,8 +26,7 @@ const MAX_STRING_LENGTH: Int64 = 40960
  * @relation class WebCookieManager
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class WebCookieManager {
@@ -45,8 +44,7 @@ public class WebCookieManager {
      * @relation static fetchCookieSync(url: string, incognito?: boolean): string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func fetchCookie(url: String, incognito!: Bool = false): String {
@@ -82,8 +80,7 @@ public class WebCookieManager {
      * @relation static configCookieSync(url: string, value: string, incognito?: boolean): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func configCookie(url: String, value: String, incognito!: Bool = false): Unit {
@@ -110,8 +107,7 @@ public class WebCookieManager {
      * @relation static putAcceptCookieEnabled(accept: boolean): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func putAcceptCookieEnabled(accept: Bool): Unit {
@@ -127,8 +123,7 @@ public class WebCookieManager {
      * @relation static isCookieAllowed(): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func isCookieAllowed(): Bool {
@@ -145,8 +140,7 @@ public class WebCookieManager {
      * @relation static putAcceptThirdPartyCookieEnabled(accept: boolean): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func putAcceptThirdPartyCookieEnabled(accept: Bool): Unit {
@@ -162,8 +156,7 @@ public class WebCookieManager {
      * @relation static isThirdPartyCookieAllowed(): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func isThirdPartyCookieAllowed(): Bool {
@@ -181,8 +174,7 @@ public class WebCookieManager {
      * @relation static existCookie(incognito?: boolean): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func existCookie(incognito!: Bool = false): Bool {
@@ -199,8 +191,7 @@ public class WebCookieManager {
      * @relation static clearAllCookiesSync(incognito?: boolean): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func clearAllCookies(incognito!: Bool = false): Unit {
@@ -215,8 +206,7 @@ public class WebCookieManager {
      * @relation static clearSessionCookieSync(): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func clearSessionCookie(): Unit {

@@ -13,11 +13,15 @@ The currently open ArkWeb Cangjie api only supports standard devices.
 
 As shown in the architecture:
 
-- BackForwardList: Provides the capability to obtain information about the historical record item at a specified index in the historical list.
-- WebCookieManager: Provides the capability to control various behaviors of cookies in Web components.
 - WebviewController: Provides the capability to control various behaviors of Web components (including behaviors such as page navigation, lifecycle status, and JavaScript interaction).
+- WebCookieManager: Provides the capability to control various behaviors of cookies in Web components.
+- BackForwardList: Provides the capability to obtain information about the historical record item at a specified index in the historical list.
 - Cangjie ArkWeb FFI Interface:  Based on cross-language interoperability via C interfaces to implement ArkWeb Cangjie API.
 - webview: Responsible for providing basic webview functions, and encapsulates C interfaces for Cangjie to conduct interoperation.
+- ArkUI Framework Cangjie Interface：Provides ResourceStr.
+- multimedia_cangjie_wrapper: Provides the capability to use media resources.
+- Cangjie Interop API Public Repository: Provides definitions for APILevel and BusinessException classes.
+- hiviewdfx_cangjie_wrapper: Provides a logging system that allows applications/services to output log content according to specified levels, identifiers, and format strings.
 
 ## Directory Structure
 
@@ -29,6 +33,23 @@ base/web/arkweb_cangjie_wrapper
 ├── ohos       # Cangjie ArkWeb code
 │   └── web
 └── test       # Cangjie ArkWeb test cases
+
+├── figures                                 # architecture pictures
+├── kit                                     # Cangjie ArkWeb kit code
+│   └── ArkWeb
+├── ohos                                    # Cangjie ArkWeb code
+│   └── web
+├── ohos
+│   └── web
+│       ├── BUILD.gn
+│       ├── web.cj
+│       └── webview
+│           ├── BUILD.gn
+│           ├── ...
+│           ├── back_forward_list.cj        # BackForwardList
+│           ├── web_cookie_manager.cj       # WebCookieManager
+│           └── webview_controller.cj       # WebviewController
+└── test                                    # Cangjie ArkWeb test cases
 ```
 ## Usage Guidelines
 
@@ -65,11 +86,15 @@ The following features are not provided yet:
   - NativeMediaPlayerHandler: Event Interface for Hosted Web Page Media Player
   - WebMessagePort: Message Port Between Web Frontend and App
 
-For ArkWeb-related APIs, please refer to [ohos.web.webview](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkWeb/cj-apis-webview.md). For relevant guidance, please refer to [ArkWeb Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/web).
+For ArkWeb-related APIs, please refer to [ohos.web.webview](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkWeb/cj-apis-webview.md). For relevant guidance, please refer to [ArkWeb Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/web/cj-web-component-overview.md).
+
+## Code Contribution
+
+Developers are welcome to contribute code, documentation, etc. For specific contribution processes and methods, please refer to [Code Contribution](https://gitcode.com/openharmony/docs/blob/master/en/contribute/code-contribution.md).
 
 ## Repositories Involved
 
-[web_webview](https://gitee.com/openharmony/web_webview)
+[web_webview](https://gitcode.com/openharmony/web_webview)
 
 [arkcompiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
 
@@ -77,8 +102,4 @@ For ArkWeb-related APIs, please refer to [ohos.web.webview](https://gitcode.com/
 
 [multimedia_multimedia_cangjie_wrapper](https://gitcode.com/openharmony-sig/multimedia_multimedia_cangjie_wrapper)
 
-[global_global_cangjie_wrapper](https://gitcode.com/openharmony-sig/global_global_cangjie_wrapper)
-
-## Code Contribution
-
-Developers are welcome to contribute code, documentation, etc. For specific contribution processes and methods, please refer to [Code Contribution](https://gitcode.com/openharmony/docs/blob/master/en/contribute/code-contribution.md).
+[hiviewdfx_hiviewdfx_cangjie_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)

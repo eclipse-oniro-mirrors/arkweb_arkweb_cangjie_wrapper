@@ -28,7 +28,6 @@
                 "cangjie_ark_interop",
                 "arkui_cangjie_wrapper",
                 "multimedia_cangjie_wrapper",
-                "global_cangjie_wrapper",
                 "hiviewdfx_cangjie_wrapper",
                 "webview"
             ]

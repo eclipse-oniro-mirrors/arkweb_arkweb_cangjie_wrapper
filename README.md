@@ -27,13 +27,7 @@ base/web/arkweb_cangjie_wrapper
 │   └── ArkWeb
 ├── ohos                                    # Cangjie ArkWeb code
 │   └── web
-├── ohos
-│   └── web
-│       ├── BUILD.gn
-│       ├── web.cj
 │       └── webview
-│           ├── BUILD.gn
-│           ├── ...
 │           ├── back_forward_list.cj        # BackForwardList
 │           ├── web_cookie_manager.cj       # WebCookieManager
 │           └── webview_controller.cj       # WebviewController

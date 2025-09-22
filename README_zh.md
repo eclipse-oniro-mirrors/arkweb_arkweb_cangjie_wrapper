@@ -18,10 +18,6 @@ Web仓颉接口是在OpenHarmony上基于方舟Web能力之上封装的仓颉API
 - 历史信息列表：提供获取历史列表中指定索引的历史记录项信息。
 - 仓颉方舟Web FFI接口定义：负责定义C语言互操作仓颉接口，用于实现方舟Web的能力。
 - webview基础能力：负责提供webview基础功能，封装C语言接口提供给仓颉进行互操作。
-- 仓颉ArkUI开发框架：提供对资源类型对象的解析功能。
-- OS媒体软件仓颉接口：提供使用媒体资源的能力。
-- 仓颉互操作API公共仓：提供仓颉标签与异常类的定义。
-- DFX仓颉接口：提供日志系统，使应用/服务可以按照指定级别、标识和格式字符串输出日志内容。
 
 ## 目录
 
@@ -43,17 +39,19 @@ base/web/arkweb_cangjie_wrapper
 │           ├── web_cookie_manager.cj       # Cookie管理
 │           └── webview_controller.cj       # Web组件控制器
 └── test                                    # 仓颉方舟Web测试用例
+    └── APILevel22
+        └── webview                         # 仓颉方舟Web测试用例
 ```
 
 ## 使用说明
 
-Web仓颉接口提供了以下功能接口，开发者可以根据使用诉求，综合使用一类或多类接口：
+Web仓颉接口提供了以下功能接口，开发者可以根据诉求使用：
 
   - BackForwardList：历史信息列表。
   - WebCookieManager：Cookie管理。
   - WebviewController：Web组件控制器。
 
-与ArkTS相比，暂不支持以下功能：
+与ArkTS提供的API能力相比，暂不支持以下功能：
 
   - AdsBlockManager：广告过滤配置。
   - BackForwardCacheOptions：前进后退缓存配置。
@@ -80,7 +78,7 @@ Web仓颉接口提供了以下功能接口，开发者可以根据使用诉求�
   - NativeMediaPlayerHandler：托管网页媒体播放器的事件接口。
   - WebMessagePort：网页前端与应用的消息端口。
 
-方舟Web相关API请参见[ohos.web.webview](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/ArkWeb/cj-apis-webview.md)，相关指导请参见[方舟Web开发指南](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/web/cj-web-component-overview.md)。
+方舟Web相关API请参见[Web仓颉API文档](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/ArkWeb/cj-apis-webview.md)，相关指导请参见[方舟Web开发指南](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/web/cj-web-component-overview.md)。
 
 ## 参与贡献
 

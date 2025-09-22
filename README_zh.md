@@ -27,13 +27,7 @@ base/web/arkweb_cangjie_wrapper
 │   └── ArkWeb
 ├── ohos                                    # 仓颉方舟Web接口实现
 │   └── web
-├── ohos
-│   └── web
-│       ├── BUILD.gn
-│       ├── web.cj
 │       └── webview
-│           ├── BUILD.gn
-│           ├── ...
 │           ├── back_forward_list.cj        # 历史信息列表
 │           ├── web_cookie_manager.cj       # Cookie管理
 │           └── webview_controller.cj       # Web组件控制器

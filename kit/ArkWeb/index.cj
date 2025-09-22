@@ -13,6 +13,6 @@
  * limitations under the License.
  */
 
-package kit.ArkWeb
+package ArkWeb
 
 public import ohos.web.webview.*

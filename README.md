@@ -2,8 +2,7 @@
 
 ## Introduction
 
-The Web Cangjie Interface is a Cangjie API encapsulated on OpenHarmony based on ArkWeb capabilities. It provides the capabilities of Web component control, Cookie management, and historical information list.
-The currently open ArkWeb Cangjie api only supports standard devices.
+The Web Cangjie Interface is a Cangjie API encapsulated on OpenHarmony based on ArkWeb capabilities. It provides the capabilities of Web component control, Cookie management, and historical information list. Developers can control the behavior of web components, query web browsing history records, and set cookie information through the provided capabilities. The currently open ArkWeb Cangjie api only supports standard devices.
 
 ## Architecture
 

@@ -2,8 +2,7 @@
 
 ## 简介
 
-Web仓颉接口是在OpenHarmony上基于方舟Web能力之上封装的仓颉API。提供了Web组件控制，Cookie管理和历史信息列表的能力。
-当前开放的Web仓颉接口仅支持standard设备。
+Web仓颉接口是在OpenHarmony上基于方舟Web能力之上封装的仓颉API。提供了Web组件控制，Cookie管理和历史信息列表的能力。开发者可通过提供的能力控制Web组件的行为，查询网页访问历史记录，设置Cookie信息。当前开放的Web仓颉接口仅支持standard设备。
 
 ## 系统架构
 

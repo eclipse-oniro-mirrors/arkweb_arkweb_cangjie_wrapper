@@ -24,7 +24,7 @@ import ohos.labels.APILevel
  * @relation interface BackForwardList
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class BackForwardList <: RemoteDataLite {
@@ -42,7 +42,7 @@ public class BackForwardList <: RemoteDataLite {
      * @relation currentIndex: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public prop currentIndex: Int32 {
@@ -62,7 +62,7 @@ public class BackForwardList <: RemoteDataLite {
      * @relation size: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public prop size: Int32 {
@@ -85,7 +85,7 @@ public class BackForwardList <: RemoteDataLite {
      * @relation getItemAtIndex(index: number): HistoryItem
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getItemAtIndex(index: Int32): HistoryItem {

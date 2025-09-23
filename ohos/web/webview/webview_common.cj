@@ -36,7 +36,7 @@ foreign func memcpy_s(dest: CPointer<UInt8>, destMax: UIntNative, src: CPointer<
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public enum SecurityLevel {
@@ -46,7 +46,7 @@ public enum SecurityLevel {
      * @relation NONE = 0
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     NoneLevel
@@ -57,7 +57,7 @@ public enum SecurityLevel {
      * @relation SECURE = 1
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     Secure
@@ -69,7 +69,7 @@ public enum SecurityLevel {
      * @relation WARNING = 2
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     Warning
@@ -80,7 +80,7 @@ public enum SecurityLevel {
      * @relation DANGEROUS = 3
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     Danger
@@ -103,7 +103,7 @@ public enum SecurityLevel {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public enum WebHitTestType {
@@ -113,7 +113,7 @@ public enum WebHitTestType {
      * @relation EditText = 0
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     EditText
@@ -124,7 +124,7 @@ public enum WebHitTestType {
      * @relation Email = 1
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     Email
@@ -135,7 +135,7 @@ public enum WebHitTestType {
      * @relation Unknown = 7
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     Unknown
@@ -156,7 +156,7 @@ public enum WebHitTestType {
  * @relation interface WebHeader
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class WebHeader {
@@ -166,7 +166,7 @@ public class WebHeader {
      * @relation headerKey: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var headerKey: String
@@ -177,7 +177,7 @@ public class WebHeader {
      * @relation headerValue: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var headerValue: String
@@ -186,7 +186,7 @@ public class WebHeader {
      * WebHeader constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public init(headerKey: String, headerValue: String) {
@@ -201,7 +201,7 @@ public class WebHeader {
  * @relation interface HitTestValue
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class HitTestValue {
@@ -211,7 +211,7 @@ public class HitTestValue {
      * @relation type: WebHitTestType
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var hitTestType: WebHitTestType
@@ -223,7 +223,7 @@ public class HitTestValue {
      * @relation extra: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var extra: String
@@ -240,7 +240,7 @@ public class HitTestValue {
  * @relation interface HistoryItem
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class HistoryItem {
@@ -250,7 +250,7 @@ public class HistoryItem {
      * @relation icon: image.PixelMap
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public let icon: ?PixelMap
@@ -261,7 +261,7 @@ public class HistoryItem {
      * @relation historyUrl: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var historyUrl: String
@@ -272,7 +272,7 @@ public class HistoryItem {
      * @relation historyRawUrl: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var historyRawUrl: String
@@ -283,7 +283,7 @@ public class HistoryItem {
      * @relation title: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var title: String

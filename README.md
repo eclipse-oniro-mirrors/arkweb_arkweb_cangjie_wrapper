@@ -17,6 +17,10 @@ As shown in the architecture:
 - BackForwardList: Provides the capability to obtain information about the historical record item at a specified index in the historical list.
 - Cangjie ArkWeb FFI Interface:  Based on cross-language interoperability via C interfaces to implement ArkWeb Cangjie API.
 - webview: Responsible for providing basic webview functions, and encapsulates C interfaces for Cangjie to conduct interoperation.
+- multimedia_cangjie_wrapper: Provides the capability to use media resources. The BackForwardList depends on PixelMap from this module.
+- arkui_cangjie_wrapper: Provides Cangjie UI component interfaces and basic types. The WebviewController depends on the definition and parsing of basic types from this module.
+- cangjie_ark_interop: Responsible for providing APILevel definitions, used for annotating APIs. Also provides the BusinessException exception class definition that is thrown to users.
+- hiviewdfx_cangjie_wrapper: Responsible for providing HiLog APIs, used for printing logs at critical paths.
 
 ## Directory Structure
 
@@ -32,8 +36,7 @@ base/web/arkweb_cangjie_wrapper
 │           ├── web_cookie_manager.cj       # WebCookieManager
 │           └── webview_controller.cj       # WebviewController
 └── test                                    # Cangjie ArkWeb test cases
-    └── APILevel22
-        └── webview                         # Cangjie ArkWeb test cases
+    └── webview                             # Cangjie ArkWeb test cases
 ```
 ## Usage Guidelines
 

@@ -17,6 +17,10 @@ Web仓颉接口是在OpenHarmony上基于方舟Web能力之上封装的仓颉API
 - 历史信息列表：提供获取历史列表中指定索引的历史记录项信息。
 - 仓颉方舟Web FFI接口定义：负责定义C语言互操作仓颉接口，用于实现方舟Web的能力。
 - webview基础能力：负责提供webview基础功能，封装C语言接口提供给仓颉进行互操作。
+- multimedia_cangjie_wrapper：提供使用媒体资源的能力。历史信息列表依赖其中的PixelMap以获取历史信息中的图标信息。
+- arkui_cangjie_wrapper：提供仓颉UI组件接口及基础类型。Web组件控制器依赖其中对基础类型的定义和解析能力。
+- cangjie_ark_interop：负责提供仓颉注解类定义，用于对API进行标注。以及提供抛向用户的BusinessException异常类定义。
+- hiviewdfx_cangjie_wrapper：负责提供日志接口，用于在关键路径处打印日志。
 
 ## 目录
 
@@ -32,8 +36,7 @@ base/web/arkweb_cangjie_wrapper
 │           ├── web_cookie_manager.cj       # Cookie管理
 │           └── webview_controller.cj       # Web组件控制器
 └── test                                    # 仓颉方舟Web测试用例
-    └── APILevel22
-        └── webview                         # 仓颉方舟Web测试用例
+    └── webview                             # 仓颉方舟Web测试用例
 ```
 
 ## 使用说明

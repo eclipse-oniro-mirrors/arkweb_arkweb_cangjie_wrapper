@@ -12,10 +12,20 @@ The Web Cangjie Interface is a Cangjie API encapsulated on OpenHarmony based on 
 
 As shown in the architecture:
 
+interface: Provides APIs for developers
+
 - WebviewController: Provides the capability to control various behaviors of Web components (including behaviors such as page navigation, lifecycle status, and JavaScript interaction).
 - WebCookieManager: Provides the capability to control various behaviors of cookies in Web components.
 - BackForwardList: Provides the capability to obtain information about the historical record item at a specified index in the historical list.
-- Cangjie ArkWeb FFI Interface:  Based on cross-language interoperability via C interfaces to implement ArkWeb Cangjie API.
+
+frameworks:
+
+- WebviewController wrapper: Encapsulates the Cangjie Web component controller, providing the WebviewController class to implement control capabilities for the Web component.
+- WebCookieManager wrapper: Encapsulates Cangjie Cookie management, providing the WebCookieManager class to implement Cookie management capabilities.
+- BackForwardList wrapper: Encapsulates Cangjie history information list, providing the BackForwardList class to implement the capability to obtain information about the historical record item at a specified index in the historical list.
+
+Dependency Component Introduction in Architecture:
+
 - webview: Responsible for providing basic webview functions, and encapsulates C interfaces for Cangjie to conduct interoperation.
 - multimedia_cangjie_wrapper: Provides the capability to use media resources. The BackForwardList depends on PixelMap from this module.
 - arkui_cangjie_wrapper: Provides Cangjie UI component interfaces and basic types. The WebviewController depends on the definition and parsing of basic types from this module.
@@ -46,6 +56,11 @@ The following features are provided:
   - WebCookieManager：Cookie Management
   - WebviewController：Web Component Controller
 
+
+For ArkWeb-related APIs, please refer to [ohos.web.webview](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkWeb/cj-apis-webview.md). For relevant guidance, please refer to [ArkWeb Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/web/cj-web-component-overview.md).
+
+## Constraints
+
 The following features are not provided yet:
 
   - AdsBlockManager：Ad Blocking Configuration
@@ -72,8 +87,6 @@ The following features are not provided yet:
   - NativeMediaPlayerBridge: Hosted Web Page Media Player Bridging Interface
   - NativeMediaPlayerHandler: Event Interface for Hosted Web Page Media Player
   - WebMessagePort: Message Port Between Web Frontend and App
-
-For ArkWeb-related APIs, please refer to [ohos.web.webview](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkWeb/cj-apis-webview.md). For relevant guidance, please refer to [ArkWeb Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/web/cj-web-component-overview.md).
 
 ## Code Contribution
 

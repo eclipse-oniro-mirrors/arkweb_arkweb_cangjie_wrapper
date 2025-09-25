@@ -1,8 +1,8 @@
-# Web仓颉接口
+# Web仓颉封装
 
 ## 简介
 
-Web仓颉接口是在OpenHarmony上基于方舟Web能力之上封装的仓颉API。提供了Web组件控制，Cookie管理和历史信息列表的能力。开发者可通过提供的能力控制Web组件的行为，查询网页访问历史记录，设置Cookie信息。当前开放的Web仓颉接口仅支持standard设备。
+Web仓颉封装提供了Web组件控制，Cookie管理和历史信息列表的能力。开发者可通过提供的能力控制Web组件的行为，查询网页访问历史记录，设置Cookie信息。当前开放的Web仓颉接口仅支持standard设备。
 
 ## 系统架构
 
@@ -12,15 +12,26 @@ Web仓颉接口是在OpenHarmony上基于方舟Web能力之上封装的仓颉API
 
 如架构图所示：
 
-- Web组件控制器：提供控制Web组件各种行为（包括页面导航、生命周期状态、JavaScript交互等行为）。
-- Cookie管理：提供控制Web组件中Cookie的各种行为。
-- 历史信息列表：提供获取历史列表中指定索引的历史记录项信息。
-- 仓颉方舟Web FFI接口定义：负责定义C语言互操作仓颉接口，用于实现方舟Web的能力。
-- webview基础能力：负责提供webview基础功能，封装C语言接口提供给仓颉进行互操作。
+接口层：
+
+- Web组件控制器：面向开发者提供的Web组件控制器的API能力。提供控制Web组件各种行为，如加载页面，页面导航，页面刷新。
+- Cookie管理：面向开发者提供的用于Cookie管理的API能力。提供控制Web组件中Cookie的各种行为。
+- 历史信息列表：面向开发者提供的历史信息列表的API能力。提供获取历史列表中指定索引的历史记录项信息。
+
+框架层：
+
+- Web组件控制器封装：基于底层webview基础能力封装，提供WebviewController类实现对Web组件的控制能力。
+- Cookie管理封装：基于底层webview基础能力封装，提供WebCookieManager类实现对Cookie的管理能力。
+- 历史信息列表封装：基于底层webview基础能力封装，提供BackForwardList类实现对历史列表中指定索引的历史记录项信息查询的能力。
+
+架构图中的依赖部件引入说明：
+
+- webview基础能力：Web仓颉封装依赖其提供的webview基础功能。
 - multimedia_cangjie_wrapper：提供使用媒体资源的能力。历史信息列表依赖其中的PixelMap以获取历史信息中的图标信息。
 - arkui_cangjie_wrapper：提供仓颉UI组件接口及基础类型。Web组件控制器依赖其中对基础类型的定义和解析能力。
-- cangjie_ark_interop：负责提供仓颉注解类定义，用于对API进行标注。以及提供抛向用户的BusinessException异常类定义。
-- hiviewdfx_cangjie_wrapper：负责提供日志接口，用于在关键路径处打印日志。
+- cangjie_ark_interop：负责提供仓颉注解类定义和BusinessException异常类定义。Web仓颉封装依赖此部件用于对API进行标注，及在错误分支向用户抛出异常。
+- hiviewdfx_cangjie_wrapper：负责提供日志接口。Web仓颉封装依赖此部件用于在关键路径处打印日志。
+
 
 ## 目录
 
@@ -46,6 +57,10 @@ Web仓颉接口提供了以下功能接口，开发者可以根据诉求使用�
   - BackForwardList：历史信息列表。
   - WebCookieManager：Cookie管理。
   - WebviewController：Web组件控制器。
+
+方舟Web相关API请参见[Web仓颉API文档](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/ArkWeb/cj-apis-webview.md)，相关指导请参见[方舟Web开发指南](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/web/cj-web-component-overview.md)。
+
+## 约束
 
 与ArkTS提供的API能力相比，暂不支持以下功能：
 
@@ -73,8 +88,6 @@ Web仓颉接口提供了以下功能接口，开发者可以根据诉求使用�
   - NativeMediaPlayerBridge：托管网页媒体播放器桥接接口。
   - NativeMediaPlayerHandler：托管网页媒体播放器的事件接口。
   - WebMessagePort：网页前端与应用的消息端口。
-
-方舟Web相关API请参见[Web仓颉API文档](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/ArkWeb/cj-apis-webview.md)，相关指导请参见[方舟Web开发指南](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/web/cj-web-component-overview.md)。
 
 ## 参与贡献
 

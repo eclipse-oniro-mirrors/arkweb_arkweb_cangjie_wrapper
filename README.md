@@ -52,9 +52,9 @@ base/web/arkweb_cangjie_wrapper
 
 The following features are provided:
 
-  - BackForwardList：list of historical information
-  - WebCookieManager：Cookie Management
-  - WebviewController：Web Component Controller
+  - BackForwardList：list of historical information, please refer to [Retrieves the history item information](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkWeb/cj-apis-webview.md#func-getitematindexint32).
+  - WebCookieManager：Cookie Management, please refer to [WebCookieManager](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkWeb/cj-apis-webview.md#class-webcookiemanager).
+  - WebviewController：Web Component Controller, please refer to [Loading Pages with Web Components](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/web/cj-web-page-loading-with-web-components.md).
 
 
 For ArkWeb-related APIs, please refer to [ohos.web.webview](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkWeb/cj-apis-webview.md). For relevant guidance, please refer to [ArkWeb Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/web/cj-web-component-overview.md).

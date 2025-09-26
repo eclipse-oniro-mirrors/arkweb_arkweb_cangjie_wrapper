@@ -26,12 +26,11 @@ Web仓颉封装提供了Web组件控制，Cookie管理和历史信息列表的�
 
 架构图中的依赖部件引入说明：
 
-- webview基础能力：Web仓颉封装依赖其提供的webview基础功能。
+- web_webview：Web仓颉封装依赖其提供的webview基础功能。
 - multimedia_cangjie_wrapper：提供使用媒体资源的能力。历史信息列表依赖其中的PixelMap以获取历史信息中的图标信息。
 - arkui_cangjie_wrapper：提供仓颉UI组件接口及基础类型。Web组件控制器依赖其中对基础类型的定义和解析能力。
 - cangjie_ark_interop：负责提供仓颉注解类定义和BusinessException异常类定义。Web仓颉封装依赖此部件用于对API进行标注，及在错误分支向用户抛出异常。
 - hiviewdfx_cangjie_wrapper：负责提供日志接口。Web仓颉封装依赖此部件用于在关键路径处打印日志。
-
 
 ## 目录
 
@@ -54,9 +53,9 @@ base/web/arkweb_cangjie_wrapper
 
 Web仓颉接口提供了以下功能接口，开发者可以根据诉求使用：
 
-  - BackForwardList：历史信息列表。
-  - WebCookieManager：Cookie管理。
-  - WebviewController：Web组件控制器。
+  - BackForwardList：历史信息列表。相关示例请参见[获取历史记录](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/ArkWeb/cj-apis-webview.md#func-getitematindexint32)。
+  - WebCookieManager：Cookie管理。相关示例请参见[Cookie管理](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/ArkWeb/cj-apis-webview.md#class-webcookiemanager)。
+  - WebviewController：Web组件控制器。相关示例请参见[使用Web组件加载页面](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/web/cj-web-page-loading-with-web-components.md)。
 
 方舟Web相关API请参见[Web仓颉API文档](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/ArkWeb/cj-apis-webview.md)，相关指导请参见[方舟Web开发指南](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/web/cj-web-component-overview.md)。
 

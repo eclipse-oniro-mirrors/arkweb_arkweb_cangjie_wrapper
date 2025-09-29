@@ -22,7 +22,7 @@ Web仓颉封装提供了Web组件控制，Cookie管理和历史信息列表的�
 
 - Web组件控制器封装：基于底层webview基础能力封装，提供WebviewController类实现对Web组件的控制能力。
 - Cookie管理封装：基于底层webview基础能力封装，提供WebCookieManager类实现对Cookie的管理能力。
-- 历史信息列表封装：基于底层webview基础能力封装，提供BackForwardList类实现对历史列表中指定索引的历史记录项信息查询的能力。
+- 历史信息列表封装：基于底层webview基础能力封装，提供BackForwardList类实现历史信息列表的查询能力。
 
 架构图中的依赖部件引入说明：
 

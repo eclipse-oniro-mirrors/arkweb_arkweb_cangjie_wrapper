@@ -15,12 +15,12 @@
 
 package ohos_app_cangjie_entry
 
-import AbilityKit.{Ability, Want, LaunchParam, LaunchReason}
+import kit.AbilityKit.{Ability, Want, LaunchParam, LaunchReason}
 import ohos.window.WindowStage
 import ohos.web.webview.{WebviewController, WebCookieManager}
 import ohos.arkui.state_management.AppStorage
-import AbilityKit.UIAbilityContext
-import AbilityKit.UIAbility
+import kit.AbilityKit.UIAbilityContext
+import kit.AbilityKit.UIAbility
 
 class MainAbility <: UIAbility {
     public func onCreate(want: Want, launchParam: LaunchParam): Unit {

@@ -1,4 +1,4 @@
-# arkweb_cangjie_wrapper
+# arkweb_cangjie_wrapper(beta feature)
 
 ## Introduction
 

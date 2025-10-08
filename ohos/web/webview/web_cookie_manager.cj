@@ -24,8 +24,6 @@ const MAX_STRING_LENGTH: Int64 = 40960
 
 /**
  * Provides methods for managing the web cookies.
- *
- * @relation class WebCookieManager
  */
 @!APILevel[
     22,
@@ -43,7 +41,6 @@ public class WebCookieManager {
      * @returns { string } - The cookie value for the given URL.
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100002 - Invalid url.
-     * @relation static fetchCookieSync(url: string, incognito?: boolean): string
      */
     @!APILevel[
         22,
@@ -79,7 +76,6 @@ public class WebCookieManager {
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100002 - Invalid url.
      * @throws { BusinessException } 17100005 - Invalid cookie value.
-     * @relation static configCookieSync(url: string, value: string, incognito?: boolean): void
      */
     @!APILevel[
         22,
@@ -106,7 +102,6 @@ public class WebCookieManager {
      * By default this is set to be true.
      *
      * @param { Bool } accept - Whether the instance should send and accept cookies.
-     * @relation static putAcceptCookieEnabled(accept: boolean): void
      */
     @!APILevel[
         22,
@@ -122,7 +117,6 @@ public class WebCookieManager {
      * Get whether the instance can send and accept cookies.
      *
      * @returns { Bool } True if the instance can send and accept cookies else false.
-     * @relation static isCookieAllowed(): boolean
      */
     @!APILevel[
         22,
@@ -139,7 +133,6 @@ public class WebCookieManager {
      * By default this is set to be true.
      *
      * @param { Bool } accept - Whether the instance should send and accept cookies.
-     * @relation static putAcceptThirdPartyCookieEnabled(accept: boolean): void
      */
     @!APILevel[
         22,
@@ -155,7 +148,6 @@ public class WebCookieManager {
      * Get whether the instance can send and accept thirdparty cookies.
      *
      * @returns { Bool } True if the instance can send and accept thirdparty cookies else false.
-     * @relation static isThirdPartyCookieAllowed(): boolean
      */
     @!APILevel[
         22,
@@ -173,7 +165,6 @@ public class WebCookieManager {
      * @param { Bool } incognito - {@code true} check whether exists any cookies.
      *                                in incognito mode; {@code false} otherwise.
      * @returns { Bool } True if exists more than one cookie else false;
-     * @relation static existCookie(incognito?: boolean): boolean
      */
     @!APILevel[
         22,
@@ -190,7 +181,6 @@ public class WebCookieManager {
      *
      * @param { Bool } incognito - {@code true} remove all cookies in incognito mode;
      *                                {@code false} otherwise.
-     * @relation static clearAllCookiesSync(incognito?: boolean): void
      */
     @!APILevel[
         22,
@@ -204,8 +194,6 @@ public class WebCookieManager {
 
     /**
      * Delete the session cookies.
-     *
-     * @relation static clearSessionCookieSync(): void
      */
     @!APILevel[
         22,

@@ -30,8 +30,6 @@ import ohos.arkui.component.util.transResourceMediaToString
  * A WebviewController object can only control one Web component,
  * and methods on the Webviewcontroller (except static methods) can only be called
  * after the web component is bound to the WebviewController.
- *
- * @relation class WebviewController
  */
 @!APILevel[
     22,
@@ -55,7 +53,6 @@ public class WebviewController <: RemoteDataLite {
      * A constructor used to create a WebviewController object.
      *
      * @param { String } [webTag] - specified the name of the web component, Empty by default.
-     * @relation constructor(webTag?: string)
      */
     @!APILevel[
         22,
@@ -73,7 +70,6 @@ public class WebviewController <: RemoteDataLite {
      * Enables debugging of web contents.
      * @param { Bool } webDebuggingAccess {@code true} enables debugging of web contents; {@code false} otherwise.
      * @throws { BusinessException } 401 - Invalid input parameter.
-     * @relation static setWebDebuggingAccess(webDebuggingAccess: boolean): void
      */
     @!APILevel[
         22,
@@ -96,7 +92,6 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100002 - Invalid url.
      * @throws { BusinessException } 17100003 - Invalid resource path or file type.
-     * @relation loadUrl(url: string | Resource, headers?: Array<WebHeader>): void
      */
     @!APILevel[
         22,
@@ -123,7 +118,6 @@ public class WebviewController <: RemoteDataLite {
      *
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation refresh(): void
      */
     @!APILevel[
         22,
@@ -142,7 +136,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { String } Return user agent information.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation getUserAgent(): string
      */
     @!APILevel[
         22,
@@ -163,7 +156,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { Bool } True if the web page can go back else false.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100001 - Init error.
-     * @relation accessBackward(): boolean
      */
     @!APILevel[
         22,
@@ -185,7 +177,6 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation setCustomUserAgent(userAgent: string): void
      */
     @!APILevel[
         22,
@@ -206,7 +197,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { String } Get custom User agent information.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation getCustomUserAgent(): string
      */
     @!APILevel[
         22,
@@ -228,7 +218,6 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation runJavaScript(script: string, callback: AsyncCallback<string>): void
      */
     @!APILevel[
         22,
@@ -266,7 +255,6 @@ public class WebviewController <: RemoteDataLite {
      * <br>2. the funcs' size be greater than 0.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation registerJavaScriptProxy(object: object, name: string, methodList: Array<string>): void
      */
     @!APILevel[
         22,
@@ -326,7 +314,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { String } Return the url of the current page.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation getUrl(): string
      */
     @!APILevel[
         22,
@@ -346,7 +333,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { String } Return the original url of the current page.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation getOriginalUrl(): string
      */
     @!APILevel[
         22,
@@ -411,7 +397,6 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation scrollTo(x: number, y: number, duration?: number): void
      */
     @!APILevel[
         22,
@@ -436,7 +421,6 @@ public class WebviewController <: RemoteDataLite {
      * @param { Int32 } duration - the scroll animation duration. Unit: millisecond.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation scrollBy(deltaX: number, deltaY: number, duration?: number): void
      */
     @!APILevel[
         22,
@@ -458,7 +442,6 @@ public class WebviewController <: RemoteDataLite {
      *
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation forward(): void
      */
     @!APILevel[
         22,
@@ -476,7 +459,6 @@ public class WebviewController <: RemoteDataLite {
      *
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation backward(): void
      */
     @!APILevel[
         22,
@@ -495,7 +477,6 @@ public class WebviewController <: RemoteDataLite {
      * @param { Int32 } step - Steps to go forward or backward.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation backOrForward(step: number): void
      */
     @!APILevel[
         22,
@@ -514,7 +495,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { Int32 } Returns the page height of the current page.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation getPageHeight(): number
      */
     @!APILevel[
         22,
@@ -535,7 +515,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { String } Return to File Selector Title.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation getTitle(): string
      */
     @!APILevel[
         22,
@@ -557,7 +536,6 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100004 - Function not enable.
-     * @relation zoom(factor: number): void
      */
     @!APILevel[
         22,
@@ -579,7 +557,6 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100004 - Function not enable.
-     * @relation zoomIn(): void
      */
     @!APILevel[
         22,
@@ -598,7 +575,6 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100004 - Function not enable.
-     * @relation zoomOut(): void
      */
     @!APILevel[
         22,
@@ -617,7 +593,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { HitTestValue } Return the element information of the clicked area.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation getHitTestValue(): HitTestValue
      */
     @!APILevel[
         22,
@@ -637,7 +612,6 @@ public class WebviewController <: RemoteDataLite {
      *
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation clearHistory(): void
      */
     @!APILevel[
         22,
@@ -657,7 +631,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { Bool } True if the web page can go back else false.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation accessStep(step: number): boolean
      */
     @!APILevel[
         22,
@@ -677,7 +650,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { WebHitTestType } The type of HitTest.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation getHitTest(): WebHitTestType
      */
     @!APILevel[
         22,
@@ -707,7 +679,6 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100003 - Invalid resource path or file type.
-     * @relation storeWebArchive(baseName: string, autoName: boolean, callback: AsyncCallback<string>): void
      */
     @!APILevel[
         22,
@@ -739,7 +710,6 @@ public class WebviewController <: RemoteDataLite {
      * @param { Bool } enable - {@code true} enable check the website security risks; {@code false} otherwise.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation enableSafeBrowsing(enable: boolean): void
      */
     @!APILevel[
         22,
@@ -758,7 +728,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { Bool } True if enable the ability to check website security risks else false.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation isSafeBrowsingEnabled(): boolean
      */
     @!APILevel[
         22,
@@ -779,7 +748,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { SecurityLevel } the security level of current page.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation getSecurityLevel(): SecurityLevel
      */
     @!APILevel[
         22,
@@ -800,7 +768,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { Bool } {@code true} has been set the incognito mode; {@code false} otherwise.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation isIncognitoMode(): boolean
      */
     @!APILevel[
         22,
@@ -823,7 +790,6 @@ public class WebviewController <: RemoteDataLite {
      *                               in ram.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation removeCache(clearRom: boolean): void
      */
     @!APILevel[
         22,
@@ -842,7 +808,6 @@ public class WebviewController <: RemoteDataLite {
      * @returns { BackForwardList } Back forward list for current webview.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation getBackForwardEntries(): BackForwardList
      */
     @!APILevel[
         22,
@@ -862,7 +827,6 @@ public class WebviewController <: RemoteDataLite {
      *
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * @relation stop(): void
      */
     @!APILevel[
         22,

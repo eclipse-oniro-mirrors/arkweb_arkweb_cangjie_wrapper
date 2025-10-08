@@ -33,8 +33,6 @@ foreign func memcpy_s(dest: CPointer<UInt8>, destMax: UIntNative, src: CPointer<
 
 /**
  * Defines the security level for the page.
- *
- * @relation enum SecurityLevel
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -44,8 +42,6 @@ foreign func memcpy_s(dest: CPointer<UInt8>, destMax: UIntNative, src: CPointer<
 public enum SecurityLevel {
     /**
      * Unable to determine whether it is safe or not, the non-http/https protocol used.
-     *
-     * @relation NONE = 0
      */
     @!APILevel[
         22,
@@ -55,8 +51,6 @@ public enum SecurityLevel {
     |
     /**
      * Indicates the HTTPS protocol used by the page and the authentication is successful.
-     *
-     * @relation SECURE = 1
      */
     @!APILevel[
         22,
@@ -67,8 +61,6 @@ public enum SecurityLevel {
     /**
      * The page is insecure. For example, the HTTP protocol is used or the HTTPS protocol
      * is used but use an legacy TLS version.
-     *
-     * @relation WARNING = 2
      */
     @!APILevel[
         22,
@@ -78,8 +70,6 @@ public enum SecurityLevel {
     |
     /**
      * Attempted HTTPS and failed, the authentication is failed.
-     *
-     * @relation DANGEROUS = 3
      */
     @!APILevel[
         22,
@@ -100,8 +90,6 @@ public enum SecurityLevel {
 
 /**
  * Enum type supplied to {@link getHitTest} for indicating the cursor node HitTest.
- *
- * @relation enum WebHitTestType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -111,8 +99,6 @@ public enum SecurityLevel {
 public enum WebHitTestType {
     /**
      * The edit text.
-     *
-     * @relation EditText = 0
      */
     @!APILevel[
         22,
@@ -122,8 +108,6 @@ public enum WebHitTestType {
     |
     /**
      * The email address.
-     *
-     * @relation Email = 1
      */
     @!APILevel[
         22,
@@ -133,8 +117,6 @@ public enum WebHitTestType {
     |
     /**
      * Other unknown HitTest.
-     *
-     * @relation Unknown = 7
      */
     @!APILevel[
         22,
@@ -154,8 +136,6 @@ public enum WebHitTestType {
 
 /**
  * Defines the Web's request/response header.
- *
- * @relation interface WebHeader
  */
 @!APILevel[
     22,
@@ -164,8 +144,6 @@ public enum WebHitTestType {
 public class WebHeader {
     /**
      * Gets the key of the request/response header.
-     *
-     * @relation headerKey: string
      */
     @!APILevel[
         22,
@@ -175,8 +153,6 @@ public class WebHeader {
 
     /**
      * Gets the value of the request/response header.
-     *
-     * @relation headerValue: string
      */
     @!APILevel[
         22,
@@ -199,8 +175,6 @@ public class WebHeader {
 
 /**
  * Provides element information of the click area. related to {@link getLastHitTest} method.
- *
- * @relation interface HitTestValue
  */
 @!APILevel[
     22,
@@ -209,8 +183,6 @@ public class WebHeader {
 public class HitTestValue {
     /**
      * Get the hit test type.
-     *
-     * @relation type: WebHitTestType
      */
     @!APILevel[
         22,
@@ -221,8 +193,6 @@ public class HitTestValue {
     /**
      * Get the hit test extra data.
      * If the clicked area is an image or a link, the additional parameter information is it's URL address.
-     *
-     * @relation extra: string
      */
     @!APILevel[
         22,
@@ -238,8 +208,6 @@ public class HitTestValue {
 
 /**
  * Provides information for history item in BackForwardList.
- *
- * @relation interface HistoryItem
  */
 @!APILevel[
     22,
@@ -248,8 +216,6 @@ public class HitTestValue {
 public class HistoryItem {
     /**
      * Pixelmap of icon.
-     *
-     * @relation icon: image.PixelMap
      */
     @!APILevel[
         22,
@@ -259,8 +225,6 @@ public class HistoryItem {
 
     /**
      * Url of this history item.
-     *
-     * @relation historyUrl: string
      */
     @!APILevel[
         22,
@@ -270,8 +234,6 @@ public class HistoryItem {
 
     /**
      * Original request url of this history item.
-     *
-     * @relation historyRawUrl: string
      */
     @!APILevel[
         22,
@@ -281,8 +243,6 @@ public class HistoryItem {
 
     /**
      * Title of this history item.
-     *
-     * @relation title: string
      */
     @!APILevel[
         22,

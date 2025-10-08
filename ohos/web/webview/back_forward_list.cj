@@ -22,8 +22,6 @@ import ohos.labels.APILevel
 
 /**
  * Provides back and forward history list information method. related to {@link HistoryItem}.
- *
- * @relation interface BackForwardList
  */
 @!APILevel[
     22,
@@ -40,8 +38,6 @@ public class BackForwardList <: RemoteDataLite {
 
     /**
      * Current index in BackForwardList.
-     *
-     * @relation currentIndex: number
      */
     @!APILevel[
         22,
@@ -60,8 +56,6 @@ public class BackForwardList <: RemoteDataLite {
 
     /**
      * Size of in BackForwardList.
-     *
-     * @relation size: number
      */
     @!APILevel[
         22,
@@ -84,7 +78,6 @@ public class BackForwardList <: RemoteDataLite {
      * @param { Int32 } index Index of back forward list entry.
      * @returns { HistoryItem } HistoryItem at given index in back forward list.
      * @throws { BusinessException } 401 - Invalid input parameter.
-     * @relation getItemAtIndex(index: number): HistoryItem
      */
     @!APILevel[
         22,

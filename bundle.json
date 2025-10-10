@@ -1,7 +1,7 @@
 {
     "name": "@ohos/arkweb_cangjie_wrapper",
     "description": "The Web Cangjie Interface is a Cangjie API encapsulated on OpenHarmony based on ArkWeb capabilities.",
-    "version": "6.0",
+    "version": "6.1",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
@@ -36,7 +36,7 @@
             "sub_component": [
                 "//base/web/arkweb_cangjie_wrapper/ohos/web:ohos.web",
                 "//base/web/arkweb_cangjie_wrapper/ohos/web/webview:ohos.web.webview",
-                "//base/web/arkweb_cangjie_wrapper/kit/ArkWeb:ArkWeb"
+                "//base/web/arkweb_cangjie_wrapper/kit/ArkWeb:kit.ArkWeb"
             ],
             "inner_kits": [
                 {

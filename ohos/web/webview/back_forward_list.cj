@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.web.webview
 
 import ohos.ffi.{ RemoteDataLite, releaseFFIData }
@@ -20,8 +22,6 @@ import ohos.labels.APILevel
 
 /**
  * Provides back and forward history list information method. related to {@link HistoryItem}.
- *
- * @relation interface BackForwardList
  */
 @!APILevel[
     since: "22",
@@ -38,8 +38,6 @@ public class BackForwardList <: RemoteDataLite {
 
     /**
      * Current index in BackForwardList.
-     *
-     * @relation currentIndex: number
      */
     @!APILevel[
         since: "22",
@@ -58,8 +56,6 @@ public class BackForwardList <: RemoteDataLite {
 
     /**
      * Size of in BackForwardList.
-     *
-     * @relation size: number
      */
     @!APILevel[
         since: "22",
@@ -82,7 +78,6 @@ public class BackForwardList <: RemoteDataLite {
      * @param { Int32 } index Index of back forward list entry.
      * @returns { HistoryItem } HistoryItem at given index in back forward list.
      * @throws { BusinessException } 401 - Invalid input parameter.
-     * @relation getItemAtIndex(index: number): HistoryItem
      */
     @!APILevel[
         since: "22",

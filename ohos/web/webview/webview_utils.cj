@@ -21,6 +21,8 @@ import ohos.ffi.*
 import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
 import std.collection.*
 
+const INVALID_URL: Int32 = 17100002
+
 let ERROR_CODE_MAP = HashMap<Int32, String>(
     [
         (17100001, "Init error. The WebviewController must be associated with a Web compoent."),

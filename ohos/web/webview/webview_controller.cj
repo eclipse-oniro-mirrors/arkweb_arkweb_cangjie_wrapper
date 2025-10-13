@@ -30,6 +30,7 @@ import ohos.arkui.component.util.transResourceMediaToString
  * A WebviewController object can only control one Web component,
  * and methods on the Webviewcontroller (except static methods) can only be called
  * after the web component is bound to the WebviewController.
+ *
  */
 @!APILevel[
     22,
@@ -52,7 +53,7 @@ public class WebviewController <: RemoteDataLite {
     /**
      * A constructor used to create a WebviewController object.
      *
-     * @param { String } [webTag] - specified the name of the web component, Empty by default.
+     * @param { ?String } webTag - specified the name of the web component, None by default.
      */
     @!APILevel[
         22,
@@ -87,6 +88,7 @@ public class WebviewController <: RemoteDataLite {
      * Loads the data or URL.
      *
      * @param { T } url - The URL to load. T should implement ResourceStr.
+     * @param { Array<WebHeader> } headers - The HTTP request headers.
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
@@ -264,12 +266,10 @@ public class WebviewController <: RemoteDataLite {
         if (funcs.size != methodList.size) {
             WEBVIEW_LOG.error(
                 "WebviewController registerJavaScriptProxy failed: the funcs and methodList must have the same size.")
-            throw BusinessException(ERR_PARAMETER_ERROR,
-                "WebviewController registerJavaScriptProxy failed: the funcs and methodList must have the same size.")
+            throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         if (funcs.size == 0) {
-            throw BusinessException(ERR_PARAMETER_ERROR,
-                "WebviewController registerJavaScriptProxy failed: the funcs' size be greater than 0.")
+            throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         unsafe {
             let cName = LibC.mallocCString(name)
@@ -393,7 +393,7 @@ public class WebviewController <: RemoteDataLite {
      *
      * @param { Float32 } x - the x of the position.
      * @param { Float32 } y - the y of the position.
-     * @param { Int32 } duration - the scroll animation duration. Unit: millisecond.
+     * @param { ?Int32 } duration - the scroll animation duration. Unit: millisecond. The default value is None.
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
@@ -418,7 +418,7 @@ public class WebviewController <: RemoteDataLite {
      *
      * @param { Float32 } deltaX - the delta x of the position.
      * @param { Float32 } deltaY - the delta y of the position.
-     * @param { Int32 } duration - the scroll animation duration. Unit: millisecond.
+     * @param { ?Int32 } duration - the scroll animation duration. Unit: millisecond. The default value is None.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      */

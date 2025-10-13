@@ -33,6 +33,7 @@ foreign func memcpy_s(dest: CPointer<UInt8>, destMax: UIntNative, src: CPointer<
 
 /**
  * Defines the security level for the page.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -42,6 +43,7 @@ foreign func memcpy_s(dest: CPointer<UInt8>, destMax: UIntNative, src: CPointer<
 public enum SecurityLevel {
     /**
      * Unable to determine whether it is safe or not, the non-http/https protocol used.
+     *
      */
     @!APILevel[
         22,
@@ -51,6 +53,7 @@ public enum SecurityLevel {
     |
     /**
      * Indicates the HTTPS protocol used by the page and the authentication is successful.
+     *
      */
     @!APILevel[
         22,
@@ -61,6 +64,7 @@ public enum SecurityLevel {
     /**
      * The page is insecure. For example, the HTTP protocol is used or the HTTPS protocol
      * is used but use an legacy TLS version.
+     *
      */
     @!APILevel[
         22,
@@ -70,6 +74,7 @@ public enum SecurityLevel {
     |
     /**
      * Attempted HTTPS and failed, the authentication is failed.
+     *
      */
     @!APILevel[
         22,
@@ -90,6 +95,7 @@ public enum SecurityLevel {
 
 /**
  * Enum type supplied to {@link getHitTest} for indicating the cursor node HitTest.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -99,6 +105,7 @@ public enum SecurityLevel {
 public enum WebHitTestType {
     /**
      * The edit text.
+     *
      */
     @!APILevel[
         22,
@@ -108,6 +115,7 @@ public enum WebHitTestType {
     |
     /**
      * The email address.
+     *
      */
     @!APILevel[
         22,
@@ -117,6 +125,7 @@ public enum WebHitTestType {
     |
     /**
      * Other unknown HitTest.
+     *
      */
     @!APILevel[
         22,
@@ -136,6 +145,7 @@ public enum WebHitTestType {
 
 /**
  * Defines the Web's request/response header.
+ *
  */
 @!APILevel[
     22,
@@ -144,6 +154,7 @@ public enum WebHitTestType {
 public class WebHeader {
     /**
      * Gets the key of the request/response header.
+     *
      */
     @!APILevel[
         22,
@@ -153,6 +164,7 @@ public class WebHeader {
 
     /**
      * Gets the value of the request/response header.
+     *
      */
     @!APILevel[
         22,
@@ -162,6 +174,9 @@ public class WebHeader {
 
     /**
      * WebHeader constructor.
+     *
+     * @param headerKey The key of the request/response header.
+     * @param headerValue The value of the request/response header.
      */
     @!APILevel[
         22,
@@ -175,6 +190,7 @@ public class WebHeader {
 
 /**
  * Provides element information of the click area. related to {@link getLastHitTest} method.
+ *
  */
 @!APILevel[
     22,
@@ -183,6 +199,7 @@ public class WebHeader {
 public class HitTestValue {
     /**
      * Get the hit test type.
+     *
      */
     @!APILevel[
         22,
@@ -193,6 +210,7 @@ public class HitTestValue {
     /**
      * Get the hit test extra data.
      * If the clicked area is an image or a link, the additional parameter information is it's URL address.
+     *
      */
     @!APILevel[
         22,
@@ -208,6 +226,7 @@ public class HitTestValue {
 
 /**
  * Provides information for history item in BackForwardList.
+ *
  */
 @!APILevel[
     22,
@@ -216,6 +235,7 @@ public class HitTestValue {
 public class HistoryItem {
     /**
      * Pixelmap of icon.
+     *
      */
     @!APILevel[
         22,
@@ -225,6 +245,7 @@ public class HistoryItem {
 
     /**
      * Url of this history item.
+     *
      */
     @!APILevel[
         22,
@@ -234,6 +255,7 @@ public class HistoryItem {
 
     /**
      * Original request url of this history item.
+     *
      */
     @!APILevel[
         22,
@@ -243,6 +265,7 @@ public class HistoryItem {
 
     /**
      * Title of this history item.
+     *
      */
     @!APILevel[
         22,

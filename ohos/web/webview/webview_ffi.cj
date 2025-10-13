@@ -19,6 +19,7 @@ package ohos.web.webview
 
 import ohos.ffi.*
 import ohos.multimedia.image.*
+import ohos.business_exception.BusinessException
 
 foreign {
     // WebviewController
@@ -594,7 +595,7 @@ struct RetWebHeader {
                 this.headerValue = LibC.mallocCString(webHeader.headerValue)
             } catch (e: IllegalMemoryException) {
                 LibC.free(headerKey)
-                throw e
+                throw BusinessException(OUT_MEMEORY, getErrorMsg(OUT_MEMEORY))
             }
         }
     }

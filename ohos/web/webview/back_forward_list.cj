@@ -22,6 +22,7 @@ import ohos.labels.APILevel
 
 /**
  * Provides back and forward history list information method. related to {@link HistoryItem}.
+ *
  */
 @!APILevel[
     22,
@@ -38,6 +39,8 @@ public class BackForwardList <: RemoteDataLite {
 
     /**
      * Current index in BackForwardList.
+     *
+     * @returns { Int32 } Current index in BackForwardList.
      */
     @!APILevel[
         22,
@@ -56,6 +59,8 @@ public class BackForwardList <: RemoteDataLite {
 
     /**
      * Size of in BackForwardList.
+     *
+     * @returns { Int32 } Size of in BackForwardList.
      */
     @!APILevel[
         22,

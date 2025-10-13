@@ -252,9 +252,6 @@ public class WebviewController <: RemoteDataLite {
      *                          object name called in the window.
      * @param { Array<String> } methodList - The method of the application side CJ funcs participating
      *                                       in the registration.
-     * @throws { BusinessException } 401 - Invalid input parameter. Possible causes:
-     * <br>1.the funcs and methodList must have the same size.
-     * <br>2. the funcs' size be greater than 0.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      */
@@ -266,10 +263,10 @@ public class WebviewController <: RemoteDataLite {
         if (funcs.size != methodList.size) {
             WEBVIEW_LOG.error(
                 "WebviewController registerJavaScriptProxy failed: the funcs and methodList must have the same size.")
-            throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+            throw BusinessException(INIT_ERROR, getErrorMsg(INIT_ERROR))
         }
         if (funcs.size == 0) {
-            throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+            throw BusinessException(INIT_ERROR, getErrorMsg(INIT_ERROR))
         }
         unsafe {
             let cName = LibC.mallocCString(name)

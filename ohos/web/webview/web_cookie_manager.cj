@@ -24,6 +24,7 @@ const MAX_STRING_LENGTH: Int64 = 40960
 
 /**
  * Provides methods for managing the web cookies.
+ *
  */
 @!APILevel[
     since: "22",
@@ -38,7 +39,7 @@ public class WebCookieManager {
      * @param { String } url - The URL for which the cookies are requested.
      * @param { Bool } incognito - {@code true} gets all cookies for the given URL
      *                                in incognito mode; {@code false} otherwise.
-     * @returns { string } - The cookie value for the given URL.
+     * @returns { String } - The cookie value for the given URL.
      * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100002 - Invalid url.
      */
@@ -48,7 +49,7 @@ public class WebCookieManager {
     ]
     public static func fetchCookie(url: String, incognito!: Bool = false): String {
         if (url.size > MAX_STRING_LENGTH) {
-            throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+            throw BusinessException(INVALID_URL, getErrorMsg(INVALID_URL))
         }
         var cookie: String = ""
         var errCode: Int32 = 0
@@ -73,7 +74,6 @@ public class WebCookieManager {
      * @param { String } value - The cookie as a string, using the format of the 'Set-Cookie' HTTP response header.
      * @param { Bool } incognito - {@code true} gets all cookies for the given URL
      *                                in incognito mode; {@code false} otherwise.
-     * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100002 - Invalid url.
      * @throws { BusinessException } 17100005 - Invalid cookie value.
      */
@@ -83,7 +83,7 @@ public class WebCookieManager {
     ]
     public static func configCookie(url: String, value: String, incognito!: Bool = false): Unit {
         if (url.size > MAX_STRING_LENGTH || value.size > MAX_STRING_LENGTH) {
-            throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+            throw BusinessException(INVALID_URL, getErrorMsg(INVALID_URL))
         }
         unsafe {
             var errCode: Int32 = 0
@@ -194,6 +194,7 @@ public class WebCookieManager {
 
     /**
      * Delete the session cookies.
+     *
      */
     @!APILevel[
         since: "22",

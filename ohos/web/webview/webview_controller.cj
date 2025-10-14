@@ -254,6 +254,7 @@ public class WebviewController <: RemoteDataLite {
      *                                       in the registration.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
+     * @throws { BusinessException } 17100015 - New failed, out of memeory.
      */
     @!APILevel[
         22,
@@ -528,8 +529,7 @@ public class WebviewController <: RemoteDataLite {
     /**
      * Let the Web zoom by.
      *
-     * @param { Int32 } factor - The zoom factor.
-     * @throws { BusinessException } 401 - Invalid input parameter.
+     * @param { Float32 } factor - The zoom factor.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100004 - Function not enable.
@@ -539,9 +539,6 @@ public class WebviewController <: RemoteDataLite {
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func zoom(factor: Float32): Unit {
-        if (factor <= 0.0) {
-            throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-        }
         unsafe {
             let errCode = FfiOHOSWebviewCtlZoom(getID(), factor)
             throwIfNotSuccess(errCode, "WebviewController", "zoom")

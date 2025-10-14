@@ -23,6 +23,7 @@ import std.collection.*
 
 const INIT_ERROR: Int32 = 17100001
 const INVALID_URL: Int32 = 17100002
+const OUT_MEMEORY: Int32 = 17100015
 
 let ERROR_CODE_MAP = HashMap<Int32, String>(
     [

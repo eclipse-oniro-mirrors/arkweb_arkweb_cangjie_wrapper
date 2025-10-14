@@ -24,8 +24,6 @@ import ohos.labels.APILevel
 
 import std.deriving.Derive
 
-
-const OUT_MEMEORY: Int32 = 17100015
 const LOG_DOMAIN: UInt32 = 0xD004500
 let WEBVIEW_LOG = HilogChannel(0, LOG_DOMAIN, "CJ-Webview")
 

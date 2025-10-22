@@ -85,42 +85,42 @@ class EntryView {
                 Text(this.msg2).fontSize(6)
 
                 Button("loadpage")
-                    .onClick {
+                    .onClick ({
                         evt => webController.loadUrl(@rawfile("message.html"))
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("loadmessage")
 
                 Button("loadpage")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("load page2")
                         webController.loadUrl(@rawfile("page2.html"))
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("load")
                 Button("loadpage2")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("load page2")
                         webController.loadUrl(@rawfile("page2.html"), headers: [WebHeader("headerKey", "headerValue")])
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("load2")
                 Button("setCustomUserAgent")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("setCustomUserAgent")
                         webController.setCustomUserAgent("ua")
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("setCustomUserAgent")
                 Button("registerJavaScriptProxy")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("registerJavaScriptProxy")
                         let funcA1 = {
@@ -164,33 +164,33 @@ class EntryView {
                         }
                         webController.registerJavaScriptProxy(funcsA, "testObjA", methodListA)
                         webController.registerJavaScriptProxy(funcsB, "testObjB", methodListB)
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("registerJavaScriptProxy")
 
                 Button("refresh")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("refresh")
                         webController.refresh()
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("refresh")
                 Button("runJavaScript")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("runJavaScript")
                         webController.runJavaScript("testObjA.testFunA2('someData')", callback)
                         webController.runJavaScript("testObjB.testFunB2('someData')", callback)
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("runJavaScript")
 
                 Button("getHitTestValue")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("getHitTestValue")
                         let hitTestValue = webController.getHitTestValue()
@@ -201,52 +201,52 @@ class EntryView {
                             case _ => throw Exception("unsupported enum constructor")
                         }
                         loggerInfo("getHitTestValue extra returns ${hitTestValue.extra}")
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("getHitTestValue")
 
                 Button("storeWebArchive")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("storeWebArchive")
                         webController.storeWebArchive("/data/storage/el2/base/", true, callback)
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("storeWebArchive")
-                Button("stop").onClick {
+                Button("stop").onClick ({
                     evt =>
                     loggerInfo("stop")
                     webController.stop()
-                }
+                })
                     .fontSize(5)
                     .height(5)
                     .id("stop")
 
                 Button("enableSafeBrowsing")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("enableSafeBrowsing")
                         webController.enableSafeBrowsing(true)
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("enableSafeBrowsing")
 
                 Button("isSafeBrowsingEnabled")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("isSafeBrowsingEnabled")
                         let bool = webController.isSafeBrowsingEnabled()
                         loggerInfo("isSafeBrowsingEnabled -- ${bool}")
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("isSafeBrowsingEnabled")
 
                 Button("getSecurityLevel")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("getSecurityLevel")
                         let securityLevel = webController.getSecurityLevel()
@@ -258,36 +258,36 @@ class EntryView {
                             case SecurityLevel.Danger => loggerInfo("getSecurityLevel returns Danger")
                             case _ => throw Exception("unsupported enum constructor")
                         }
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("getSecurityLevel")
 
                 Button("isIncognitoMode")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("isIncognitoMode")
                         let bool = webController.isIncognitoMode()
                         loggerInfo("isIncognitoMode -- ${bool}")
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("isIncognitoMode")
 
                 Button("getBackForwardEntries")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("getBackForwardEntries")
                         let backForwardList = webController.getBackForwardEntries()
                         loggerInfo("backForwardList currentIndex is ${backForwardList.currentIndex}")
                         loggerInfo("backForwardList size is ${backForwardList.size}")
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("getBackForwardEntries")
 
                 Button("getItemAtIndex")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("getItemAtIndex")
                         let backForwardList = webController.getBackForwardEntries()
@@ -301,33 +301,33 @@ class EntryView {
                             let byteInfo = pixelMap.getPixelBytesNumber()
                             loggerInfo("icon byteInfo is ${byteInfo}")
                         }
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("getItemAtIndex")
 
                 Button("removeCache")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("removeCache")
                         webController.removeCache(false)
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("removeCache")
 
                 Button("clearHistory")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("clearHistory")
                         webController.clearHistory()
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("clearHistory")
 
                 Button("getHitTest")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("getHitTest")
                         let hitType = webController.getHitTest()
@@ -338,12 +338,12 @@ class EntryView {
                             case WebHitTestType.Unknown => loggerInfo("getHitTest returns Unknown")
                             case _ => throw Exception("unsupported enum constructor")
                         }
-                    }
+                    })
                     .fontSize(5)
                     .height(5)
                     .id("getHitTest")
 
-                Button("testConfigCookie").onClick {
+                Button("testConfigCookie").onClick ({
                     _ =>
                     try {
                         WebCookieManager.clearAllCookies()
@@ -353,7 +353,7 @@ class EntryView {
                     } catch (e: BusinessException) {
                         loggerError("testConfigCookie error ${e}")
                     }
-                }.id("testConfigCookie")
+                }).id("testConfigCookie")
 
                 // cert
                 Web(src: "https://www.example.com", controller: getWebViewController("5")).height(30)
@@ -385,29 +385,29 @@ class EntryView {
                 Web(src: @rawfile("page1.html"), controller: getWebViewController("2")).height(100)
 
                 Button("go_baidu")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("go to baidu")
                         webCtrl.loadUrl("www.baidu.com")
-                    }
+                    })
                     .fontSize(5)
                     .height(30)
                     .id("go_baidu")
                 Button("go_iqiyi")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("go to iqiyi")
                         webCtrl.loadUrl("www.iqiyi.com")
-                    }
+                    })
                     .fontSize(5)
                     .height(30)
                     .id("go_iqiyi")
                 Button("go_example")
-                    .onClick {
+                    .onClick ({
                         evt =>
                         loggerInfo("go to example")
                         webCtrl.loadUrl("www.example.com")
-                    }
+                    })
                     .fontSize(5)
                     .height(30)
                     .id("go_example")

@@ -24,7 +24,7 @@ import ohos.base.*
 @Test
 class Test_web_cookie_manager {
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_configCookie_fetchCookie() {
         let value = WebCookieManager.fetchCookie("https://www.example.com")
         loggerInfo("[WebCookieManager]: value is ${value}")
@@ -32,7 +32,7 @@ class Test_web_cookie_manager {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_putAcceptCookieEnabled_isCookieAllowed() {
         WebCookieManager.putAcceptCookieEnabled(true)
         var result = WebCookieManager.isCookieAllowed()
@@ -43,7 +43,7 @@ class Test_web_cookie_manager {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_putAcceptThirdPartyCookieEnabled_isThirdPartyCookieAllowed() {
         WebCookieManager.putAcceptThirdPartyCookieEnabled(true)
         sleepFor(1.second)
@@ -56,7 +56,7 @@ class Test_web_cookie_manager {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_existCookie_clearAllCookies() {
         var bool = WebCookieManager.existCookie(incognito: true)
         @Expect(bool, false)

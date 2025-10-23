@@ -27,7 +27,7 @@ import ohos.base.*
 @Test
 class Test_webview_enum {
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func testSecurityLevel(): Unit {
         let enumArr: Array<SecurityLevel> = [NoneLevel, Secure, Warning, Danger]
         let strArr: Array<String> = ["SecurityLevel.NoneLevel", "SecurityLevel.Secure", "SecurityLevel.Warning",
@@ -40,7 +40,7 @@ class Test_webview_enum {
     }
  
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func testWebHitTestType(): Unit {
         let enumArr: Array<WebHitTestType> = [EditText, Email, Unknown]
         let strArr: Array<String> = ["WebHitTestType.EditText", "WebHitTestType.Email", "WebHitTestType.Unknown"]

@@ -67,7 +67,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getTitle() {
         let webController = getWebViewController("")
         let title = webController.getTitle()
@@ -76,7 +76,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getUserAgent() {
         let webController = getWebViewController("")
         let userAgent = webController.getUserAgent()
@@ -84,21 +84,21 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getUrl() {
         let webController = getWebViewController("")
         let url = webController.getUrl()
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getOriginalUrl() {
         let webController = getWebViewController("")
         webController.getOriginalUrl() // not fixed
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_pageUp_pageDown() {
         let webController = getWebViewController("")
         webController.pageUp(false)
@@ -128,7 +128,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_forward_backward_backOrForward() {
         let webController = getWebViewController("")
         webController.forward()
@@ -138,7 +138,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getPageHeight() {
         let webController = getWebViewController("")
         webController.getPageHeight() // not fixed
@@ -146,20 +146,20 @@ class Test_webview {
 
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_loadUrlRawFile() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("load").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_loadUrlRawFile2() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("load2").perform(click())
     }
 
     @Skip
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_setCustomUserAgent() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("setCustomUserAgent").perform(click())
         let webController = getWebViewController("")
@@ -173,7 +173,7 @@ class Test_webview {
 
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_runJavaScript() {
         let webController = getWebViewController("")
         try {
@@ -184,7 +184,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_registerJavaScriptProxy() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("registerJavaScriptProxy").perform(click())
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("refresh").perform(click())
@@ -192,7 +192,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_zoom() {
         let webController = getWebViewController("")
         webController.zoom(3.0)
@@ -206,13 +206,13 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getHitTestValue() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("getHitTestValue").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_storeWebArchive() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("storeWebArchive").perform(click())
         let webController = getWebViewController("")
@@ -224,67 +224,67 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_stop() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("stop").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_enableSafeBrowsing() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("enableSafeBrowsing").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_isSafeBrowsingEnabled() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("isSafeBrowsingEnabled").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getSecurityLevel() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("getSecurityLevel").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_isIncognitoMode() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("isIncognitoMode").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getBackForwardEntries() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("getBackForwardEntries").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getItemAtIndex() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("getItemAtIndex").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_clearHistory() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("clearHistory").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_removeCache() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("removeCache").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getBackForwardEntries2() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("getBackForwardEntries").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_accessStep() {
         let webController = getWebViewController("")
         let bool = webController.accessStep(1)
@@ -298,7 +298,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getTitle2() {
         let webController = getWebViewController("")
         let title = webController.getTitle()
@@ -308,13 +308,13 @@ class Test_webview {
 
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getHitTest() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("getHitTest").perform(click())
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_webController() {
         let webController = WebviewController(webTag: "web_test_tag")
         try {
@@ -327,14 +327,14 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func rawfile() {
         let webController = getWebViewController("")
         webController.loadUrl("resource://rawfile/page1.html")
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_loadUrl_exception() {
         try {
             wc.loadUrl("test", headers: Array<WebHeader>())
@@ -356,7 +356,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_funcs_exception() {
         try {
             wc.refresh()
@@ -398,7 +398,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_runJS_exception() {
         try {
             wc.runJavaScript("test", resultCallback)
@@ -426,7 +426,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getUrl_exception() {
         try {
             wc.getUrl()
@@ -443,7 +443,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_pageUpDown_exception() {
         try {
             wc.pageUp(true)
@@ -459,7 +459,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_scroll_exception() {
         try {
             wc.scrollTo(1.0, 1.0)
@@ -475,7 +475,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_backOrForward_exception() {
         try {
             wc.forward()
@@ -497,7 +497,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_zoom_exception() {
         try {
             wc.zoom(1.0)
@@ -519,7 +519,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_funs2_exception() {
         try {
             wc.getHitTestValue()
@@ -571,7 +571,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel12, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_funs3_exception() {
         try {
             wc.isIncognitoMode()
@@ -600,20 +600,20 @@ class Test_webview {
 
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_setWebDebuggingAccess() {
         WebviewController.setWebDebuggingAccess(true)
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_refresh() {
         let webController = getWebViewController("")
         webController.refresh()
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_loadUrl() {
         let webController = getWebViewController("")
         try {
@@ -627,7 +627,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getCustomUserAgent() {
         sleepFor(300.milliSecond)
         let webController = getWebViewController("")
@@ -636,7 +636,7 @@ class Test_webview {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_postMessage() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("loadmessage").perform(click())
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("refresh").perform(click())

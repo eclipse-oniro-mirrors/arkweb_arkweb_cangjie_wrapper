@@ -38,15 +38,15 @@ import ohos.arkui.component.util.transResourceMediaToString
 ]
 public class WebviewController <: RemoteDataLite {
     static var webTagId: Int32 = 0
-    static let webTagSet: HashSet<String> = HashSet<String>()
+    static let WEB_TAG_SET: HashSet<String> = HashSet<String>()
 
     static func generateWebTag(): String {
         var webTag = "arkweb:${webTagId}"
-        while (webTagSet.contains(webTag)) {
+        while (WEB_TAG_SET.contains(webTag)) {
             webTagId++
             webTag = "arkweb:${webTagId}"
         }
-        webTagSet.add(webTag)
+        WEB_TAG_SET.add(webTag)
         webTag
     }
 

@@ -409,13 +409,13 @@ class Test_webview {
         try {
             wc.registerJavaScriptProxy(Array<(String) -> String>(), "test", ["1"])
         } catch (e: BusinessException) {
-            @Expect(e.code, 401)
+            @Expect(e.code, 17100001)
         }
 
         try {
             wc.registerJavaScriptProxy(Array<(String) -> String>(), "test", Array<String>())
         } catch (e: BusinessException) {
-            @Expect(e.code, 401)
+            @Expect(e.code, 17100001)
         }
 
         try {

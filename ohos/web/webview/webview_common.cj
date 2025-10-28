@@ -239,7 +239,7 @@ public class HistoryItem {
         since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
-    public let icon: ?PixelMap
+    public var icon: ?PixelMap
 
     /**
      * Url of this history item.

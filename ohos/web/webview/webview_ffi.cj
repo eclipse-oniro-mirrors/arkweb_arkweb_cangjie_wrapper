@@ -17,8 +17,9 @@
 
 package ohos.web.webview
 
-import ohos.ffi.*
-import ohos.multimedia.image.*
+import ohos.ffi.{RetDataCString, CArrI64, CArrString, CArrUI8, CArrDouble,
+    CArrBool, RetDataCArrString, cjArr2CArr}
+import ohos.multimedia.image.PixelMap
 import ohos.business_exception.BusinessException
 
 foreign {

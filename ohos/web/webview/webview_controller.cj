@@ -18,8 +18,9 @@
 package ohos.web.webview
 
 import ohos.base.ResourceStr
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, RetDataCString, CArrString, CArrI64, releaseFFIData,
+    Callback1Param, toArrayCString, freeArrCString}
 import ohos.business_exception.{BusinessException, AsyncCallback, ERR_PARAMETER_ERROR}
 import std.collection.HashSet
 import ohos.arkui.component.util.transResourceMediaToString

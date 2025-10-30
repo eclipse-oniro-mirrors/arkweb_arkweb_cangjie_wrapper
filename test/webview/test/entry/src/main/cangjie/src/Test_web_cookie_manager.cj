@@ -26,9 +26,10 @@ class Test_web_cookie_manager {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func test_configCookie_fetchCookie() {
+        sleepFor(2.second)
         let value = WebCookieManager.fetchCookie("https://www.example.com")
         loggerInfo("[WebCookieManager]: value is ${value}")
-        @Expect(value, "test=lltConfigCookieSync")
+        @Expect(value, "a=b,c=d,e=f")
     }
 
     @TestCase

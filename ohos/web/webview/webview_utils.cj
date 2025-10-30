@@ -17,9 +17,9 @@
 
 package ohos.web.webview
 
-import ohos.ffi.*
+import ohos.ffi.SUCCESS_CODE
 import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
-import std.collection.*
+import std.collection.HashMap
 
 const INIT_ERROR: Int32 = 17100001
 const INVALID_URL: Int32 = 17100002

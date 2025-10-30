@@ -34,7 +34,7 @@ import ohos.arkui.component.util.transResourceMediaToString
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class WebviewController <: RemoteDataLite {
@@ -57,7 +57,7 @@ public class WebviewController <: RemoteDataLite {
      * @param { ?String } webTag - specified the name of the web component, None by default.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public init(webTag!: ?String = None) {
@@ -74,7 +74,7 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 401 - Invalid input parameter.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func setWebDebuggingAccess(webDebuggingAccess: Bool): Unit {
@@ -97,7 +97,7 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100003 - Invalid resource path or file type.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func loadUrl<T>(url: T, headers!: Array<WebHeader> = Array<WebHeader>()): Unit where T <: ResourceStr {
@@ -123,7 +123,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func refresh(): Unit {
@@ -141,7 +141,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getUserAgent(): String {
@@ -161,7 +161,7 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100001 - Init error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func accessBackward(): Bool {
@@ -182,7 +182,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func setCustomUserAgent(userAgent: String): Unit {
@@ -202,7 +202,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getCustomUserAgent(): String {
@@ -223,7 +223,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func runJavaScript(script: String, callback: AsyncCallback<String>): Unit {
@@ -258,7 +258,7 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100015 - New failed, out of memeory.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func registerJavaScriptProxy(funcs: Array<(String) -> String>, name: String, methodList: Array<String>): Unit {
@@ -315,7 +315,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getUrl(): String {
@@ -334,7 +334,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getOriginalUrl(): String {
@@ -356,7 +356,7 @@ public class WebviewController <: RemoteDataLite {
      * relation pageUp(top: boolean): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func pageUp(top: Bool): Unit {
@@ -377,7 +377,7 @@ public class WebviewController <: RemoteDataLite {
      * relation pageDown(bottom: boolean): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func pageDown(bottom: Bool): Unit {
@@ -398,7 +398,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func scrollTo(x: Float32, y: Float32, duration!: ?Int32 = None): Unit {
@@ -422,7 +422,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func scrollBy(deltaX: Float32, deltaY: Float32, duration!: ?Int32 = None): Unit {
@@ -443,7 +443,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func forward(): Unit {
@@ -460,7 +460,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func backward(): Unit {
@@ -478,7 +478,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func backOrForward(step: Int32): Unit {
@@ -496,7 +496,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getPageHeight(): Int32 {
@@ -516,7 +516,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getTitle(): String {
@@ -536,7 +536,7 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100004 - Function not enable.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func zoom(factor: Float32): Unit {
@@ -554,7 +554,7 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100004 - Function not enable.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func zoomIn(): Unit {
@@ -572,7 +572,7 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100004 - Function not enable.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func zoomOut(): Unit {
@@ -590,7 +590,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getHitTestValue(): HitTestValue {
@@ -609,7 +609,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func clearHistory(): Unit {
@@ -628,7 +628,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func accessStep(step: Int32): Bool {
@@ -647,7 +647,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getHitTest(): WebHitTestType {
@@ -676,7 +676,7 @@ public class WebviewController <: RemoteDataLite {
      * @throws { BusinessException } 17100003 - Invalid resource path or file type.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func storeWebArchive(baseName: String, autoName: Bool, callback: AsyncCallback<String>): Unit {
@@ -707,7 +707,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func enableSafeBrowsing(enable: Bool): Unit {
@@ -725,7 +725,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func isSafeBrowsingEnabled(): Bool {
@@ -745,7 +745,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getSecurityLevel(): SecurityLevel {
@@ -765,7 +765,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func isIncognitoMode(): Bool {
@@ -787,7 +787,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func removeCache(clearRom: Bool): Unit {
@@ -805,7 +805,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getBackForwardEntries(): BackForwardList {
@@ -824,7 +824,7 @@ public class WebviewController <: RemoteDataLite {
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func stop(): Unit {

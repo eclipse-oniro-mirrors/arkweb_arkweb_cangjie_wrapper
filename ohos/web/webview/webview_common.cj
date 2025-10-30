@@ -35,7 +35,7 @@ foreign func memcpy_s(dest: CPointer<UInt8>, destMax: UIntNative, src: CPointer<
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public enum SecurityLevel {
@@ -44,7 +44,7 @@ public enum SecurityLevel {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     NoneLevel
@@ -54,7 +54,7 @@ public enum SecurityLevel {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     Secure
@@ -65,7 +65,7 @@ public enum SecurityLevel {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     Warning
@@ -75,7 +75,7 @@ public enum SecurityLevel {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     Danger
@@ -97,7 +97,7 @@ public enum SecurityLevel {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public enum WebHitTestType {
@@ -106,7 +106,7 @@ public enum WebHitTestType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     EditText
@@ -116,7 +116,7 @@ public enum WebHitTestType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     Email
@@ -126,7 +126,7 @@ public enum WebHitTestType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     Unknown
@@ -146,7 +146,7 @@ public enum WebHitTestType {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class WebHeader {
@@ -155,7 +155,7 @@ public class WebHeader {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var headerKey: String
@@ -165,7 +165,7 @@ public class WebHeader {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var headerValue: String
@@ -177,7 +177,7 @@ public class WebHeader {
      * @param headerValue The value of the request/response header.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public init(headerKey: String, headerValue: String) {
@@ -191,7 +191,7 @@ public class WebHeader {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class HitTestValue {
@@ -200,7 +200,7 @@ public class HitTestValue {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var hitTestType: WebHitTestType
@@ -211,7 +211,7 @@ public class HitTestValue {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var extra: String
@@ -227,7 +227,7 @@ public class HitTestValue {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class HistoryItem {
@@ -236,7 +236,7 @@ public class HistoryItem {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var icon: ?PixelMap
@@ -246,7 +246,7 @@ public class HistoryItem {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var historyUrl: String
@@ -256,7 +256,7 @@ public class HistoryItem {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var historyRawUrl: String
@@ -266,7 +266,7 @@ public class HistoryItem {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public var title: String

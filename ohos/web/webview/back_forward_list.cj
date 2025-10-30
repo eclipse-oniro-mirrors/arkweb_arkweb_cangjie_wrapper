@@ -25,7 +25,7 @@ import ohos.labels.APILevel
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class BackForwardList <: RemoteDataLite {
@@ -43,7 +43,7 @@ public class BackForwardList <: RemoteDataLite {
      * @returns { Int32 } Current index in BackForwardList.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public prop currentIndex: Int32 {
@@ -63,7 +63,7 @@ public class BackForwardList <: RemoteDataLite {
      * @returns { Int32 } Size of in BackForwardList.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public prop size: Int32 {
@@ -85,7 +85,7 @@ public class BackForwardList <: RemoteDataLite {
      * @throws { BusinessException } 401 - Invalid input parameter.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public func getItemAtIndex(index: Int32): HistoryItem {

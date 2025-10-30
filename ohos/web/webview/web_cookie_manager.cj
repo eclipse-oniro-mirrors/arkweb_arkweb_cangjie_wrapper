@@ -27,7 +27,7 @@ const MAX_STRING_LENGTH: Int64 = 40960
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Web.Webview.Core"
 ]
 public class WebCookieManager {
@@ -44,7 +44,7 @@ public class WebCookieManager {
      * @throws { BusinessException } 17100002 - Invalid url.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func fetchCookie(url: String, incognito!: Bool = false): String {
@@ -78,7 +78,7 @@ public class WebCookieManager {
      * @throws { BusinessException } 17100005 - Invalid cookie value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func configCookie(url: String, value: String, incognito!: Bool = false): Unit {
@@ -104,7 +104,7 @@ public class WebCookieManager {
      * @param { Bool } accept - Whether the instance should send and accept cookies.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func putAcceptCookieEnabled(accept: Bool): Unit {
@@ -119,7 +119,7 @@ public class WebCookieManager {
      * @returns { Bool } True if the instance can send and accept cookies else false.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func isCookieAllowed(): Bool {
@@ -135,7 +135,7 @@ public class WebCookieManager {
      * @param { Bool } accept - Whether the instance should send and accept cookies.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func putAcceptThirdPartyCookieEnabled(accept: Bool): Unit {
@@ -150,7 +150,7 @@ public class WebCookieManager {
      * @returns { Bool } True if the instance can send and accept thirdparty cookies else false.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func isThirdPartyCookieAllowed(): Bool {
@@ -167,7 +167,7 @@ public class WebCookieManager {
      * @returns { Bool } True if exists more than one cookie else false;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func existCookie(incognito!: Bool = false): Bool {
@@ -183,7 +183,7 @@ public class WebCookieManager {
      *                                {@code false} otherwise.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func clearAllCookies(incognito!: Bool = false): Unit {
@@ -197,7 +197,7 @@ public class WebCookieManager {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     public static func clearSessionCookie(): Unit {

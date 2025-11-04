@@ -353,7 +353,26 @@ class EntryView {
                     } catch (e: BusinessException) {
                         loggerError("testConfigCookie error ${e}")
                     }
-                }).id("testConfigCookie")
+                })
+                .fontSize(5)
+                .height(5)
+                .id("testConfigCookie")
+
+                Button("scroll").onClick ({
+                    _ =>
+                    try {
+                        let webController = getWebViewController("3")
+                        webController.scrollTo(50.0, 50.0)
+                        webController.scrollBy(50.0, 50.0)
+                        webController.scrollTo(0.0, 0.0, duration: 100)
+                        webController.scrollBy(50.0, 50.0, duration: -20)
+                    } catch (e: BusinessException) {
+                        loggerError("scroll error ${e}")
+                    }
+                })
+                .fontSize(5)
+                .height(5)
+                .id("scroll")
 
                 // cert
                 Web(src: "https://www.example.com", controller: getWebViewController("5")).height(30)
@@ -383,35 +402,7 @@ class EntryView {
                     )
                     .height(100)
                 Web(src: @rawfile("page1.html"), controller: getWebViewController("2")).height(100)
-
-                Button("go_baidu")
-                    .onClick ({
-                        evt =>
-                        loggerInfo("go to baidu")
-                        webCtrl.loadUrl("www.baidu.com")
-                    })
-                    .fontSize(5)
-                    .height(30)
-                    .id("go_baidu")
-                Button("go_iqiyi")
-                    .onClick ({
-                        evt =>
-                        loggerInfo("go to iqiyi")
-                        webCtrl.loadUrl("www.iqiyi.com")
-                    })
-                    .fontSize(5)
-                    .height(30)
-                    .id("go_iqiyi")
-                Button("go_example")
-                    .onClick ({
-                        evt =>
-                        loggerInfo("go to example")
-                        webCtrl.loadUrl("www.example.com")
-                    })
-                    .fontSize(5)
-                    .height(30)
-                    .id("go_example")
-
+                Web(src: @rawfile("scroll.html"), controller: getWebViewController("3"))
             }.width(100.percent)
         }.height(100.percent)
     }

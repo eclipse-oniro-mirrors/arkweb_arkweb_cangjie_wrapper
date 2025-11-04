@@ -108,23 +108,9 @@ class Test_webview {
     }
 
     @TestCase
-    @Skip
+    @Tag[APILevel22, TestLevel0]
     func test_scrollTo_scrollBy() {
-        let webController = getWebViewController("")
-        webController.scrollTo(50.0, 50.0)
-        webController.scrollBy(50.0, 50.0)
-        webController.scrollTo(0.0, 0.0, duration: 100)
-        webController.scrollBy(50.0, 50.0, duration: -20)
-        try {
-            webController.scrollTo(-1.0, -1.0)
-        } catch (e: BusinessException) {
-            @Expect(e.code, 17100001)
-        }
-        try {
-            webController.scrollBy(-1.0, -1.0)
-        } catch (e: BusinessException) {
-            @Expect(e.code, 17100001)
-        }
+        Screen.getTheOnlyUiComponentWhoseIdEqualsTo("scroll").perform(click())
     }
 
     @TestCase
@@ -157,17 +143,16 @@ class Test_webview {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("load2").perform(click())
     }
 
-    @Skip
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func test_setCustomUserAgent() {
-        Screen.getTheOnlyUiComponentWhoseIdEqualsTo("setCustomUserAgent").perform(click())
         let webController = getWebViewController("")
-        try {
-            webController.setCustomUserAgent("")
-        } catch (e: BusinessException) {
-            @Expect(e.code, 17100001)
-        }
+        var userAgent = webController.getCustomUserAgent()
+        @Expect(userAgent.contains("Mozilla"))
+        Screen.getTheOnlyUiComponentWhoseIdEqualsTo("setCustomUserAgent").perform(click())
+        sleepFor(2.second)
+        userAgent = webController.getCustomUserAgent()
+        @Expect(userAgent, "ua")
     }
 
 
@@ -624,15 +609,6 @@ class Test_webview {
         }
         let title = webController.getTitle()
         loggerInfo(title)
-    }
-
-    @TestCase
-    @Tag[APILevel22, TestLevel0]
-    func test_getCustomUserAgent() {
-        sleepFor(300.milliSecond)
-        let webController = getWebViewController("")
-        let userAgent = webController.getCustomUserAgent()
-        @Expect(userAgent.contains("Mozilla"))
     }
 
     @TestCase

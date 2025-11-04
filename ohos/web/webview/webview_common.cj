@@ -20,7 +20,7 @@ package ohos.web.webview
 import ohos.ffi.{ CArrString, cjArr2CArr }
 import ohos.hilog.HilogChannel
 import ohos.multimedia.image.PixelMap
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 
 import std.deriving.Derive
 
@@ -120,6 +120,36 @@ public enum WebHitTestType {
         syscap: "SystemCapability.Web.Webview.Core"
     ]
     Email
+    |
+    /**
+     * The HTML::a tag with src=http.
+     */
+     @!Hide
+    HttpAnchor
+    |
+    /**
+     * The HTML::a tag with src=http + HTML::img.
+     */
+    @!Hide
+    HttpAnchorImg
+    |
+    /**
+     * The HTML::img tag.
+     */
+    @!Hide
+    Img
+    |
+    /**
+     * The map address.
+     */
+    @!Hide
+    Map
+    |
+    /**
+     * The phone number.
+     */
+    @!Hide
+    Phone
     |
     /**
      * Other unknown HitTest.

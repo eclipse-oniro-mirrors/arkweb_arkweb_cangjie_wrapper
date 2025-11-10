@@ -98,22 +98,6 @@ public class WebCookieManager {
     }
 
     /**
-     * Set whether the instance should send and accept cookies.
-     * By default this is set to be true.
-     *
-     * @param { Bool } accept - Whether the instance should send and accept cookies.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
-    ]
-    public static func putAcceptCookieEnabled(accept: Bool): Unit {
-        unsafe {
-            FfiOHOSCookieMgrPutAcceptCookieEnabled(accept)
-        }
-    }
-
-    /**
      * Get whether the instance can send and accept cookies.
      *
      * @returns { Bool } True if the instance can send and accept cookies else false.
@@ -138,9 +122,9 @@ public class WebCookieManager {
         since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
-    public static func putAcceptThirdPartyCookieEnabled(accept: Bool): Unit {
+    public static func putAcceptCookieEnabled(accept: Bool): Unit {
         unsafe {
-            FfiOHOSCookieMgrPutAcceptThirdPartyCookieEnabled(accept)
+            FfiOHOSCookieMgrPutAcceptCookieEnabled(accept)
         }
     }
 
@@ -156,6 +140,22 @@ public class WebCookieManager {
     public static func isThirdPartyCookieAllowed(): Bool {
         unsafe {
             return FfiOHOSCookieMgrIsThirdPartyCookieAllowed()
+        }
+    }
+
+    /**
+     * Set whether the instance should send and accept cookies.
+     * By default this is set to be true.
+     *
+     * @param { Bool } accept - Whether the instance should send and accept cookies.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public static func putAcceptThirdPartyCookieEnabled(accept: Bool): Unit {
+        unsafe {
+            FfiOHOSCookieMgrPutAcceptThirdPartyCookieEnabled(accept)
         }
     }
 

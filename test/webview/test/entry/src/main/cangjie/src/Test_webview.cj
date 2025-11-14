@@ -117,10 +117,10 @@ class Test_webview {
     @Tag[APILevel22, TestLevel0]
     func test_forward_backward_backOrForward() {
         let webController = getWebViewController("")
-        webController.forward()
-        webController.backward()
-        webController.backOrForward(1)
-        webController.backOrForward(-1)
+        webController.goForward()
+        webController.goBack()
+        webController.goBackOrForward(1)
+        webController.goBackOrForward(-1)
     }
 
     @TestCase
@@ -303,7 +303,7 @@ class Test_webview {
     func test_webController() {
         let webController = WebviewController(webTag: "web_test_tag")
         try {
-            webController.accessBackward()
+            webController.canGoBack()
         } catch (e: BusinessException) {
             @Expect(e.code, 17100001)
             return
@@ -344,7 +344,7 @@ class Test_webview {
     @Tag[APILevel22, TestLevel0]
     func test_funcs_exception() {
         try {
-            wc.refresh()
+            wc.reload()
         } catch (e: BusinessException) {
             @Expect(e.code, 17100001)
         }
@@ -463,19 +463,19 @@ class Test_webview {
     @Tag[APILevel22, TestLevel0]
     func test_backOrForward_exception() {
         try {
-            wc.forward()
+            wc.goForward()
         } catch (e: BusinessException) {
             @Expect(e.code, 17100001)
         }
 
         try {
-            wc.backward()
+            wc.goBack()
         } catch (e: BusinessException) {
             @Expect(e.code, 17100001)
         }
 
         try {
-            wc.backOrForward(1)
+            wc.goBackOrForward(1)
         } catch (e: BusinessException) {
             @Expect(e.code, 17100001)
         }
@@ -594,7 +594,7 @@ class Test_webview {
     @Tag[APILevel22, TestLevel0]
     func test_refresh() {
         let webController = getWebViewController("")
-        webController.refresh()
+        webController.reload()
     }
 
     @TestCase

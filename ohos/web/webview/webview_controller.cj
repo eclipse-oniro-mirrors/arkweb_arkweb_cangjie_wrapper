@@ -31,7 +31,6 @@ import ohos.arkui.component.util.transResourceMediaToString
  * A WebviewController object can only control one Web component,
  * and methods on the Webviewcontroller (except static methods) can only be called
  * after the web component is bound to the WebviewController.
- *
  */
 @!APILevel[
     since: "22",
@@ -54,7 +53,7 @@ public class WebviewController <: RemoteDataLite {
     /**
      * A constructor used to create a WebviewController object.
      *
-     * @param { ?String } webTag - specified the name of the web component, None by default.
+     * @param { ?String } [webTag] - specified the name of the web component, None by default.
      */
     @!APILevel[
         since: "22",
@@ -69,9 +68,16 @@ public class WebviewController <: RemoteDataLite {
     }
 
     /**
-     * Enables debugging of web contents.
-     * @param { Bool } webDebuggingAccess {@code true} enables debugging of web contents; {@code false} otherwise.
-     * @throws { BusinessException } 401 - Invalid input parameter.
+     * Sets whether to enable web debugging. By default, web debugging is disabled.
+     * For details, see Debugging Frontend Pages by Using DevTools.
+     * 
+     * API Note:
+     * Enabling web debugging allows users to check and modify the internal status of the web page,
+     * which poses security risks. Therefore, you are advised not to enable this function
+     * in the officially released version of the app.
+     *
+     * @param { Bool } webDebuggingAccess - Sets whether to enable web debugging. true enable web debugging;
+     *                                     false disable web debugging. The default value is false.
      */
     @!APILevel[
         since: "22",
@@ -89,16 +95,17 @@ public class WebviewController <: RemoteDataLite {
      * Loads the data or URL.
      *
      * @param { T } url - The URL to load. T should implement ResourceStr.
-     * @param { Array<WebHeader> } headers - The HTTP request headers.
-     * @throws { BusinessException } 401 - Invalid input parameter.
+     * @param { Array<WebHeader> } [headers] - Additional HTTP request header for URL.
      * @throws { BusinessException } 17100001 - Init error.
-     *                           The WebviewController must be associated with a Web component.
-     * @throws { BusinessException } 17100002 - Invalid url.
+     *                               The WebviewController must be associated with a Web component.
+     * @throws { BusinessException } 17100002 - URL error. The webpage corresponding to the URL is invalid, or the URL
+     *                               length exceeds 2048.
      * @throws { BusinessException } 17100003 - Invalid resource path or file type.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func loadUrl<T>(url: T, headers!: Array<WebHeader> = Array<WebHeader>()): Unit where T <: ResourceStr {
         unsafe {
@@ -124,12 +131,13 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
-    public func refresh(): Unit {
+    public func reload(): Unit {
         unsafe {
             let errCode = FfiOHOSWebviewCtlRefresh(getID())
-            throwIfNotSuccess(errCode, "WebviewController", "refresh")
+            throwIfNotSuccess(errCode, "WebviewController", "reload")
         }
     }
 
@@ -142,7 +150,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func getUserAgent(): String {
         unsafe {
@@ -157,18 +166,19 @@ public class WebviewController <: RemoteDataLite {
      * Checks whether the web page can go back.
      *
      * @returns { Bool } True if the web page can go back else false.
-     *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100001 - Init error.
+     *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
-    public func accessBackward(): Bool {
+    public func canGoBack(): Bool {
         unsafe {
             var code: Int32 = 0
             let result = FfiOHOSWebviewCtlAccessBackward(getID(), inout code)
-            throwIfNotSuccess(code, "WebviewController", "accessBackward")
+            throwIfNotSuccess(code, "WebviewController", "canGoBack")
             return result
         }
     }
@@ -177,13 +187,13 @@ public class WebviewController <: RemoteDataLite {
      * Set custom user agent.
      *
      * @param { String } userAgent - User custom agent information.
-     * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func setCustomUserAgent(userAgent: String): Unit {
         unsafe {
@@ -203,7 +213,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func getCustomUserAgent(): String {
         unsafe {
@@ -214,17 +225,23 @@ public class WebviewController <: RemoteDataLite {
     }
 
     /**
-     * Loads a piece of code and execute JS code in the context of the currently displayed page.
+     * Asynchronously execute JavaScript in the context of the currently displayed page.
+     * The result of the script execution will be returned through an asynchronous callback.
+     * This method must be used on the UI thread, and the callback will also be invoked on the UI thread.
+     * API Note:
+     * The state of JavaScript is no longer persisted across navigations like loadUrl.
+     * For example, global variables and functions defined before calling loadUrl will not exist in the loaded page.
+     * It is recommended that applications use registerJavaScriptProxy to ensure that the JavaScript state can be persisted across page navigations.
      *
      * @param { String } script - JavaScript Script.
      * @param { AsyncCallback<String> } callback - Callbacks execute JavaScript script results.
-     * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func runJavaScript(script: String, callback: AsyncCallback<String>): Unit {
         unsafe {
@@ -246,12 +263,18 @@ public class WebviewController <: RemoteDataLite {
     }
 
     /**
-     * Registers the JavaScript object and method list.
+     * Registers the supplied Cangjie functions into this Web component.
+     * The functions are registered into all frames of the web page, including all iframes, using the specified name.
+     * This allows the methods of the Cangjie functions to be accessed from JavaScript.
      *
-     * @param { Array<(String) -> String>} funcs - Application side CJ funcs participating in registration.
-     * @param { String } name - The name of the registered CJ funcs, which is consistent with the
+     * Registed functions will not appear in JavaScript until the page is next (re)load.
+     * To avoid memory leaks, registerJavaScriptProxy must be used together with deleteJavaScriptProxy.
+     * To avoid security risks, it is recommended that registerJavaScriptProxy be used with trusted web components.
+     *
+     * @param { Array<(String) -> String>} funcs - Application side Cangjie functions participating in registration.
+     * @param { String } name - The name of the registered Cangjie functions, which is consistent with the
      *                          object name called in the window.
-     * @param { Array<String> } methodList - The method of the application side CJ funcs participating
+     * @param { Array<String> } methodList - The method of the application side Cangjie functions participating
      *                                       in the registration.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
@@ -259,7 +282,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func registerJavaScriptProxy(funcs: Array<(String) -> String>, name: String, methodList: Array<String>): Unit {
         if (funcs.size != methodList.size) {
@@ -316,7 +340,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func getUrl(): String {
         unsafe {
@@ -335,7 +360,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func getOriginalUrl(): String {
         unsafe {
@@ -353,11 +379,11 @@ public class WebviewController <: RemoteDataLite {
      *                          and when set to true, it will jump to the top of the page.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * relation pageUp(top: boolean): void
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func pageUp(top: Bool): Unit {
         unsafe {
@@ -374,11 +400,11 @@ public class WebviewController <: RemoteDataLite {
      *                             and when set to true, it will jump to the top of the page.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
-     * relation pageDown(bottom: boolean): void
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func pageDown(bottom: Bool): Unit {
         unsafe {
@@ -388,18 +414,19 @@ public class WebviewController <: RemoteDataLite {
     }
 
     /**
-     * Scroll to the position.
+     * Scroll to the position within specified time.
      *
-     * @param { Float32 } x - the x of the position.
-     * @param { Float32 } y - the y of the position.
-     * @param { ?Int32 } duration - the scroll animation duration. Unit: millisecond. The default value is None.
-     * @throws { BusinessException } 401 - Invalid input parameter.
+     * @param { Float32 } x - the x of the position.Unit: vp.
+     * @param { Float32 } y - the y of the position.Unit: vp.
+     * @param { ?Int32 } [duration] - the scroll animation duration. Unit: millisecond.
+     *                              If the value is not passed, or is negative or 0, there is no animation.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func scrollTo(x: Float32, y: Float32, duration!: ?Int32 = None): Unit {
         unsafe {
@@ -415,15 +442,20 @@ public class WebviewController <: RemoteDataLite {
     /**
      * Scroll by the delta position.
      *
-     * @param { Float32 } deltaX - the delta x of the position.
-     * @param { Float32 } deltaY - the delta y of the position.
-     * @param { ?Int32 } duration - the scroll animation duration. Unit: millisecond. The default value is None.
+     * API Note:
+     * In nested scroll scenarios, calling scrollBy does not trigger nested scrolling in the parent component.
+     *
+     * @param { Float32 } deltaX - the delta x of the position.Unit: vp.
+     * @param { Float32 } deltaY - the delta y of the position.Unit: vp.
+     * @param { ?Int32 } [duration] - the scroll animation duration. Unit: millisecond.
+     *                              If the value is not passed, or is negative or 0, there is no animation.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func scrollBy(deltaX: Float32, deltaY: Float32, duration!: ?Int32 = None): Unit {
         unsafe {
@@ -444,12 +476,13 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
-    public func forward(): Unit {
+    public func goForward(): Unit {
         unsafe {
             let errCode = FfiOHOSWebviewCtlForward(getID())
-            throwIfNotSuccess(errCode, "WebviewController", "forward")
+            throwIfNotSuccess(errCode, "WebviewController", "goForward")
         }
     }
 
@@ -461,12 +494,13 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
-    public func backward(): Unit {
+    public func goBack(): Unit {
         unsafe {
             let errCode = FfiOHOSWebviewCtlBackward(getID())
-            throwIfNotSuccess(errCode, "WebviewController", "backward")
+            throwIfNotSuccess(errCode, "WebviewController", "goBack")
         }
     }
 
@@ -479,25 +513,27 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
-    public func backOrForward(step: Int32): Unit {
+    public func goBackOrForward(step: Int32): Unit {
         unsafe {
             let errCode = FfiOHOSWebviewCtlBackOrForward(getID(), step)
-            throwIfNotSuccess(errCode, "WebviewController", "backOrForward")
+            throwIfNotSuccess(errCode, "WebviewController", "goBackOrForward")
         }
     }
 
     /**
-     * Gets the content height of current Web page.
+     * Obtains the height of this web page.
      *
-     * @returns { Int32 } Returns the page height of the current page.
+     * @returns { Int32 } Height of the current web page. Unit: vp.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func getPageHeight(): Int32 {
         unsafe {
@@ -517,7 +553,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func getTitle(): String {
         unsafe {
@@ -530,6 +567,9 @@ public class WebviewController <: RemoteDataLite {
     /**
      * Let the Web zoom by.
      *
+     * API Note:
+     * zoomAccess must be true.
+     *
      * @param { Float32 } factor - The zoom factor.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
@@ -537,7 +577,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func zoom(factor: Float32): Unit {
         unsafe {
@@ -547,7 +588,7 @@ public class WebviewController <: RemoteDataLite {
     }
 
     /**
-     * Let the Web zoom in.
+     * Zooms in on this web page by 25%.
      *
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
@@ -555,7 +596,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func zoomIn(): Unit {
         unsafe {
@@ -565,7 +607,7 @@ public class WebviewController <: RemoteDataLite {
     }
 
     /**
-     * Let the Web zoom out.
+     * Zooms out of this web page by 20%.
      *
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
@@ -573,7 +615,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func zoomOut(): Unit {
         unsafe {
@@ -583,7 +626,7 @@ public class WebviewController <: RemoteDataLite {
     }
 
     /**
-     * Gets the hit test value of HitTest.
+     * Get the element information of the currently clicked area.
      *
      * @returns { HitTestValue } Return the element information of the clicked area.
      * @throws { BusinessException } 17100001 - Init error.
@@ -591,7 +634,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func getHitTestValue(): HitTestValue {
         var code: Int32 = 0
@@ -610,7 +654,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func clearHistory(): Unit {
         unsafe {
@@ -629,7 +674,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func accessStep(step: Int32): Bool {
         
@@ -648,7 +694,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func getHitTest(): WebHitTestType {
         unsafe {
@@ -670,14 +717,14 @@ public class WebviewController <: RemoteDataLite {
      * @param { AsyncCallback<String> } callback - called after the web archive has been stored. The parameter
      *                                             will either be the filename under which the file was stored,
      *                                             or empty if storing the file failed.
-     * @throws { BusinessException } 401 - Invalid input parameter.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      * @throws { BusinessException } 17100003 - Invalid resource path or file type.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func storeWebArchive(baseName: String, autoName: Bool, callback: AsyncCallback<String>): Unit {
         unsafe {
@@ -702,13 +749,14 @@ public class WebviewController <: RemoteDataLite {
      * Enable the ability to check website security risks.
      * Illegal and fraudulent websites are mandatory enabled and can't be disabled by this function.
      *
-     * @param { Bool } enable - {@code true} enable check the website security risks; {@code false} otherwise.
+     * @param { Bool } enable - true enable check the website security risks; false otherwise.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func enableSafeBrowsing(enable: Bool): Unit {
         unsafe {
@@ -726,7 +774,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func isSafeBrowsingEnabled(): Bool {
         unsafe {
@@ -746,7 +795,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func getSecurityLevel(): SecurityLevel {
         unsafe {
@@ -760,13 +810,14 @@ public class WebviewController <: RemoteDataLite {
     /**
      * Whether the incognito mode is set.
      *
-     * @returns { Bool } {@code true} has been set the incognito mode; {@code false} otherwise.
+     * @returns { Bool } true has been set the incognito mode; false otherwise.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func isIncognitoMode(): Bool {
         unsafe {
@@ -778,17 +829,18 @@ public class WebviewController <: RemoteDataLite {
     }
 
     /**
-     * Remove resource cache in application. So this method will remove all cache for all web components in the
-     * same application.
+     * Clears the cache in the application. This API will clear the cache for all webviews in the same application.
      *
-     * @param { Bool } clearRom - Remove cache in both rom and ram if true. Otherwise only clear cache
-     *                               in ram.
+     * @param { Bool } clearRom - Whether to clear the cache in the ROM and RAM at the same time.
+     *                            true means to clear the cache in the ROM and RAM at the same time;
+     *                            false means to only clear the cache in the RAM.
      * @throws { BusinessException } 17100001 - Init error.
      *                           The WebviewController must be associated with a Web component.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func removeCache(clearRom: Bool): Unit {
         unsafe {
@@ -806,7 +858,8 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func getBackForwardEntries(): BackForwardList {
         unsafe {
@@ -825,7 +878,9 @@ public class WebviewController <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func stop(): Unit {
         unsafe {

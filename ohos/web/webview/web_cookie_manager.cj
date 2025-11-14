@@ -24,7 +24,6 @@ const MAX_STRING_LENGTH: Int64 = 40960
 
 /**
  * Provides methods for managing the web cookies.
- *
  */
 @!APILevel[
     since: "22",
@@ -37,15 +36,15 @@ public class WebCookieManager {
      * Gets all cookies for the given URL.
      *
      * @param { String } url - The URL for which the cookies are requested.
-     * @param { Bool } incognito - {@code true} gets all cookies for the given URL
-     *                                in incognito mode; {@code false} otherwise.
-     * @returns { String } - The cookie value for the given URL.
-     * @throws { BusinessException } 401 - Invalid input parameter.
-     * @throws { BusinessException } 17100002 - Invalid url.
+     * @param { Bool } [incognito] - true gets all cookies for the given URL
+     *                                in incognito mode; false otherwise.
+     * @returns { String } Resolved after the cookies of given URL have been gotten.
+     * @throws { BusinessException } 17100002 - URL error. No valid cookie found for the specified URL.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public static func fetchCookie(url: String, incognito!: Bool = false): String {
         if (url.size > MAX_STRING_LENGTH) {
@@ -72,14 +71,15 @@ public class WebCookieManager {
      *
      * @param { String } url - The URL for which the cookie is to be set.
      * @param { String } value - The cookie as a string, using the format of the 'Set-Cookie' HTTP response header.
-     * @param { Bool } incognito - {@code true} gets all cookies for the given URL
-     *                                in incognito mode; {@code false} otherwise.
-     * @throws { BusinessException } 17100002 - Invalid url.
-     * @throws { BusinessException } 17100005 - Invalid cookie value.
+     * @param { Bool } [incognito] - true set a single cookie (key-value pair) for the given URL
+     *                                in incognito mode; false otherwise.
+     * @throws { BusinessException } 17100002 - URL error. No valid cookie found for the specified URL.
+     * @throws { BusinessException } 17100005 - The provided cookie value is invalid. It must follow the format specified 
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public static func configCookie(url: String, value: String, incognito!: Bool = false): Unit {
         if (url.size > MAX_STRING_LENGTH || value.size > MAX_STRING_LENGTH) {
@@ -122,7 +122,7 @@ public class WebCookieManager {
         since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
-    public static func putAcceptCookieEnabled(accept: Bool): Unit {
+    public static func setAcceptCookiesEnabled(accept: Bool): Unit {
         unsafe {
             FfiOHOSCookieMgrPutAcceptCookieEnabled(accept)
         }
@@ -144,16 +144,16 @@ public class WebCookieManager {
     }
 
     /**
-     * Set whether the instance should send and accept cookies.
-     * By default this is set to be true.
+     * Set whether the instance should send and accept thirdparty cookies.
+     * By default this is set to be false.
      *
-     * @param { Bool } accept - Whether the instance should send and accept cookies.
+     * @param { Bool } accept - Whether the instance should send and accept thirdparty cookies.
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
-    public static func putAcceptThirdPartyCookieEnabled(accept: Bool): Unit {
+    public static func setAcceptThirdPartyCookieEnabled(accept: Bool): Unit {
         unsafe {
             FfiOHOSCookieMgrPutAcceptThirdPartyCookieEnabled(accept)
         }
@@ -162,15 +162,15 @@ public class WebCookieManager {
     /**
      * Check whether exists any cookies.
      *
-     * @param { Bool } incognito - {@code true} check whether exists any cookies.
-     *                                in incognito mode; {@code false} otherwise.
+     * @param { Bool } [incognito] - true check whether exists any cookies.
+     *                                in incognito mode; false otherwise.  The default value is false.
      * @returns { Bool } True if exists more than one cookie else false;
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.Web.Webview.Core"
     ]
-    public static func existCookie(incognito!: Bool = false): Bool {
+    public static func hasCookie(incognito!: Bool = false): Bool {
         unsafe {
             return FfiOHOSCookieMgrExistCookie(incognito)
         }
@@ -179,8 +179,8 @@ public class WebCookieManager {
     /**
      * Remove all cookies.
      *
-     * @param { Bool } incognito - {@code true} remove all cookies in incognito mode;
-     *                                {@code false} otherwise.
+     * @param { Bool } [incognito] - true remove all cookies in incognito mode;
+     *                               false otherwise. The default value is false.
      */
     @!APILevel[
         since: "22",
@@ -194,7 +194,6 @@ public class WebCookieManager {
 
     /**
      * Delete the session cookies.
-     *
      */
     @!APILevel[
         since: "22",

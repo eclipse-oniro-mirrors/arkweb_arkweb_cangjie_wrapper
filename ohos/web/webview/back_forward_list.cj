@@ -21,8 +21,7 @@ import ohos.ffi.{ RemoteDataLite, releaseFFIData }
 import ohos.labels.APILevel
 
 /**
- * Provides back and forward history list information method. related to {@link HistoryItem}.
- *
+ * Provides back and forward history list information method. related to HistoryItem.
  */
 @!APILevel[
     since: "22",
@@ -39,8 +38,6 @@ public class BackForwardList <: RemoteDataLite {
 
     /**
      * Current index in BackForwardList.
-     *
-     * @returns { Int32 } Current index in BackForwardList.
      */
     @!APILevel[
         since: "22",
@@ -58,9 +55,8 @@ public class BackForwardList <: RemoteDataLite {
     }
 
     /**
-     * Size of in BackForwardList.
-     *
-     * @returns { Int32 } Size of in BackForwardList.
+     * Number of indexes in the history stack. The maximum value is 50.
+     * If this value is exceeded, the earliset index will be overwritten.
      */
     @!APILevel[
         since: "22",
@@ -80,13 +76,13 @@ public class BackForwardList <: RemoteDataLite {
     /**
      * Get history entry at given index.
      *
-     * @param { Int32 } index Index of back forward list entry.
+     * @param { Int32 } index - Index of back forward list entry.
      * @returns { HistoryItem } HistoryItem at given index in back forward list.
-     * @throws { BusinessException } 401 - Invalid input parameter.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Web.Webview.Core"
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
     ]
     public func getItemAtIndex(index: Int32): HistoryItem {
         unsafe {

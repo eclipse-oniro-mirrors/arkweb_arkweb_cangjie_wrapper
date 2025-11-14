@@ -35,10 +35,10 @@ class Test_web_cookie_manager {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func test_putAcceptCookieEnabled_isCookieAllowed() {
-        WebCookieManager.putAcceptCookieEnabled(true)
+        WebCookieManager.setAcceptCookiesEnabled(true)
         var result = WebCookieManager.isCookieAllowed()
         @Expect(result, true)
-        WebCookieManager.putAcceptCookieEnabled(false)
+        WebCookieManager.setAcceptCookiesEnabled(false)
         result = WebCookieManager.isCookieAllowed()
         @Expect(result, false)
     }
@@ -46,11 +46,11 @@ class Test_web_cookie_manager {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func test_putAcceptThirdPartyCookieEnabled_isThirdPartyCookieAllowed() {
-        WebCookieManager.putAcceptThirdPartyCookieEnabled(true)
+        WebCookieManager.setAcceptThirdPartyCookieEnabled(true)
         sleepFor(1.second)
         var result = WebCookieManager.isThirdPartyCookieAllowed()
         @Expect(result, true)
-        WebCookieManager.putAcceptThirdPartyCookieEnabled(false)
+        WebCookieManager.setAcceptThirdPartyCookieEnabled(false)
         sleepFor(1.second)
         result = WebCookieManager.isThirdPartyCookieAllowed()
         @Expect(result, false)
@@ -59,13 +59,13 @@ class Test_web_cookie_manager {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func test_existCookie_clearAllCookies() {
-        var bool = WebCookieManager.existCookie(incognito: true)
+        var bool = WebCookieManager.hasCookie(incognito: true)
         @Expect(bool, false)
-        bool = WebCookieManager.existCookie(incognito: false)
+        bool = WebCookieManager.hasCookie(incognito: false)
         @Expect(bool, true)
         WebCookieManager.clearAllCookies()
         WebCookieManager.clearSessionCookie()
-        bool = WebCookieManager.existCookie(incognito: false)
+        bool = WebCookieManager.hasCookie(incognito: false)
         @Expect(bool, false)
     }
 }

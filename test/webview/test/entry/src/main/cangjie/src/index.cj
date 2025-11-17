@@ -174,7 +174,7 @@ class EntryView {
                     .onClick ({
                         evt =>
                         loggerInfo("refresh")
-                        webController.refresh()
+                        webController.reload()
                     })
                     .fontSize(5)
                     .height(5)
@@ -256,7 +256,7 @@ class EntryView {
                             case SecurityLevel.NoneLevel => loggerInfo("getSecurityLevel returns NoneLevel")
                             case SecurityLevel.Secure => loggerInfo("getSecurityLevel returns Secure")
                             case SecurityLevel.Warning => loggerInfo("getSecurityLevel returns Warning")
-                            case SecurityLevel.Danger => loggerInfo("getSecurityLevel returns Danger")
+                            case SecurityLevel.Dangerous => loggerInfo("getSecurityLevel returns Dangerous")
                             case _ => throw Exception("unsupported enum constructor")
                         }
                     })

@@ -29,9 +29,9 @@ class Test_webview_enum {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func testSecurityLevel(): Unit {
-        let enumArr: Array<SecurityLevel> = [NoneLevel, Secure, Warning, Danger]
+        let enumArr: Array<SecurityLevel> = [NoneLevel, Secure, Warning, Dangerous]
         let strArr: Array<String> = ["SecurityLevel.NoneLevel", "SecurityLevel.Secure", "SecurityLevel.Warning",
-            "SecurityLevel.Danger"]
+            "SecurityLevel.Dangerous"]
         for (i in 0..enumArr.size) {
             @Expect(enumArr[i].toString(), strArr[i])
             @Expect(enumArr[i] == enumArr[i])

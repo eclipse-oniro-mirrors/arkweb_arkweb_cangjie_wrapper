@@ -41,6 +41,12 @@
             "inner_kits": [
                 {
                     "name": "//base/web/arkweb_cangjie_wrapper/ohos/web/webview:ohos.web.webview"
+                },
+                {
+                    "name": "//base/web/arkweb_cangjie_wrapper:copy_sdk_arkweb_cangjie_libs"
+                },
+                {
+                    "name": "//base/web/arkweb_cangjie_wrapper:copy_sdk_arkweb_cangjie_libs_kit"
                 }
             ],
             "test": []

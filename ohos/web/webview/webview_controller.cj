@@ -626,27 +626,6 @@ public class WebviewController <: RemoteDataLite {
     }
 
     /**
-     * Get the element information of the currently clicked area.
-     *
-     * @returns { HitTestValue } Return the element information of the clicked area.
-     * @throws { BusinessException } 17100001 - Init error.
-     *                           The WebviewController must be associated with a Web component.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Web.Webview.Core",
-        throwexception: true
-    ]
-    public func getHitTestValue(): HitTestValue {
-        var code: Int32 = 0
-        let ret = unsafe { FfiOHOSWebviewCtlGetHitTestValue(getID(), inout code) }
-        throwIfNotSuccess(code, "WebviewController", "getHitTestValue")
-        let hitType = WebHitTestType.fromInt32(ret.code)
-        let extra = getStringAndFree(ret.data)
-        return HitTestValue(hitType, extra)
-    }
-
-    /**
      * Clears the history in the Web.
      *
      * @throws { BusinessException } 17100001 - Init error.
@@ -683,27 +662,6 @@ public class WebviewController <: RemoteDataLite {
         let result = unsafe { FfiOHOSWebviewCtlAccessStep(getID(), inout code, step) }
         throwIfNotSuccess(code, "WebviewController", "accessStep")
         return result
-    }
-
-    /**
-     * Gets the type of HitTest.
-     *
-     * @returns { WebHitTestType } The type of HitTest.
-     * @throws { BusinessException } 17100001 - Init error.
-     *                           The WebviewController must be associated with a Web component.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Web.Webview.Core",
-        throwexception: true
-    ]
-    public func getHitTest(): WebHitTestType {
-        unsafe {
-            var code: Int32 = 0
-            let hitTestType = FfiOHOSWebviewCtlGetHitTest(getID(), inout code)
-            throwIfNotSuccess(code, "WebviewController", "getHitTest")
-            return WebHitTestType.fromInt32(hitTestType)
-        }
     }
 
     /**

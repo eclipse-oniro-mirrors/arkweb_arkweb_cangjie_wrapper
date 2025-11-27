@@ -192,12 +192,6 @@ class Test_webview {
 
     @TestCase
     @Tag[APILevel22, TestLevel0]
-    func test_getHitTestValue() {
-        Screen.getTheOnlyUiComponentWhoseIdEqualsTo("getHitTestValue").perform(click())
-    }
-
-    @TestCase
-    @Tag[APILevel22, TestLevel0]
     func test_storeWebArchive() {
         Screen.getTheOnlyUiComponentWhoseIdEqualsTo("storeWebArchive").perform(click())
         let webController = getWebViewController("")
@@ -289,13 +283,6 @@ class Test_webview {
         let title = webController.getTitle()
         loggerInfo("title is ${title}")
         @Expect(title, "Page2")
-    }
-
-
-    @TestCase
-    @Tag[APILevel22, TestLevel0]
-    func test_getHitTest() {
-        Screen.getTheOnlyUiComponentWhoseIdEqualsTo("getHitTest").perform(click())
     }
 
     @TestCase
@@ -507,12 +494,6 @@ class Test_webview {
     @Tag[APILevel22, TestLevel0]
     func test_funs2_exception() {
         try {
-            wc.getHitTestValue()
-        } catch (e: BusinessException) {
-            @Expect(e.code, 17100001)
-        }
-
-        try {
             wc.clearHistory()
         } catch (e: BusinessException) {
             @Expect(e.code, 17100001)
@@ -520,12 +501,6 @@ class Test_webview {
 
         try {
             wc.accessStep(1)
-        } catch (e: BusinessException) {
-            @Expect(e.code, 17100001)
-        }
-
-        try {
-            wc.getHitTest()
         } catch (e: BusinessException) {
             @Expect(e.code, 17100001)
         }

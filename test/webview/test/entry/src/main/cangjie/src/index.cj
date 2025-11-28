@@ -190,23 +190,6 @@ class EntryView {
                     .height(5)
                     .id("runJavaScript")
 
-                Button("getHitTestValue")
-                    .onClick ({
-                        evt =>
-                        loggerInfo("getHitTestValue")
-                        let hitTestValue = webController.getHitTestValue()
-                        match (hitTestValue.hitTestType) {
-                            case WebHitTestType.EditText => loggerInfo("getHitTestValue returns EditText")
-                            case WebHitTestType.Email => loggerInfo("getHitTestValue returns Email")
-                            case WebHitTestType.Unknown => loggerInfo("getHitTestValue returns Unknown")
-                            case _ => throw Exception("unsupported enum constructor")
-                        }
-                        loggerInfo("getHitTestValue extra returns ${hitTestValue.extra}")
-                    })
-                    .fontSize(5)
-                    .height(5)
-                    .id("getHitTestValue")
-
                 Button("storeWebArchive")
                     .onClick ({
                         evt =>
@@ -326,23 +309,6 @@ class EntryView {
                     .fontSize(5)
                     .height(5)
                     .id("clearHistory")
-
-                Button("getHitTest")
-                    .onClick ({
-                        evt =>
-                        loggerInfo("getHitTest")
-                        let hitType = webController.getHitTest()
-                        loggerInfo("get WebHitTestType ${hitType.toString()}")
-                        match (hitType) {
-                            case WebHitTestType.EditText => loggerInfo("getHitTest returns EditText")
-                            case WebHitTestType.Email => loggerInfo("getHitTest returns Email")
-                            case WebHitTestType.Unknown => loggerInfo("getHitTest returns Unknown")
-                            case _ => throw Exception("unsupported enum constructor")
-                        }
-                    })
-                    .fontSize(5)
-                    .height(5)
-                    .id("getHitTest")
 
                 Button("testConfigCookie").onClick ({
                     _ =>

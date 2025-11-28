@@ -12,9 +12,7 @@
     "component": {
         "name": "arkweb_cangjie_wrapper",
         "subsystem": "web",
-        "syscap": [
-            "SystemCapability.Web.Webview.Core"
-        ],
+        "syscap": [],
         "features": [],
         "adapted_system_type": [
             "standard"

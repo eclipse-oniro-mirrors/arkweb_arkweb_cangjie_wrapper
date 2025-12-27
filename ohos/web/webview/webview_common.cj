@@ -116,31 +116,31 @@ public enum WebHitTestType {
     /**
      * The HTML::a tag with src=http.
      */
-     @!Hide
+     @!Hide[isChecked: true]
     HttpAnchor
     |
     /**
      * The HTML::a tag with src=http + HTML::img.
      */
-    @!Hide
+    @!Hide[isChecked: true]
     HttpAnchorImg
     |
     /**
      * The HTML::img tag.
      */
-    @!Hide
+    @!Hide[isChecked: true]
     Img
     |
     /**
      * The map address.
      */
-    @!Hide
+    @!Hide[isChecked: true]
     Map
     |
     /**
      * The phone number.
      */
-    @!Hide
+    @!Hide[isChecked: true]
     Phone
     |
     /**

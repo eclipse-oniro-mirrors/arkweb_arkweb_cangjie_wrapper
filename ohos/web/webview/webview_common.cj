@@ -17,7 +17,6 @@
 
 package ohos.web.webview
 
-import ohos.ffi.{ CArrString, cjArr2CArr }
 import ohos.hilog.HilogChannel
 import ohos.multimedia.image.PixelMap
 import ohos.labels.{APILevel, Hide}

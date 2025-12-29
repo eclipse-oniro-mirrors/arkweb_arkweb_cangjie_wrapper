@@ -17,7 +17,7 @@
 
 package ohos.web.webview
 
-import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR}
+import ohos.business_exception.BusinessException
 import ohos.labels.APILevel
 
 const MAX_STRING_LENGTH: Int64 = 40960

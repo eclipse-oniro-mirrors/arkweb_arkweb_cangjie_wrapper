@@ -21,7 +21,7 @@ import ohos.base.ResourceStr
 import ohos.labels.APILevel
 import ohos.ffi.{RemoteDataLite, RetDataCString, CArrString, CArrI64, releaseFFIData,
     Callback1Param, toArrayCString, freeArrCString}
-import ohos.business_exception.{BusinessException, AsyncCallback, ERR_PARAMETER_ERROR}
+import ohos.business_exception.{BusinessException, AsyncCallback}
 import std.collection.HashSet
 import ohos.arkui.component.util.transResourceMediaToString
 

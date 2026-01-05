@@ -17,14 +17,19 @@ import("//build/ohos.gni")
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.web.webview") {
-  sources = [
-    "back_forward_list.cj",
-    "web_cookie_manager.cj",
-    "webview_common.cj",
-    "webview_controller.cj",
-    "webview_ffi.cj",
-    "webview_utils.cj",
-  ]
+  
+  if (is_mingw || is_mac){
+    sources = [ "../../../mock/ohos.web.webview.cj" ]
+  } else {
+    sources = [
+      "back_forward_list.cj",
+      "web_cookie_manager.cj",
+      "webview_common.cj",
+      "webview_controller.cj",
+      "webview_ffi.cj",
+      "webview_utils.cj",
+    ]
+  }
 
   cj_external_deps = [
     "cangjie_ark_interop:ohos.business_exception",

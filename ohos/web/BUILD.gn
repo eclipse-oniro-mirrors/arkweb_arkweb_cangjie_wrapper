@@ -17,7 +17,12 @@ import("//build/ohos.gni")
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.web") {
-  sources = [ "web.cj" ]
+  
+  if (is_mingw || is_mac){
+    sources = [ "../../mock/ohos.web.cj" ]
+  } else {
+    sources = [ "web.cj" ]
+  }
 
   subsystem_name = "web"
   part_name = "arkweb_cangjie_wrapper"

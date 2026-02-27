@@ -21,4 +21,5 @@ func testsuite(): Unit {
     registerTestSuite("Test_webview", {=> Test_webview()})
     registerTestSuite("Test_web_cookie_manager", {=> Test_web_cookie_manager()})
     registerTestSuite("Test_webview_enum", {=> Test_webview_enum()})
+    registerTestSuite("Test_webview_llt", {=> Test_webview_llt()})
 }

@@ -231,12 +231,6 @@ foreign {
     func FfiOHOSWebviewCtlPrefetchResource(request: CRequestInfo, additionalHeaders: ArrWebHeader, cKey: CString,
         cacheValidTime: Int32): Int32
 
-    func FfiOHOSWebviewCtlClearServiceWorkerWebSchemeHandler(): Unit
-
-    func FfiOHOSWebviewCtlSetServiceWorkerWebSchemeHandler(cScheme: CString, classId: Int64, errCode: CPointer<Int32>): Unit
-
-    func FfiOHOSWebviewCtlClearWebSchemeHandler(id: Int64, errCode: Int32): Unit
-
     func FfiOHOSWebviewCtlSetWebSchemeHandler(id: Int64, cScheme: CString, classId: Int64, errCode: CPointer<Int32>): Unit
 
     func FfiOHOSWebviewCtlOnCreateNativeMediaPlayer(id: Int64, callbackId: Int64): Unit

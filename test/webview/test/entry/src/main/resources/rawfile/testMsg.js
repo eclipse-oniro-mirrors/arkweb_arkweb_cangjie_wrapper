@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-//xxx.js
 var h5Port;
 var output = document.querySelector('.output');
 window.addEventListener('message', function (event) {
@@ -47,10 +46,8 @@ window.addEventListener('message', function (event) {
 
 // 3. 使用h5Port往ets侧发送消息.
 function PostMsgToCangjie(data) {
-    // let a = new ArrayBuffer(12);
     if (h5Port) {
         h5Port.postMessage(data);
-        // h5Port.postMessage(a);
     } else {
         console.error("h5Port is null, Please initialize first");
     }

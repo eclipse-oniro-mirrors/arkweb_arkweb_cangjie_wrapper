@@ -151,14 +151,6 @@ public enum WebHitTestType {
     ]
     Unknown
     | ...
-
-    static func fromInt32(code: Int32): WebHitTestType {
-        match (code) {
-            case 0 => EditText
-            case 1 => Email
-            case _ => Unknown
-        }
-    }
 }
 
 /**

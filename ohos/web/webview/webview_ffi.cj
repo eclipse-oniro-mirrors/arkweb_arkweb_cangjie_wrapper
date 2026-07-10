@@ -154,8 +154,6 @@ foreign {
 
     func FfiOHOSWebviewCtlGetCertificate(id: Int64, errCode: CPointer<Int32>): CArrString
 
-    func FfiOHOSWebviewCtlGetCertificateByte(id: Int64, errCode: CPointer<Int32>): CCertByteData
-
     func FfiOHOSWebviewCtlTerminateRenderProcess(id: Int64, errcode: CPointer<Int32>): Bool
 
     func FfiOHOSWebviewCtlCloseAllMediaPresentations(id: Int64): Int32
@@ -228,14 +226,9 @@ foreign {
 
     func FfiOHOSWebviewCtlSetUrlTrustList(id: Int64, cUrl: CString): Int32
 
-    func FfiOHOSWebviewCtlPrefetchResource(request: CRequestInfo, additionalHeaders: ArrWebHeader, cKey: CString,
-        cacheValidTime: Int32): Int32
-
     func FfiOHOSWebviewCtlSetWebSchemeHandler(id: Int64, cScheme: CString, classId: Int64, errCode: CPointer<Int32>): Unit
 
     func FfiOHOSWebviewCtlOnCreateNativeMediaPlayer(id: Int64, callbackId: Int64): Unit
-
-    func FfiOHOSWebviewCtlGetScrollOffset(id: Int64, errCode: CPointer<Int32>): CScrollOffset
 
     func FfiOHOSWebviewCtlScrollByWithResult(id: Int64, deltaX: Float32, deltaY: Float32, errCode: CPointer<Int32>): Bool
 
@@ -334,15 +327,10 @@ foreign {
 
     func FfiOHOSWebMessageExtImplGetString(msgExtId: Int64, errCode: CPointer<Int32>): CString
 
-    func FfiOHOSWebMessageExtImplGetNumber(msgExtId: Int64, errCode: CPointer<Int32>): RetNumber
-
     func FfiOHOSWebMessageExtImplGetBoolean(msgExtId: Int64, errCode: CPointer<Int32>): Bool
 
     func FfiOHOSWebMessageExtImplGetArrayBuffer(msgExtId: Int64, errCode: CPointer<Int32>): CArrUI8
 
-    func FfiOHOSWebMessageExtImplGetArray(msgExtId: Int64, errCode: CPointer<Int32>): CArrValue
-
-    func FfiOHOSWebMessageExtImplGetError(msgExtId: Int64, errCode: CPointer<Int32>): CError
     // set
     func FfiOHOSWebMessageExtImplSetType(msgExtId: Int64, msgType: Int32, errCode: CPointer<Int32>): Unit
 
@@ -353,8 +341,6 @@ foreign {
     func FfiOHOSWebMessageExtImplSetBoolean(msgExtId: Int64, value: Bool, errCode: CPointer<Int32>): Unit
 
     func FfiOHOSWebMessageExtImplSetArrayBuffer(msgExtId: Int64, value: CArrUI8, errCode: CPointer<Int32>): Unit
-
-    func FfiOHOSWebMessageExtImplSetError(msgExtId: Int64, value: CError, errCode: CPointer<Int32>): Unit
 
     func FfiOHOSWebMessageExtImplSetArrayString(msgExtId: Int64, value: CArrString, errCode: CPointer<Int32>): Unit
 
@@ -380,13 +366,9 @@ foreign {
 
     func FfiOHOSJsMessageExtImplGetString(msgExtId: Int64, errCode: CPointer<Int32>): CString
 
-    func FfiOHOSJsMessageExtImplGetNumber(msgExtId: Int64, errCode: CPointer<Int32>): RetNumber
-
     func FfiOHOSJsMessageExtImplGetBoolean(msgExtId: Int64, errCode: CPointer<Int32>): Bool
 
     func FfiOHOSJsMessageExtImplGetArrayBuffer(msgExtId: Int64, errCode: CPointer<Int32>): CArrUI8
-
-    func FfiOHOSJsMessageExtImplGetArray(msgExtId: Int64, errCode: CPointer<Int32>): CArrValue
     // webStorage
     func FfiWebStorageDeleteOrigin(origin: CString): Int32
 
@@ -533,52 +515,6 @@ foreign {
 }
 
 @C
-struct LoadDatas {
-    LoadDatas(
-        let cData: CString,
-        let cMimeType: CString,
-        let cEncoding: CString,
-        let cBaseUrl: CString,
-        let cHistoryUrl: CString
-    ) {}
-}
-
-@C
-struct RetWebMessage {
-    RetWebMessage(
-        let messageStr: CString,
-        let messageArr: CArrUI8
-    ) {}
-}
-
-@C
-struct CError {
-    CError(
-        let errorName: CString,
-        let errorMsg: CString
-    ) {}
-}
-
-@C
-struct RetNumber {
-    RetNumber(
-        let numberInt: Int64,
-        let numberDouble: Float64
-    ) {}
-}
-
-@C
-struct CArrValue {
-    CArrValue(
-        let strHead: CPointer<CString>,
-        let intHead: CPointer<Int64>,
-        let doubleHead: CPointer<Float64>,
-        let boolHead: CPointer<Bool>,
-        let size: Int64
-    ) {}
-}
-
-@C
 struct RetWebHeader {
     let headerKey: CString
     let headerValue: CString
@@ -661,49 +597,4 @@ func freeArrWebHeader(ptr: CPointer<RetWebHeader>, len: Int64) {
         }
     }
     unsafe { LibC.free(ptr) }
-}
-
-@C
-struct CRequestInfo {
-    CRequestInfo(
-        let url: CString,
-        let method: CString,
-        let formData: CString
-    ) {}
-}
-
-@C
-struct CScrollOffset {
-    CScrollOffset(
-        let x: Float32,
-        let y: Float32
-    ) {}
-}
-
-@C
-protected struct CCertByteData {
-    protected CCertByteData(
-        protected let head: CPointer<CArrUI8>,
-        protected let size: Int64
-    ) {}
-
-    func toByteArray(): Array<Array<Byte>> {
-        unsafe {
-            Array<Array<Byte>>(size) {
-                i => Array<Byte>(head.read(i).size) {
-                    j => head.read(i).head.read(j)
-                }
-            }
-        }
-    }
-
-    func free() {
-        if (head.isNull()) {
-            return
-        }
-        for (index in 0..size) {
-            unsafe { head.read(index).free() }
-        }
-        unsafe { LibC.free(head) }
-    }
 }

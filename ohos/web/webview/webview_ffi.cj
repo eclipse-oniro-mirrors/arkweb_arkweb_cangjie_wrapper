@@ -28,15 +28,25 @@ foreign {
 
     func FfiOHOSWebviewCtlConstructorWithWebTag(webTag: CString): Int64
 
+    func FfiOHOSWebviewOnce(`type`: CString, funcId: Int64): Int32
+
+    func FfiOHOSWebviewCtlInitializeWebEngine(): Unit
+
     func FfiOHOSWebviewCtlSetWebDebuggingAccess(webDebuggingAccess: Bool): Unit
 
     func FfiOHOSWebviewCtlLoadUrl(id: Int64, url: CString): Int32
 
     func FfiOHOSWebviewCtlLoadUrlWithHeaders(id: Int64, url: CString, headers: ArrWebHeader): Int32
 
+    func FfiOHOSWebviewCtlLoadData(id: Int64, loadDatas: LoadDatas): Int32
+
+    func FfiOHOSWebviewCtlSetAudioMuted(id: Int64, mute: Bool): Int32
+
     func FfiOHOSWebviewCtlRefresh(id: Int64): Int32
 
     func FfiOHOSWebviewCtlGetUserAgent(id: Int64, errCode: CPointer<Int32>): CString
+
+    func FfiOHOSWebviewCtlAccessForward(id: Int64, errCode: CPointer<Int32>): Bool
 
     func FfiOHOSWebviewCtlAccessBackward(id: Int64, errCode: CPointer<Int32>): Bool
 
@@ -45,6 +55,8 @@ foreign {
     func FfiOHOSWebviewCtlGetCustomUserAgent(id: Int64): RetDataCString
 
     func FfiOHOSWebviewCtlRunJavaScript(id: Int64, cScript: CString, funcId: Int64): Int32
+
+    func FfiOHOSWebviewCtlRunJavaScriptExt(id: Int64, cScript: CString, funcId: Int64): Int32
 
     func FfiOHOSWebviewCtlRegisterJavaScriptProxy(id: Int64, cFuncIds: CArrI64, cName: CString, cMethodList: CArrString): Int32
 
@@ -74,6 +86,8 @@ foreign {
 
     func FfiOHOSCookieMgrClearSessionCookieSync(): Unit
 
+    func FfiOHOSCookieMgrSaveCookieAsync(funcId: Int64): Unit
+
     func FfiOHOSWebviewCtlScrollTo(id: Int64, x: Float32, y: Float32): Int32
 
     func FfiOHOSWebviewCtlScrollBy(id: Int64, deltaX: Float32, deltaY: Float32): Int32
@@ -102,6 +116,8 @@ foreign {
 
     func FfiOHOSWebviewCtlAccessStep(id: Int64, errCode: CPointer<Int32>, step: Int32): Bool
 
+    func FfiOHOSWebviewCtlOnActive(id: Int64): Int32
+
     func FfiOHOSWebviewCtlOnInactive(id: Int64): Int32
 
     func FfiOHOSWebviewCtlGetHitTest(id: Int64, errCode: CPointer<Int32>): Int32
@@ -123,6 +139,8 @@ foreign {
     func FfiOHOSWebviewCtlGetBackForwardEntries(id: Int64, errCode: CPointer<Int32>): Int64
 
     func FfiOHOSWebviewCtlStop(id: Int64): Int32
+
+    func FfiOHOSWebviewCtlDeleteJavaScriptRegister(id: Int64, name: CString): Int32
 
     func FfiOHOSWebviewCtlPostUrl(id: Int64, cUrl: CString, bytes: CArrUI8): Int32
 
@@ -147,6 +165,8 @@ foreign {
     func FfiOHOSWebviewCtlPostMessage(id: Int64, name: CString, ports: CArrI64, uri: CString): Int32
 
     func FfiOHOSWebviewCtlHasImage(id: Int64, funcId: Int64): Int32
+
+    func FfiWebviewCtlCustomizeSchemes(schemes: ArrScheme): Int32
 
     func FfiOHOSWebviewCtlSerializeWebState(id: Int64, errCode: CPointer<Int32>): CArrUI8
 
@@ -537,6 +557,76 @@ struct RetWebHeader {
             LibC.free(headerValue)
         }
     }
+}
+
+@C
+struct LoadDatas {
+    LoadDatas(
+        let cData: CString,
+        let cMimeType: CString,
+        let cEncoding: CString,
+        let cBaseUrl: CString,
+        let cHistoryUrl: CString
+    ) {}
+}
+
+@C
+struct CScheme {
+    let name: CString
+    let isSupportCORS: Bool
+    let isSupportFetch: Bool
+    let isStandard: Bool
+    let isLocal: Bool
+    let isDisplayIsolated: Bool
+    let isSecure: Bool
+    let isCspBypassing: Bool
+    let isCodeCacheSupported: Bool
+
+    init(scheme: WebCustomScheme) {
+        unsafe {
+            this.name = LibC.mallocCString(scheme.schemeName)
+            this.isSupportCORS = scheme.isSupportCORS
+            this.isSupportFetch = scheme.isSupportFetch
+            this.isStandard = false
+            this.isLocal = false
+            this.isDisplayIsolated = false
+            this.isSecure = false
+            this.isCspBypassing = false
+            this.isCodeCacheSupported = scheme.isCodeCacheSupported ?? false
+        }
+    }
+
+    func free() {
+        unsafe {
+            LibC.free(name)
+        }
+    }
+}
+
+@C
+struct ArrScheme {
+    let head: CPointer<CScheme>
+    let size: Int64
+
+    init(arr: Array<WebCustomScheme>) {
+        unsafe {
+            head = cjArr2CArr<WebCustomScheme, CScheme>(
+                arr,
+                {v: WebCustomScheme => CScheme(v)},
+                {v: CScheme => v.free()}
+            )
+            this.size = arr.size
+        }
+    }
+}
+
+func freeArrScheme(ptr: CPointer<CScheme>, len: Int64) {
+    for (i in 0..len) {
+        unsafe {
+            ptr.read(i).free()
+        }
+    }
+    unsafe { LibC.free(ptr) }
 }
 
 @C

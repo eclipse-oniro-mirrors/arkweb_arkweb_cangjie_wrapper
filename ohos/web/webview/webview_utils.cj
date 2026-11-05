@@ -24,10 +24,11 @@ import std.collection.HashMap
 const INIT_ERROR: Int32 = 17100001
 const INVALID_URL: Int32 = 17100002
 const OUT_MEMEORY: Int32 = 17100015
+const NOT_SUPPORTED_ERROR: Int32 = 801
 
 let ERROR_CODE_MAP = HashMap<Int32, String>(
     [
-        (17100001, "Init error. The WebviewController must be associated with a Web compoent."),
+        (17100001, "Init error. The WebviewController must be associated with a Web component"),
         (17100002, "Invalid url."),
         (17100003, "Invalid resource path or file type."),
         (17100004, "Function not enable."),

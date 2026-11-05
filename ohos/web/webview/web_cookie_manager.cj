@@ -17,7 +17,8 @@
 
 package ohos.web.webview
 
-import ohos.business_exception.BusinessException
+import ohos.business_exception.{AsyncCallback, BusinessException}
+import ohos.ffi.Callback0Param
 import ohos.labels.APILevel
 
 const MAX_STRING_LENGTH: Int64 = 40960
@@ -202,6 +203,30 @@ public class WebCookieManager {
     public static func clearSessionCookie(): Unit {
         unsafe {
             FfiOHOSCookieMgrClearSessionCookieSync()
+        }
+    }
+
+    /**
+     * Asynchronously saves all cookies (that can be obtained through **fetchCookie** and need to be persisted) to the
+     * disk.
+     *
+     * **NOTE**
+     * - saveCookieAsync is used to forcibly write cookies that need to be persisted to the disk. Session cookies are
+     * not persisted on PC/2-in-1 and tablet devices. Even if saveCookieAsync is called, session cookies are not
+     * written to the disk.
+     *
+     * @param { AsyncCallback<Unit> } callback - Callback used to indicate whether the cookie is saved
+     *     successfully.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public static func saveCookieAsync(callback: AsyncCallback<Unit>): Unit {
+        unsafe {
+            let wrapper = { => callback(None, ()) }
+            let lambdaData = Callback0Param<Unit>(wrapper)
+            FfiOHOSCookieMgrSaveCookieAsync(lambdaData.getID())
         }
     }
 }

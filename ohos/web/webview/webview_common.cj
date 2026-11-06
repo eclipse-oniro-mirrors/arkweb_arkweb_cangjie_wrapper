@@ -20,6 +20,8 @@ package ohos.web.webview
 import ohos.hilog.HilogChannel
 import ohos.multimedia.image.PixelMap
 import ohos.labels.{APILevel, Hide}
+import ohos.ffi.{RemoteDataLite, releaseFFIData, Callback0Param}
+import ohos.callback_invoke.Callback
 
 import std.deriving.Derive
 
@@ -280,5 +282,352 @@ public class HistoryItem {
         this.historyUrl = historyUrl
         this.historyRawUrl = historyRawUrl
         this.title = title
+    }
+}
+
+/**
+ * Placeholder for the ArrayBuffer type, which is referenced by the ScriptValueType API but is not
+ * yet officially defined in the Cangjie SDK base layer.
+ *
+ * NOTE: This is a temporary shim for compilation. Once ArrayBuffer is officially provided by the
+ * SDK, this local definition must be removed, and the ArrayBufferValue branch of runJavaScriptExt
+ * must be implemented with real byte conversion. The ToString and Equatable implementations only
+ * exist to satisfy the @Derive requirements of ScriptValueType.
+ */
+public type ArrayBuffer = Array<Byte>
+
+class WebCustomSchemeImpl {
+    var schemeName_: String
+    var isSupportCORS_: Bool
+    var isSupportFetch_: Bool
+    var isCodeCacheSupported_: ?Bool = None
+
+    init(schemeName: String, isSupportCORS: Bool, isSupportFetch: Bool) {
+        this.schemeName_ = schemeName
+        this.isSupportCORS_ = isSupportCORS
+        this.isSupportFetch_ = isSupportFetch
+    }
+}
+
+/**
+ * Defines a custom URL scheme.
+ */
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public class WebCustomScheme {
+    private var webCustomSchemeImpl: WebCustomSchemeImpl
+
+    /**
+     * Custom protocol name. The maximum length is 32, and only lowercase letters, digits, '.', '+', and '-' are
+     * supported. It must start with a letter. If the preceding restrictions are not met, the custom protocol
+     * configuration does not take effect.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public mut prop schemeName: String {
+        get() {
+            return webCustomSchemeImpl.schemeName_
+        }
+        set(value) {
+            webCustomSchemeImpl.schemeName_ = value
+        }
+    }
+
+    /**
+     * Whether to support cross-origin resource sharing (CORS).
+     *
+     * The value **true** means to support cross-origin resource sharing (CORS), and **false** means the opposite.
+     *
+     * Default value: **true**.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public mut prop isSupportCORS: Bool {
+        get() {
+            return webCustomSchemeImpl.isSupportCORS_
+        }
+        set(value) {
+            webCustomSchemeImpl.isSupportCORS_ = value
+        }
+    }
+
+    /**
+     * Whether to support fetch requests.
+     *
+     * The value **true** means to support fetch requests, and **false** means the opposite.
+     *
+     * Default value: **true**.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public mut prop isSupportFetch: Bool {
+        get() {
+            return webCustomSchemeImpl.isSupportFetch_
+        }
+        set(value) {
+            webCustomSchemeImpl.isSupportFetch_ = value
+        }
+    }
+
+    /**
+     * Whether JavaScript resources of the scheme with this option set support code cache generation.
+     *
+     * **true** indicates that JavaScript resources of the scheme with this option set support code cache generation,
+     * and **false** indicates that they do not support code cache generation.
+     *
+     * Default value: false.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public mut prop isCodeCacheSupported: ?Bool {
+        get() {
+            return webCustomSchemeImpl.isCodeCacheSupported_
+        }
+        set(value) {
+            webCustomSchemeImpl.isCodeCacheSupported_ = value
+        }
+    }
+
+    /**
+     * Creates a **WebCustomScheme** object.
+     * Initializes the custom URL scheme with the specified scheme name.
+     *
+     * @param { String } schemeName - Custom protocol name.
+     * @param { Bool } isSupportCORS - Whether to support cross-origin resource sharing (CORS).
+     *     The value **true** means to support cross-origin resource sharing (CORS), and **false** means the opposite.
+     *     Default value: **true**.
+     * @param { Bool } isSupportFetch - Whether to support fetch requests.
+     *     The value **true** means to support fetch requests, and **false** means the opposite.
+     *     Default value: **true**.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public init(schemeName: String, isSupportCORS: Bool, isSupportFetch: Bool) {
+        this.webCustomSchemeImpl = WebCustomSchemeImpl(schemeName, isSupportCORS, isSupportFetch)
+    }
+}
+
+/**
+ * Registers a one-time callback for web events of the specified type. Currently, only **webInited** is supported.
+ * This callback is triggered when the Web engine initialization is complete.
+ *
+ * When the first **Web** component is loaded in an app, the Web engine is initialized, and the once() callback is not
+ * triggered when other **Web** components are subsequently loaded in the same app. When the app destroys the last
+ * **Web** component, if the first **Web** component is loaded again, the app re-enters the Web engine initialization
+ * process.
+ *
+ * @param { String } eventType - Type of the Web event. Currently, only **"webInited"** (Web engine initialization complete)
+ *     is supported.
+ * @param { Callback<Unit> } callback - Callback invoked when the Web engine initialization is complete.
+ */
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public func once(eventType: String, callback: Callback<Unit>): Unit {
+    unsafe {
+        let cType = LibC.mallocCString(eventType)
+        let wrapper = { => callback(()) }
+        let lambdaData = Callback0Param<Unit>(wrapper)
+        let errCode = FfiOHOSWebviewOnce(cType, lambdaData.getID())
+        LibC.free(cType)
+        throwIfNotSuccess(errCode, "webview", "once")
+    }
+}
+
+/**
+ * Implements a **WebStorage** object to manage the Web SQL database and HTML5 Web Storage APIs. All **Web**
+ * components in an application share a **WebStorage** object.
+ *
+ * **NOTE**
+ * - You must load the **Web** component before calling the APIs in **WebStorage**.
+ */
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public class WebStorage {
+    init() {}
+
+    /**
+     * Deletes all storage data used by JavaScript storage APIs, including the Web SQL Database and HTML5-supported Web
+     * storage APIs.
+     *
+     * @param { ?Bool } [incognito] - Whether to delete all data in the Web SQL Database in incognito mode. The value
+     *     **true** means to delete all data in the Web SQL Database in incognito mode, and **false** means the
+     *     opposite.
+     *     Default value: **false**.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public static func deleteAllData(incognito!: ?Bool = false): Unit {
+        unsafe {
+            FfiWebStorageDeleteAllData(incognito ?? false)
+        }
+    }
+}
+
+/**
+ * Defines the script type of the **runJavaScriptExt** API. The JavaScript script to be executed can be passed as a
+ * string or as a byte array.
+ */
+@Derive[ToString, Equatable]
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public enum ScriptValueType {
+    /**
+     * The JavaScript script is passed as a string.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    StringValue(String)
+    |
+    /**
+     * The JavaScript script is passed as a byte array.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    ArrayBufferValue(ArrayBuffer)
+    | ...
+}
+
+class JsMessageExtImpl <: RemoteDataLite {
+    init(id: Int64) {
+        super(id)
+    }
+
+    ~init() {
+        releaseFFIData(myDataId)
+    }
+
+    prop id: Int64 {
+        get() {
+            return getID()
+        }
+    }
+}
+
+/**
+ * JsMessageExt is a data class in the ArkWeb framework used to encapsulate the result returned after executing a
+ * JavaScript script through the **runJavaScriptExt** API. Unlike the conventional runJavaScript API,
+ * runJavaScriptExt supports richer return value types, and JsMessageExt provides a type-safe way to access these
+ * diverse return results. Developers first obtain the data type through the getType method of JsMessageExt, and then
+ * call the corresponding get method to retrieve the specific value.
+ */
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public class JsMessageExt {
+    private var jsMessageExtImpl: JsMessageExtImpl
+
+    init(id: Int64) {
+        this.jsMessageExtImpl = JsMessageExtImpl(id)
+    }
+
+    /**
+     * Obtains string-type data of the data object.
+     *
+     * @returns { String } String-type data obtained after the script of the runJavaScriptExt API is executed.
+     * @throws { BusinessException } 17100014 - The type and value of the message do not match.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func getString(): String {
+        var code: Int32 = 0
+        let ret = unsafe {
+            FfiOHOSJsMessageExtImplGetString(jsMessageExtImpl.id, inout code)
+        }
+        throwIfNotSuccess(code, "JsMessageExt", "getString")
+        return getStringAndFree(ret)
+    }
+}
+
+/**
+ * Enumerates the ArkWeb renderer subprocess mode types. You can select the appropriate mode based on the app's
+ * requirements for memory usage and renderer process isolation.
+ */
+@Derive[ToString, Equatable]
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public enum RenderProcessMode {
+    /**
+     * ArkWeb single render subprocess mode. In this mode, multiple **Web** components share one render subprocess.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    Single
+    |
+    /**
+     * ArkWeb multi-render subprocess mode. In this mode, each **Web** component has a rendering subprocess.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    Multiple
+    | ...
+
+    func getValue(): Int32 {
+        match (this) {
+            case Single => 0
+            case Multiple => 1
+            // An invalid value falls back to the multi-render subprocess mode by default.
+            case _ => 1
+        }
+    }
+}
+
+/**
+ * Enumerates the scroll types for **setScrollable**.
+ */
+@Derive[ToString, Equatable]
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public enum ScrollType {
+    /**
+     * Scroll event, which represents web page scrolling generated through the touchscreen, touchpad, or mouse wheel.
+     */
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    Event
+    | ...
+
+    func getValue(): Int32 {
+        match (this) {
+            case Event => 0
+            case _ => 0
+        }
     }
 }

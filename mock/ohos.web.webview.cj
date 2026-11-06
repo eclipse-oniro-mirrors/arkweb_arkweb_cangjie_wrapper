@@ -17,6 +17,7 @@ package ohos.web.webview
 
 import ohos.base.ResourceStr
 import ohos.business_exception.AsyncCallback
+import ohos.callback_invoke.Callback
 import ohos.labels.*
 import ohos.labels.APILevel
 import ohos.multimedia.image.*
@@ -143,7 +144,15 @@ public class WebCookieManager {
     public static func clearSessionCookie(): Unit {
         return ()
     }
-    
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public static func saveCookieAsync(callback: AsyncCallback<Unit>): Unit {
+        return ()
+    }
+
     public init() {
         super()
     }
@@ -348,6 +357,250 @@ public class HistoryItem {
         this.historyUrl = String()
         this.historyRawUrl = String()
         this.title = String()
+    }
+}
+
+/**
+ * Placeholder for the ArrayBuffer type, which is referenced by the ScriptValueType API but is not
+ * yet officially defined in the Cangjie SDK base layer.
+ *
+ * NOTE: This is a temporary shim for compilation. Once ArrayBuffer is officially provided by the
+ * SDK, this local definition must be removed. The ToString and Equatable implementations only
+ * exist to keep this placeholder consistent with the real implementation.
+ */
+public type ArrayBuffer = Array<Byte>
+
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public class WebCustomScheme {
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public mut prop schemeName: String {
+        get() {
+            return ""
+        }
+        set(value) {
+        }
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public mut prop isSupportCORS: Bool {
+        get() {
+            return true
+        }
+        set(value) {
+        }
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public mut prop isSupportFetch: Bool {
+        get() {
+            return true
+        }
+        set(value) {
+        }
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public mut prop isCodeCacheSupported: ?Bool {
+        get() {
+            return None
+        }
+        set(value) {
+        }
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public init(schemeName: String, isSupportCORS: Bool, isSupportFetch: Bool) {
+        super()
+    }
+}
+
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public func once(eventType: String, callback: Callback<Unit>): Unit {
+    return ()
+}
+
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public class WebStorage {
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public static func deleteAllData(incognito!: ?Bool = false): Unit {
+        return ()
+    }
+}
+
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public enum ScriptValueType {
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    StringValue(String)
+    |
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    ArrayBufferValue(ArrayBuffer)
+    | ...
+}
+
+extend ScriptValueType <: ToString {
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public func toString(): String {
+        return String()
+    }
+}
+
+extend ScriptValueType <: Equatable<ScriptValueType> {
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public operator func ==(other: ScriptValueType): Bool {
+        return true
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public operator func !=(other: ScriptValueType): Bool {
+        return true
+    }
+}
+
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public class JsMessageExt {
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func getString(): String {
+        return String()
+    }
+}
+
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public enum RenderProcessMode {
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    Single
+    |
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    Multiple
+    | ...
+}
+
+extend RenderProcessMode <: ToString {
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public func toString(): String {
+        return String()
+    }
+}
+
+extend RenderProcessMode <: Equatable<RenderProcessMode> {
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public operator func ==(other: RenderProcessMode): Bool {
+        return true
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public operator func !=(other: RenderProcessMode): Bool {
+        return true
+    }
+}
+
+@!APILevel[
+    since: "26.1.0",
+    syscap: "SystemCapability.Web.Webview.Core"
+]
+public enum ScrollType {
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    Event
+    | ...
+}
+
+extend ScrollType <: ToString {
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public func toString(): String {
+        return String()
+    }
+}
+
+extend ScrollType <: Equatable<ScrollType> {
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public operator func ==(other: ScrollType): Bool {
+        return true
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public operator func !=(other: ScrollType): Bool {
+        return true
     }
 }
 
@@ -659,5 +912,139 @@ public class WebviewController <: RemoteDataLite {
     ]
     public func isIncognitoMode(): Bool {
         return true
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public static func initializeWebEngine(): Unit {
+        return ()
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func accessForward(): Bool {
+        return true
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func accessBackward(): Bool {
+        return true
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func onActive(): Unit {
+        return ()
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func onInactive(): Unit {
+        return ()
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func loadData(data: String, mimeType: String, encoding: String, baseUrl!: ?String = None,
+        historyUrl!: ?String = None): Unit {
+        return ()
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func getWebId(): Int32 {
+        return 0
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func requestFocus(): Unit {
+        return ()
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func deleteJavaScriptRegister(name: String): Unit {
+        return ()
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public static func customizeSchemes(schemes: Array<WebCustomScheme>): Unit {
+        return ()
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func setAudioMuted(mute: Bool): Unit {
+        return ()
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func setScrollable(enable: Bool, scrollType!: ?ScrollType = None): Unit {
+        return ()
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core"
+    ]
+    public static func setRenderProcessMode(mode: RenderProcessMode): Unit {
+        return ()
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func scrollByWithResult(deltaX: Float32, deltaY: Float32): Bool {
+        return true
+    }
+
+    @!APILevel[
+        since: "26.1.0",
+        syscap: "SystemCapability.Web.Webview.Core",
+        throwexception: true
+    ]
+    public func runJavaScriptExt(script: ScriptValueType, callback: AsyncCallback<JsMessageExt>): Unit {
+        return ()
     }
 }
